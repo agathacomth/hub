@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koncluí · Brand Book</title>
+<meta name="description" content="Brand Book Koncluí v1 · Identidade visual, paleta, tipografia, motif e regras de uso da marca." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0A0E2B;
+    --navy-2: #131A3F;
+    --navy-3: #1a2348;
+    --teal: #02E8C5;
+    --teal-2: #00FFC2;
+    --teal-soft: #C8F5F4;
+    --white: #F5F7FB;
+    --gray: #6B7280;
+    --gray-2: #9CA3AF;
+    --light-bg: #F8FAFC;
+    --line: rgba(255,255,255,.08);
+    --red: #EF4444;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Urbanist', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content:''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%),
+      radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; }
+  ::selection { background: var(--teal); color: var(--navy); }
+
+  h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.05; font-weight: 900; }
+  h1 { font-size: clamp(2.4rem, 6vw, 5rem); }
+  h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 800; }
+  h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); font-weight: 800; }
+  p { font-size: clamp(1rem, 1.2vw, 1.1rem); color: rgba(245,247,251,.78); font-weight: 500; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  strong { color: var(--white); font-weight: 800; }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 3rem); }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0;
+    background: rgba(10,14,43,.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    padding: 1rem 0;
+  }
+  nav.top .row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .nav-left { display: flex; align-items: center; gap: 1.2rem; }
+  .back-hub {
+    display: inline-flex; align-items: center; gap: .45rem;
+    color: rgba(245,247,251,.65);
+    text-decoration: none;
+    font-size: .85rem; font-weight: 700;
+    padding: .5rem .85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.1);
+    transition: all .2s;
+  }
+  .back-hub:hover { color: var(--teal); border-color: rgba(2,232,197,.3); background: rgba(2,232,197,.05); }
+  .back-hub svg { width: 14px; height: 14px; }
+  @media (max-width: 540px) { .back-hub span { display: none; } .back-hub { padding: .5rem .65rem; } }
+  .logo { display: flex; align-items: center; gap: .65rem; }
+  .logo img { height: 36px; }
+  .nav-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .25em; text-transform: uppercase;
+    font-weight: 700;
+    padding: .35rem .8rem;
+    border: 1px solid rgba(2,232,197,.25);
+    border-radius: 999px;
+  }
+  @media (max-width: 540px) { .nav-tag { display: none; } }
+
+  /* HERO */
+  .hero { padding: clamp(4rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem); }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(2,232,197,0.12); color: var(--teal);
+    padding: .45rem 1rem; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    border: 1px solid rgba(2,232,197,.25);
+    margin-bottom: 1.6rem;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; background: var(--teal); border-radius: 999px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(2,232,197,.6); } 70% { box-shadow: 0 0 0 8px rgba(2,232,197,0); } 100% { box-shadow: 0 0 0 0 rgba(2,232,197,0); } }
+
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero p.lede {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    margin-top: 1.4rem; max-width: 720px;
+  }
+  .hero .meta {
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+  }
+  .hero .meta .item .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--gray-2);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: .35rem;
+  }
+  .hero .meta .item .v {
+    font-size: 1rem; font-weight: 700; color: var(--white);
+  }
+
+  /* TOC */
+  .toc {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    margin-bottom: 4rem;
+  }
+  .toc h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 1.4rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .7rem;
+    counter-reset: toc;
+  }
+  .toc ol li { counter-increment: toc; }
+  .toc ol li a {
+    display: flex; align-items: center; gap: .8rem;
+    color: rgba(245,247,251,.85); text-decoration: none;
+    padding: .7rem .9rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all .2s;
+    font-weight: 600;
+  }
+  .toc ol li a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--teal);
+    font-size: .8rem;
+    font-weight: 700;
+  }
+  .toc ol li a:hover {
+    background: rgba(2,232,197,.06);
+    border-color: rgba(2,232,197,.2);
+    color: var(--white);
+  }
+
+  /* SECTION */
+  section.cap { padding: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .cap-head {
+    display: flex; align-items: baseline; gap: 1.2rem;
+    margin-bottom: 2.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .cap-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem; color: var(--teal);
+    letter-spacing: .25em; font-weight: 700;
+  }
+  .cap-head h2 { flex: 1; }
+  .cap-intro { max-width: 760px; margin-bottom: 2.5rem; font-size: 1.1rem; }
+
+  /* QUEM SOMOS */
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.4rem;
+  }
+  .who-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+  }
+  .who-card .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: .9rem;
+  }
+  .who-card h4 { font-size: 1.4rem; line-height: 1.25; font-weight: 800; color: var(--white); }
+
+  /* PALETA */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .swatch {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+    position: relative;
+  }
+  .swatch:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.4); }
+  .swatch .color { height: 130px; position: relative; }
+  .swatch .color::after {
+    content: 'Clique p/ copiar';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; font-weight: 700;
+    color: rgba(0,0,0,.7);
+    letter-spacing: .15em; text-transform: uppercase;
+    background: rgba(255,255,255,.0);
+    opacity: 0; transition: opacity .25s;
+  }
+  .swatch:hover .color::after { opacity: 1; background: rgba(255,255,255,.15); }
+  .swatch.dark .color::after { color: rgba(255,255,255,.85); background: rgba(0,0,0,.0); }
+  .swatch.dark:hover .color::after { background: rgba(0,0,0,.25); }
+  .swatch .info { background: var(--navy-2); padding: 1rem 1.1rem; }
+  .swatch .info .name { font-weight: 800; font-size: .95rem; color: var(--white); margin-bottom: .25rem; }
+  .swatch .info .hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem; color: var(--teal);
+    letter-spacing: .05em;
+  }
+  .swatch .info .use {
+    font-size: .8rem; color: var(--gray-2); margin-top: .35rem; line-height: 1.4;
+  }
+  .palette-rule {
+    margin-top: 2rem;
+    padding: 1.5rem 1.8rem;
+    background: rgba(2,232,197,.06);
+    border-left: 3px solid var(--teal);
+    border-radius: 6px;
+  }
+  .palette-rule strong { color: var(--teal); }
+
+  /* TIPOGRAFIA */
+  .typo-block {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2.2rem;
+    margin-bottom: 1.4rem;
+  }
+  .typo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 1.2rem;
+    display: block;
+  }
+  .typo-display {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1; letter-spacing: -0.025em;
+    color: var(--white);
+  }
+  .typo-display em { font-style: normal; color: var(--teal); }
+  .typo-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .typo-meta { margin-top: 1.2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .85rem; color: var(--gray-2); }
+  .typo-meta span { font-family: 'JetBrains Mono', monospace; }
+
+  .weight-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.2rem; margin-top: 1.5rem;
+  }
+  .weight-sample { padding: 1rem 0; border-top: 1px solid var(--line); }
+  .weight-sample .ws {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1.6rem; line-height: 1; color: var(--white);
+  }
+  .weight-sample .wlabel {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem; color: var(--gray-2);
+    letter-spacing: .15em; text-transform: uppercase;
+    margin-top: .4rem;
+  }
+
+  /* LOGO */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+  .logo-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .logo-card .show {
+    background: var(--navy);
+    border: 1px dashed rgba(2,232,197,.2);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 120px;
+  }
+  .logo-card .show.light { background: var(--white); }
+  .logo-card .show img { max-height: 60px; max-width: 100%; }
+  .logo-card .show.dont {
+    background: var(--teal);
+    position: relative;
+  }
+  .logo-card .show.dont::after {
+    content: '✕'; position: absolute; top: 8px; right: 12px;
+    color: var(--red); font-size: 1.4rem; font-weight: 900;
+  }
+  .logo-card h4 { font-size: 1.1rem; }
+  .logo-card p { font-size: .92rem; line-height: 1.55; }
+  .logo-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .rule-item {
+    background: rgba(255,255,255,.02);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.2rem;
+  }
+  .rule-item .l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: .55rem;
+  }
+  .rule-item .v { font-weight: 700; color: var(--white); font-size: 1rem; }
+
+  /* MOTIF */
+  .motif-demo {
+    height: 280px;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 95% 5%, rgba(2,232,197,.35), transparent 55%),
+      linear-gradient(135deg, var(--navy), var(--navy-2));
+    border: 1px solid rgba(2,232,197,.15);
+  }
+  .motif-demo::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(45deg, transparent 49.5%, rgba(2,232,197,.08) 49.5%, rgba(2,232,197,.08) 50.5%, transparent 50.5%),
+      linear-gradient(135deg, transparent 49.5%, rgba(2,232,197,.08) 49.5%, rgba(2,232,197,.08) 50.5%, transparent 50.5%);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  .motif-demo .label {
+    position: absolute; top: 1.4rem; left: 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .25em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .motif-demo .quote {
+    position: absolute; bottom: 1.6rem; left: 1.6rem; right: 1.6rem;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .motif-demo .quote em { font-style: normal; color: var(--teal); }
+
+  /* ICONOGRAFIA */
+  .icon-row {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+  }
+  .icon-tile {
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.4rem;
+    font-size: 2rem;
+    text-align: center;
+    min-width: 80px;
+  }
+  .icon-tile .lbl {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .65rem;
+    color: var(--gray-2);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-top: .4rem;
+  }
+
+  /* TOM (RESUMO) */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .voice-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.6rem;
+  }
+  .voice-card h4 { color: var(--teal); font-size: 1.2rem; margin-bottom: .6rem; }
+  .voice-card p { font-size: .95rem; }
+
+  .voice-cta {
+    margin-top: 2.4rem;
+    padding: 1.8rem 2rem;
+    background: linear-gradient(135deg, rgba(2,232,197,.08), rgba(2,232,197,.02));
+    border: 1px solid rgba(2,232,197,.2);
+    border-radius: 1rem;
+    display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; justify-content: space-between;
+  }
+  .voice-cta .txt h4 { font-size: 1.2rem; margin-bottom: .25rem; }
+  .voice-cta .txt p { font-size: .95rem; }
+  .voice-cta a {
+    background: var(--teal);
+    color: var(--navy);
+    padding: .85rem 1.6rem;
+    border-radius: 8px;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .92rem;
+    transition: all .2s;
+  }
+  .voice-cta a:hover { background: var(--teal-2); transform: translateX(2px); }
+  .voice-cta a svg { width: 16px; height: 16px; }
+
+  /* CO-BRANDING */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+  table.cob {
+    width: 100%; border-collapse: collapse;
+    background: var(--navy-2);
+  }
+  table.cob th {
+    text-align: left;
+    padding: 1.1rem 1.3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    background: rgba(2,232,197,.04);
+  }
+  table.cob td {
+    padding: 1.05rem 1.3rem;
+    border-bottom: 1px solid var(--line);
+    font-size: .95rem;
+    vertical-align: top;
+  }
+  table.cob tr:last-child td { border-bottom: none; }
+  table.cob td:first-child { font-weight: 700; color: var(--white); }
+  table.cob td.teal { color: var(--teal); font-weight: 700; }
+  @media (max-width: 640px) {
+    table.cob th, table.cob td { padding: .85rem 1rem; font-size: .85rem; }
+  }
+
+  .never-list, .always-list {
+    list-style: none;
+    margin-top: 1.4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: .8rem;
+  }
+  .never-list li, .always-list li {
+    padding: .85rem 1.1rem;
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    font-size: .92rem;
+    color: rgba(245,247,251,.88);
+    font-weight: 500;
+  }
+  .always-list li { border-left-color: var(--teal); }
+
+  /* CHECKLIST */
+  .checklist {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2.2rem;
+  }
+  .checklist h3 { margin-bottom: 1.5rem; }
+  .checklist ul { list-style: none; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    user-select: none;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li .box {
+    width: 22px; height: 22px;
+    border: 2px solid rgba(2,232,197,.3);
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .checklist li .box svg {
+    width: 14px; height: 14px;
+    color: var(--navy);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .checklist li.done .box {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .checklist li.done .box svg { opacity: 1; }
+  .checklist li.done .lbl { color: var(--gray-2); text-decoration: line-through; }
+  .checklist li .lbl {
+    font-size: 1rem; font-weight: 600;
+    color: var(--white);
+    line-height: 1.5;
+    transition: color .2s;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--line);
+  }
+  footer .row { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .76rem; color: var(--gray-2);
+    letter-spacing: .15em; text-transform: uppercase;
+  }
+  footer p span.t { color: var(--teal); }
+  footer a {
+    color: var(--teal); text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .76rem;
+    letter-spacing: .15em; text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .copy-toast {
+    position: fixed; bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--teal); color: var(--navy);
+    padding: .85rem 1.4rem;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .1em;
+    box-shadow: 0 8px 30px rgba(2,232,197,.3);
+    transition: transform .35s ease;
+    z-index: 200;
+  }
+  .copy-toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <div class="nav-left">
+      <a href="index.html" class="back-hub" title="Voltar ao painel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <span>Painel</span>
+      </a>
+      <div class="logo">
+        <img src="png/logo.png" alt="Koncluí" onerror="this.style.display='none'" />
+      </div>
+    </div>
+    <span class="nav-tag">Brand Book · v1</span>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span>Documento vivo · Maio 2026</div>
+      <h1>Brand Book<br/><em>Koncluí.</em></h1>
+      <p class="lede">Como a marca se veste, como ela fala, e como ela existe no mundo. Tudo o que toca o nome Koncluí — da apresentação comercial ao Reels — passa por aqui antes de virar peça pública.</p>
+      <div class="meta">
+        <div class="item"><div class="l">Versão</div><div class="v">v1.0</div></div>
+        <div class="item"><div class="l">Última revisão</div><div class="v">04 Mai 2026</div></div>
+        <div class="item"><div class="l">Próxima revisão</div><div class="v">04 Ago 2026</div></div>
+        <div class="item"><div class="l">Status</div><div class="v" style="color:var(--teal)">Aprovação pendente</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <nav class="toc" aria-label="Sumário">
+      <h4>Sumário</h4>
+      <ol>
+        <li><a href="#quem">Quem é a Koncluí</a></li>
+        <li><a href="#paleta">Paleta de cores</a></li>
+        <li><a href="#tipografia">Tipografia</a></li>
+        <li><a href="#logo">Logo &amp; uso</a></li>
+        <li><a href="#motif">Motif visual</a></li>
+        <li><a href="#iconografia">Iconografia</a></li>
+        <li><a href="#tom">Tom de voz</a></li>
+        <li><a href="#cobranding">Co-branding Politi</a></li>
+        <li><a href="#checklist">Checklist de revisão</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- 01 QUEM SOMOS -->
+  <section class="cap" id="quem">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">01</span>
+        <h2>Quem é a Koncluí</h2>
+      </div>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="l">Em uma frase</div>
+          <h4>Koncluí é o <span style="color:var(--teal)">GPS da operação</span> de quem opera padrão — restaurantes, redes, multiunidade.</h4>
+        </div>
+        <div class="who-card">
+          <div class="l">O que entrega</div>
+          <h4>Operação autogerenciável. Mesmo sem o dono por perto.</h4>
+        </div>
+        <div class="who-card">
+          <div class="l">Pra quem</div>
+          <h4>Donos e gestores que cansaram de ser o gargalo da própria empresa.</h4>
+        </div>
+        <div class="who-card">
+          <div class="l">Como fala</div>
+          <h4>Direta. Crítica. Sabe o que diz porque já viu cliente real passar por isso. Não vende sonho — vende o sábado de manhã sem 14 mensagens de WhatsApp.</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PALETA -->
+  <section class="cap" id="paleta">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">02</span>
+        <h2>Paleta de cores</h2>
+      </div>
+      <p class="cap-intro">Navy é a casa. Teal é o feixe de luz. Branco é o respiro. Toda peça começa em um desses três — o resto é apoio. Clique em qualquer cor pra copiar o hex.</p>
+
+      <div class="palette-grid">
+        <div class="swatch dark" data-hex="#0A0E2B">
+          <div class="color" style="background:#0A0E2B"></div>
+          <div class="info"><div class="name">Navy primário</div><div class="hex">#0A0E2B</div><div class="use">Fundo principal, base de tudo.</div></div>
+        </div>
+        <div class="swatch dark" data-hex="#131A3F">
+          <div class="color" style="background:#131A3F"></div>
+          <div class="info"><div class="name">Navy soft</div><div class="hex">#131A3F</div><div class="use">Cards, gradientes, profundidade.</div></div>
+        </div>
+        <div class="swatch" data-hex="#02E8C5">
+          <div class="color" style="background:#02E8C5"></div>
+          <div class="info"><div class="name">Teal primário</div><div class="hex">#02E8C5</div><div class="use">Destaques, CTAs, acentos.</div></div>
+        </div>
+        <div class="swatch" data-hex="#00FFC2">
+          <div class="color" style="background:#00FFC2"></div>
+          <div class="info"><div class="name">Teal-2 (gradiente)</div><div class="hex">#00FFC2</div><div class="use">Quando precisar de mais brilho.</div></div>
+        </div>
+        <div class="swatch" data-hex="#C8F5F4">
+          <div class="color" style="background:#C8F5F4"></div>
+          <div class="info"><div class="name">Teal soft</div><div class="hex">#C8F5F4</div><div class="use">Backgrounds claros, badges suaves.</div></div>
+        </div>
+        <div class="swatch" data-hex="#F5F7FB">
+          <div class="color" style="background:#F5F7FB"></div>
+          <div class="info"><div class="name">Branco</div><div class="hex">#F5F7FB</div><div class="use">Textos sobre escuro, respiro.</div></div>
+        </div>
+        <div class="swatch" data-hex="#6B7280">
+          <div class="color" style="background:#6B7280"></div>
+          <div class="info"><div class="name">Gray</div><div class="hex">#6B7280</div><div class="use">Textos secundários, metas.</div></div>
+        </div>
+        <div class="swatch" data-hex="#F8FAFC">
+          <div class="color" style="background:#F8FAFC"></div>
+          <div class="info"><div class="name">Light bg</div><div class="hex">#F8FAFC</div><div class="use">Cards em fundo claro.</div></div>
+        </div>
+      </div>
+
+      <div class="palette-rule">
+        <p><strong>Regra de ouro:</strong> sempre <strong>navy ou branco</strong> como base. <strong>Teal é acento, não wallpaper.</strong> Se a peça parece um "muro de teal", recuou demais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TIPOGRAFIA -->
+  <section class="cap" id="tipografia">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">03</span>
+        <h2>Tipografia</h2>
+      </div>
+      <p class="cap-intro">Duas famílias. Uma pra falar com peso, outra pra etiquetar dado. Nada além disso.</p>
+
+      <div class="typo-block">
+        <span class="typo-label">Display &amp; UI · Urbanist</span>
+        <div class="typo-display">A operação <em>cobra sozinha.</em></div>
+        <div class="typo-meta">
+          <span>Pesos: 400 · 500 · 600 · 700 · 800 · 900</span>
+          <span>Letter-spacing: -0.025em (headlines)</span>
+          <span>Open Font License</span>
+        </div>
+        <div class="weight-row">
+          <div class="weight-sample"><div class="ws" style="font-weight:500">Aa Bb Cc</div><div class="wlabel">500 · Medium</div></div>
+          <div class="weight-sample"><div class="ws" style="font-weight:600">Aa Bb Cc</div><div class="wlabel">600 · SemiBold</div></div>
+          <div class="weight-sample"><div class="ws" style="font-weight:700">Aa Bb Cc</div><div class="wlabel">700 · Bold</div></div>
+          <div class="weight-sample"><div class="ws" style="font-weight:800">Aa Bb Cc</div><div class="wlabel">800 · ExtraBold</div></div>
+          <div class="weight-sample"><div class="ws" style="font-weight:900">Aa Bb Cc</div><div class="wlabel">900 · Black</div></div>
+        </div>
+      </div>
+
+      <div class="typo-block">
+        <span class="typo-label">Mono · JetBrains Mono</span>
+        <div class="typo-mono">DADOS · LABELS · METADADOS</div>
+        <div class="typo-meta">
+          <span>Pesos: 500 · 700</span>
+          <span>Letter-spacing: 0.22em (eyebrows)</span>
+          <span>Sempre uppercase em labels</span>
+        </div>
+      </div>
+
+      <div class="typo-block">
+        <span class="typo-label">Hierarquia aplicada</span>
+        <div style="font-family:'Urbanist';font-weight:900;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.025em;color:var(--white);margin-bottom:.6rem">Headline de impacto.</div>
+        <div style="font-family:'Urbanist';font-weight:800;font-size:1.4rem;color:var(--white);margin-bottom:.6rem">Subheader claro.</div>
+        <div style="font-family:'Urbanist';font-weight:600;font-size:1.05rem;color:rgba(245,247,251,.78);max-width:540px">Corpo de texto. É aqui que mora a explicação. 500 ou 600, nunca regular puro — fica anêmico no fundo escuro.</div>
+        <div style="font-family:'JetBrains Mono';font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-top:1rem">EYEBROW · METADADO · LABEL</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 LOGO -->
+  <section class="cap" id="logo">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">04</span>
+        <h2>Logo &amp; uso</h2>
+      </div>
+      <p class="cap-intro">A marca tem dois elementos: o símbolo "K" com o check turquesa, e o wordmark "Koncluí" em Urbanist 900 com o pingo turquesa no "í". Tratar com reverência.</p>
+
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="show">
+            <img src="png/logo.png" alt="Logo sobre fundo navy" onerror="this.style.display='none'" />
+          </div>
+          <span class="label">Aplicação primária</span>
+          <h4>Sobre fundo navy</h4>
+          <p>O uso preferencial. Sempre que possível, é assim que a marca aparece — com o teal do logo respirando contra o navy.</p>
+        </div>
+        <div class="logo-card">
+          <div class="show light">
+            <img src="png/logo.png" alt="Logo sobre fundo branco" onerror="this.style.display='none'" />
+          </div>
+          <span class="label">Aplicação secundária</span>
+          <h4>Sobre fundo branco</h4>
+          <p>Em documentos, propostas impressas, slides claros. O navy do wordmark fica protagonista; o teal segue como pingo de luz.</p>
+        </div>
+        <div class="logo-card">
+          <div class="show dont">
+            <img src="png/logo.png" alt="Não usar sobre teal" onerror="this.style.display='none'" />
+          </div>
+          <span class="label" style="color:var(--red)">Nunca</span>
+          <h4>Sobre fundo teal puro</h4>
+          <p>O teal é acento, não suporte. Logo sobre fundo teal perde contraste e parece amador. Mesma regra pra qualquer fundo colorido fora do sistema.</p>
+        </div>
+      </div>
+
+      <div class="rules">
+        <div class="rule-item"><div class="l">Espaço de proteção</div><div class="v">≥ altura do "K"</div></div>
+        <div class="rule-item"><div class="l">Tamanho mínimo digital</div><div class="v">18 px de altura</div></div>
+        <div class="rule-item"><div class="l">Tamanho mínimo impresso</div><div class="v">6 mm de altura</div></div>
+        <div class="rule-item"><div class="l">Distorção / rotação</div><div class="v" style="color:var(--red)">Proibido</div></div>
+        <div class="rule-item"><div class="l">Recriar / redesenhar</div><div class="v" style="color:var(--red)">Proibido</div></div>
+        <div class="rule-item"><div class="l">Drop shadow / glow</div><div class="v" style="color:var(--red)">Proibido</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 MOTIF -->
+  <section class="cap" id="motif">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">05</span>
+        <h2>Motif visual</h2>
+      </div>
+      <p class="cap-intro">A assinatura visual da marca em quatro elementos: quadriculado sutil em diagonal, glow radial turquesa no canto, cards com bordas suaves e <em>zero</em> linha decorativa embaixo de título — isso aí é vibe AI ruim.</p>
+
+      <div class="motif-demo">
+        <div class="label">Exemplo aplicado</div>
+        <div class="quote">A operação <em>cobra sozinha.</em><br/>Você só confere se quiser.</div>
+      </div>
+
+      <div class="rules">
+        <div class="rule-item"><div class="l">Quadriculado teal</div><div class="v">45° / 135° · opacidade 8%</div></div>
+        <div class="rule-item"><div class="l">Glow radial</div><div class="v">Canto sup. direito</div></div>
+        <div class="rule-item"><div class="l">Border-radius cards</div><div class="v">0.9 – 1.2 cqw</div></div>
+        <div class="rule-item"><div class="l">Border cards</div><div class="v">1px rgba(2,232,197,.15)</div></div>
+        <div class="rule-item"><div class="l">Linha embaixo de título</div><div class="v" style="color:var(--red)">Nunca</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ICONOGRAFIA -->
+  <section class="cap" id="iconografia">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">06</span>
+        <h2>Iconografia</h2>
+      </div>
+      <p class="cap-intro">Emojis simples e contextuais. <strong>Nada de carinha de coração ou óculos escuros</strong> — quebra o tom. Check em teal pra "feito", X vermelho pra "antes".</p>
+
+      <div class="icon-row">
+        <div class="icon-tile">🦁<span class="lbl">Operação</span></div>
+        <div class="icon-tile">🔧<span class="lbl">Ferramenta</span></div>
+        <div class="icon-tile">📋<span class="lbl">Checklist</span></div>
+        <div class="icon-tile">📱<span class="lbl">App</span></div>
+        <div class="icon-tile">🐶<span class="lbl">Marca</span></div>
+        <div class="icon-tile" style="color:var(--teal)">✓<span class="lbl">Feito</span></div>
+        <div class="icon-tile" style="color:var(--red)">✕<span class="lbl">Antes</span></div>
+      </div>
+
+      <div class="rules">
+        <div class="rule-item"><div class="l">Emoji de sentimento</div><div class="v" style="color:var(--red)">😍 😎 🥰 — proibido</div></div>
+        <div class="rule-item"><div class="l">Ícones decorativos sem função</div><div class="v" style="color:var(--red)">Proibido</div></div>
+        <div class="rule-item"><div class="l">Mistura de estilos</div><div class="v" style="color:var(--red)">Proibido</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 TOM (RESUMO) -->
+  <section class="cap" id="tom">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">07</span>
+        <h2>Tom de voz · resumo</h2>
+      </div>
+      <p class="cap-intro">A marca tem cinco atributos de voz que aparecem em <strong>toda</strong> peça pública. Pra exemplos completos por canal, vocabulário e CTAs, ver o Guia de Tom de Voz dedicado.</p>
+
+      <div class="voice-grid">
+        <div class="voice-card"><h4>Direto</h4><p>Frase curta. Verbo forte. Conclusão clara.</p></div>
+        <div class="voice-card"><h4>Crítico</h4><p>Aponta o que tá errado sem suavizar — mas sempre com saída.</p></div>
+        <div class="voice-card"><h4>Operacional</h4><p>Fala de chão de loja, não de "ecossistema digital de transformação".</p></div>
+        <div class="voice-card"><h4>Próximo</h4><p>Trata o dono como quem está sentado do lado, não em pedestal.</p></div>
+        <div class="voice-card"><h4>Confiante</h4><p>Tem 1.150 clientes pra provar. Não precisa pedir desculpa.</p></div>
+      </div>
+
+      <div class="voice-cta">
+        <div class="txt">
+          <h4>Quer ver vocabulário, CTAs e exemplos por canal?</h4>
+          <p>O Guia de Tom de Voz tem o aprofundamento — palavra a palavra.</p>
+        </div>
+        <a href="konclui-guia-tom-de-voz.html">Abrir Guia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 CO-BRANDING -->
+  <section class="cap" id="cobranding">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">08</span>
+        <h2>Co-branding · Koncluí × Politi Academy</h2>
+      </div>
+      <p class="cap-intro"><strong>Koncluí é a ferramenta. Politi Academy é a escola.</strong> Cliente da Politi pode (e geralmente vira) cliente da Koncluí. Mas no canal, uma marca não pode confundir a outra. Por isso a tabela.</p>
+
+      <div class="table-wrap">
+        <table class="cob">
+          <thead>
+            <tr><th>Situação</th><th>Marca principal</th><th>Politi aparece?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Demonstração de produto</td><td class="teal">Koncluí</td><td>Não, exceto se cliente perguntar.</td></tr>
+            <tr><td>Apresentação comercial (deck)</td><td class="teal">Koncluí</td><td>Sim, no slide "Cursos e suporte" e em números (Acelera Food Nation).</td></tr>
+            <tr><td>Conteúdo orgânico (Reels, Stories)</td><td class="teal">Koncluí</td><td>Eventual, quando a narrativa é "operação" pura.</td></tr>
+            <tr><td>Posts educativos sobre gestão</td><td>Pode ser Politi com Koncluí mencionada</td><td>Sim, principal.</td></tr>
+            <tr><td>Posts de prova social Koncluí</td><td class="teal">Koncluí</td><td>Logo Politi pode aparecer no rodapé como "powered by".</td></tr>
+            <tr><td>Diagnóstico Operacional Politi</td><td>Politi (autoria)</td><td>Koncluí usa como insight.</td></tr>
+            <tr><td>Anúncio Meta Ads</td><td class="teal">Koncluí</td><td>Não — uma marca por anúncio. Fim.</td></tr>
+            <tr><td>Eventos (Fispal, AFN)</td><td class="teal">Stand é Koncluí</td><td>Politi mencionada nos materiais educativos.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.8rem;margin-bottom:1rem">Como mencionar — sim e não</h3>
+      <ul class="always-list">
+        <li>"Pesquisa Politi Academy revelou que..."</li>
+        <li>"A Koncluí é a plataforma escolhida pelos alunos da Politi pra colocar a operação no eixo."</li>
+        <li>"Conteúdo educativo: Politi Academy. Execução: Koncluí."</li>
+      </ul>
+      <ul class="never-list" style="margin-top:1rem">
+        <li>"Koncluí Politi" — nunca colar nomes.</li>
+        <li>Logo Politi maior que Koncluí em material da Koncluí.</li>
+        <li>Falar em nome da Politi sem alinhamento com Caio / liderança.</li>
+        <li>Logo das duas marcas no mesmo headline visual de capa.</li>
+        <li>Anúncios pagos com bandeira dupla — confunde leitura, derruba CTR.</li>
+        <li>Bio de Instagram da Koncluí falando como se fosse Politi (e vice-versa).</li>
+      </ul>
+
+      <h3 style="margin-top:2.8rem;margin-bottom:1rem">Hierarquia visual quando coexistem</h3>
+      <div class="rules">
+        <div class="rule-item"><div class="l">Logo Koncluí</div><div class="v">Primária · 100%</div></div>
+        <div class="rule-item"><div class="l">Logo Politi</div><div class="v">Secundária · 70-80%</div></div>
+        <div class="rule-item"><div class="l">Cor da Politi</div><div class="v">Branca ou cinza, não verde</div></div>
+        <div class="rule-item"><div class="l">Espaçamento mínimo</div><div class="v">2× a altura do K</div></div>
+        <div class="rule-item"><div class="l">Encostar uma na outra</div><div class="v" style="color:var(--red)">Nunca</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 CHECKLIST -->
+  <section class="cap" id="checklist">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">09</span>
+        <h2>Checklist de revisão</h2>
+      </div>
+      <p class="cap-intro">Antes de aprovar qualquer peça que vai pro mundo, passe por aqui. Marca um ponto pra ver onde tá.</p>
+
+      <div class="checklist">
+        <h3>Antes de aprovar, responda:</h3>
+        <ul>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">A paleta principal é navy + teal (não outras cores)?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">A tipografia é Urbanist (não Arial, Helvetica, Roboto)?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">O logo aparece com proteção e tamanho mínimo?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">O tom de voz é direto, crítico, operacional — não genérico?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">Não tem palavra de "buzzword soup" (sinergia, disruptivo, etc.)?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">Tem promessa concreta, não sentimento abstrato?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">Co-branding Politi (se aplicável) seguiu hierarquia visual?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">Headlines em UPPERCASE quando faz sentido (estilo "USE UM TEMPLATE OU CRIE COM IA")?</div>
+          </li>
+          <li>
+            <div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="lbl">Nada de linha decorativa embaixo de título (vibe AI)?</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <p>Brand Book Koncluí <span class="t">·</span> v1.0 <span class="t">·</span> Maio 2026</p>
+    <a href="index.html">← Voltar à central de materiais</a>
+  </div>
+</footer>
+
+<div class="copy-toast" id="toast">Hex copiado</div>
+
+<script>
+  // copiar hex
+  document.querySelectorAll('.swatch').forEach(s => {
+    s.addEventListener('click', () => {
+      const hex = s.getAttribute('data-hex');
+      navigator.clipboard.writeText(hex).then(() => {
+        const t = document.getElementById('toast');
+        t.textContent = hex + ' copiado';
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 1600);
+      }).catch(() => {});
+    });
+  });
+
+  // checklist toggle
+  document.querySelectorAll('.checklist li').forEach(li => {
+    li.addEventListener('click', () => li.classList.toggle('done'));
+  });
+</script>
+
+</body>
+</html>

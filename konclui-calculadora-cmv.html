@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculadora de CMV · Descubra onde sua margem está vazando · Koncluí</title>
+<meta name="description" content="Calcule o CMV do seu restaurante em 30 segundos. Saiba se está dentro do saudável (20-35%) ou se a margem está escapando entre desperdícios e erros de compra.">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0A0E2B; --navy-2: #131A3F; --navy-3: #1a2348;
+    --teal: #02E8C5; --teal-2: #00FFC2; --teal-deep: #007974;
+    --white: #F5F7FB; --gray: #6B7280; --gray-2: #9CA3AF;
+    --line: rgba(255,255,255,.08); --red: #EF4444; --green: #10B981; --amber: #F59E0B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { background: var(--navy); color: var(--white); font-family: 'Urbanist', sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body::before { content:''; position: fixed; inset: 0; background: radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%), radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%); pointer-events: none; z-index: 0; }
+  main { position: relative; z-index: 1; }
+  ::selection { background: var(--teal); color: var(--navy); }
+
+  h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.05; font-weight: 900; }
+  h1 { font-size: clamp(2.4rem, 5.5vw, 4.8rem); }
+  h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; }
+  h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; }
+  h4 { font-size: clamp(1rem, 1.4vw, 1.2rem); font-weight: 800; }
+  p { font-size: clamp(1rem, 1.2vw, 1.15rem); color: rgba(245,247,251,.78); font-weight: 500; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .teal { color: var(--teal); }
+  strong { font-weight: 800; color: var(--white); }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+  section { padding: clamp(3.5rem, 7vw, 6rem) 0; position: relative; }
+
+  /* NAV */
+  nav.top { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,14,43,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); z-index: 100; padding: 1rem 0; }
+  nav.top .row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .logo { display: flex; align-items: center; gap: .65rem; }
+  .logo img { height: 36px; }
+  .logo .fallback { font-size: 1.2rem; font-weight: 900; }
+  .logo .fallback .dot { color: var(--teal); }
+  .logo:not(.has-img) img { display: none; }
+  .logo:not(.has-img) .fallback { display: inline; }
+  nav .small { font-size: .85rem; color: rgba(245,247,251,.5); }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: .5rem; background: rgba(2,232,197,0.12); color: var(--teal); padding: .45rem 1rem; border-radius: 999px; font-size: .82rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; border: 1px solid rgba(2,232,197,.25); margin-bottom: 1.6rem; width: fit-content; }
+  .eyebrow .dot { width: 6px; height: 6px; background: var(--teal); border-radius: 999px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(2,232,197,.6);} 70%{box-shadow:0 0 0 8px rgba(2,232,197,0);} 100%{box-shadow:0 0 0 0 rgba(2,232,197,0);} }
+
+  .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--teal); letter-spacing: .3em; text-transform: uppercase; font-weight: 700; margin-bottom: 1.4rem; display: block; }
+  .divider { width: 60px; height: 3px; background: var(--teal); margin: 0 0 2rem; box-shadow: 0 0 12px var(--teal); }
+
+  /* HERO */
+  .hero { padding-top: 7rem; padding-bottom: 3rem; }
+  .hero h1 em { font-style: normal; color: var(--teal); display: block; }
+  .hero p.sub { font-size: clamp(1.1rem, 1.6vw, 1.45rem); margin-top: 1.6rem; max-width: 720px; }
+  .hero .actions { display: flex; gap: 1rem; margin-top: 2.4rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--teal); color: var(--navy); padding: 1.1rem 2.2rem; border-radius: 999px; font-weight: 800; text-decoration: none; transition: transform .2s; display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; border: 0; font-family: inherit; font-size: 1rem; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.2); padding: 1.1rem 2.2rem; border-radius: 999px; font-weight: 700; text-decoration: none; transition: border .2s; cursor: pointer; font-family: inherit; font-size: 1rem; }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* CALCULADORA */
+  .calc-section { padding-top: 2rem; padding-bottom: 4rem; }
+  .calc-card {
+    background: linear-gradient(135deg, rgba(2,232,197,.08), rgba(255,255,255,.02));
+    border: 1px solid rgba(2,232,197,.3);
+    border-radius: 1.4rem;
+    padding: clamp(1.6rem, 4vw, 2.8rem);
+    box-shadow: 0 30px 80px -20px rgba(2,232,197,.15);
+  }
+  .calc-card h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 1rem; }
+  .calc-card p { font-size: 1rem; }
+  .calc-formula {
+    margin-top: 1.6rem; padding: 1rem 1.4rem;
+    background: rgba(255,255,255,.04); border-radius: .7rem;
+    border-left: 3px solid var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .9rem;
+    color: rgba(245,247,251,.85);
+  }
+  .calc-formula b { color: var(--teal); }
+
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  @media (max-width: 720px) { .calc-grid { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: .4rem; }
+  .field label { font-size: .85rem; font-weight: 700; color: rgba(245,247,251,.85); }
+  .field label .req { color: var(--teal); }
+  .field .input-wrap { position: relative; }
+  .field .input-wrap::before {
+    content: 'R$';
+    position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+    color: var(--teal); font-weight: 800; font-size: 1rem; pointer-events: none;
+  }
+  .field input {
+    width: 100%;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(2,232,197,.2); border-radius: .6rem;
+    padding: 1rem 1rem 1rem 3rem;
+    color: var(--white); font-family: inherit; font-size: 1.1rem; font-weight: 700;
+    transition: border .2s, background .2s;
+  }
+  .field input:focus { outline: none; border-color: var(--teal); background: rgba(2,232,197,.06); }
+  .field-help { font-size: .78rem; color: rgba(245,247,251,.5); }
+
+  .calc-action { margin-top: 2rem; text-align: center; }
+  .calc-action button {
+    background: var(--teal); color: var(--navy);
+    padding: 1.2rem 3rem; border-radius: 999px; border: 0;
+    font-family: inherit; font-size: 1.15rem; font-weight: 900;
+    cursor: pointer; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 10px 40px -10px rgba(2,232,197,.4);
+  }
+  .calc-action button:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(2,232,197,.6); }
+
+  /* RESULTADO */
+  #result { display: none; margin-top: 2.4rem; }
+  #result.visible { display: block; animation: slideIn .5s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  @media (max-width: 720px) { .result-grid { grid-template-columns: 1fr; } }
+
+  .result-card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 1rem; padding: 1.6rem;
+  }
+  .result-card .l { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: rgba(245,247,251,.6); letter-spacing: .25em; text-transform: uppercase; font-weight: 700; }
+  .result-card .v { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900; line-height: 1; margin-top: .6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: -.02em; color: var(--white); }
+  .result-card .sub { font-size: .85rem; color: rgba(245,247,251,.55); margin-top: .5rem; font-weight: 500; }
+  .result-card.percent .v { color: var(--teal); }
+
+  .diagnostic {
+    margin-top: 1.4rem; padding: 1.4rem 1.6rem;
+    border-radius: 1rem;
+    border-left: 4px solid;
+    background: rgba(255,255,255,.03);
+  }
+  .diagnostic.green { border-color: var(--green); background: rgba(16,185,129,.08); }
+  .diagnostic.amber { border-color: var(--amber); background: rgba(245,158,11,.08); }
+  .diagnostic.red { border-color: var(--red); background: rgba(239,68,68,.08); }
+  .diagnostic .status { display: flex; align-items: center; gap: .6rem; font-size: .9rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+  .diagnostic.green .status { color: var(--green); }
+  .diagnostic.amber .status { color: var(--amber); }
+  .diagnostic.red .status { color: var(--red); }
+  .diagnostic .msg { margin-top: .8rem; font-size: 1rem; line-height: 1.55; color: rgba(245,247,251,.9); }
+  .diagnostic .scale { margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.08); }
+  .scale-bar { height: 12px; border-radius: 999px; background: linear-gradient(90deg, #fbbf24 0%, #fbbf24 15%, #10b981 15%, #10b981 50%, #fbbf24 50%, #fbbf24 65%, #ef4444 65%, #ef4444 100%); position: relative; overflow: visible; }
+  .scale-marker { position: absolute; top: -6px; width: 4px; height: 24px; background: var(--white); border-radius: 999px; box-shadow: 0 0 12px var(--white); transform: translateX(-50%); }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: .6rem; font-size: .7rem; color: rgba(245,247,251,.55); font-weight: 700; }
+
+  /* SECTIONS GENERAL */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 2rem; }
+  @media (max-width: 880px) { .grid-3 { grid-template-columns: 1fr; } }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 2rem; }
+  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
+  .card { background: rgba(255,255,255,.04); border: 1px solid rgba(2,232,197,.15); border-radius: 1.1rem; padding: 1.8rem; }
+  .card .num { font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: var(--teal); letter-spacing: .25em; text-transform: uppercase; font-weight: 700; }
+  .card h3 { margin-top: .5rem; font-size: 1.3rem; line-height: 1.2; }
+  .card p { margin-top: .8rem; font-size: .95rem; }
+
+  /* LEAKS */
+  .leaks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+  @media (max-width: 720px) { .leaks-grid { grid-template-columns: 1fr; } }
+  .leak { background: rgba(255,255,255,.04); border-left: 3px solid var(--red); border-radius: .7rem; padding: 1.2rem 1.4rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .leak .ico { font-size: 1.4rem; flex-shrink: 0; }
+  .leak h4 { font-size: 1rem; font-weight: 800; color: var(--white); }
+  .leak p { font-size: .9rem; color: rgba(245,247,251,.72); margin-top: .3rem; }
+
+  /* LEAD FORM */
+  .lead-section { padding: clamp(4rem, 7vw, 6rem) 0; }
+  .lead-card {
+    background: #F8F5EE;
+    border-radius: 1.4rem;
+    padding: clamp(2rem, 4vw, 3rem);
+    color: var(--navy);
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(2,232,197,.2);
+    box-shadow: 0 30px 80px -25px rgba(0,0,0,.4);
+  }
+  .lead-card::before {
+    content:''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 90% 0%, rgba(2,232,197,.12), transparent 50%);
+    pointer-events: none;
+  }
+  .lead-card .lead-eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(2,232,197,.15); color: var(--teal-deep);
+    padding: .35rem .9rem; border-radius: 999px;
+    font-size: .75rem; font-weight: 800;
+    letter-spacing: .18em; text-transform: uppercase;
+    margin-bottom: 1.2rem; position: relative; z-index: 1;
+    border: 1px solid rgba(2,232,197,.3);
+  }
+  .lead-card h2 { color: var(--navy); font-size: clamp(1.8rem, 3.4vw, 2.6rem); position: relative; z-index: 1; }
+  .lead-card h2 em { font-style: normal; color: var(--teal-deep); }
+  .lead-card p { color: rgba(10,14,43,.72); font-size: 1.1rem; margin-top: 1rem; max-width: 600px; position: relative; z-index: 1; }
+  .lead-card p strong { color: var(--navy); }
+
+  .lead-form { margin-top: 2rem; display: grid; gap: 1rem; max-width: 720px; position: relative; z-index: 1; }
+  .lead-form .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 720px) { .lead-form .row-2 { grid-template-columns: 1fr; } }
+  .lead-form input, .lead-form select {
+    background: #fff;
+    border: 1px solid rgba(10,14,43,.12);
+    border-radius: .6rem;
+    padding: .95rem 1rem;
+    color: var(--navy);
+    font-family: inherit; font-size: 1rem; font-weight: 600;
+    transition: border .2s, box-shadow .2s;
+  }
+  .lead-form input:focus, .lead-form select:focus {
+    outline: none;
+    border-color: var(--teal-deep);
+    box-shadow: 0 0 0 3px rgba(2,232,197,.18);
+  }
+  .lead-form input::placeholder { color: rgba(10,14,43,.4); }
+  .lead-form button {
+    background: var(--navy); color: var(--white);
+    padding: 1.1rem 2rem;
+    border-radius: 999px; border: 0;
+    font-family: inherit; font-weight: 800; font-size: 1rem;
+    cursor: pointer; margin-top: .6rem;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 24px -8px rgba(10,14,43,.5);
+  }
+  .lead-form button:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(10,14,43,.6); }
+  .lead-form button:disabled { opacity: .6; cursor: wait; transform: none; }
+  .lead-success {
+    display: none; margin-top: 2rem;
+    background: #fff;
+    border: 1px solid #10b981;
+    border-radius: .9rem; padding: 1.6rem;
+    color: var(--navy); position: relative; z-index: 1;
+  }
+  .lead-success.visible { display: block; animation: scaleIn .4s ease; }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+  .lead-success h3 { color: #047857; margin-bottom: .5rem; font-size: 1.2rem; }
+  .lead-success p { color: rgba(10,14,43,.72); }
+  .lead-error {
+    display: none; margin-top: 1rem;
+    padding: .8rem 1.2rem; border-radius: .6rem;
+    background: #fef2f2; border: 1px solid #fca5a5;
+    color: #991b1b; font-size: .9rem; font-weight: 600;
+  }
+  .lead-error.visible { display: block; }
+
+  /* KONCLUÍ PITCH */
+  .pitch-section { padding: clamp(4rem, 7vw, 6rem) 0; }
+  .pitch-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; margin-top: 2rem; }
+  @media (max-width: 880px) { .pitch-grid { grid-template-columns: 1fr; } }
+  .pitch-grid img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 30px 60px -20px rgba(0,0,54,.4); }
+  .pitch-grid .ph { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--navy-2), #06112d); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; opacity: .3; }
+
+  /* FAQ */
+  .faq { display: grid; gap: .8rem; margin-top: 2rem; }
+  .faq-item { background: rgba(255,255,255,.03); border: 1px solid rgba(2,232,197,.15); border-radius: .8rem; overflow: hidden; }
+  .faq-q { padding: 1.2rem 1.4rem; font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 1rem; transition: background .2s; }
+  .faq-q::after { content: '+'; font-size: 1.6rem; color: var(--teal); font-weight: 300; transition: transform .2s; flex-shrink: 0; }
+  .faq-q:hover { background: rgba(2,232,197,.04); }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 1.4rem 1.4rem; color: rgba(245,247,251,.78); font-size: .95rem; line-height: 1.6; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* FOOTER */
+  footer { padding: 3rem 0; border-top: 1px solid var(--line); margin-top: 4rem; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; align-items: center; }
+  footer p { font-size: .85rem; color: var(--gray-2); }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-to-hub" title="Voltar ao painel" style="position:fixed;bottom:1.2rem;left:1.2rem;z-index:9999;display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1rem;background:rgba(10,14,43,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:rgba(245,247,251,.92);text-decoration:none;font-family:'Urbanist',sans-serif;font-size:.85rem;font-weight:700;border-radius:10px;border:1px solid rgba(2,232,197,.3);box-shadow:0 8px 24px rgba(0,0,0,.35);transition:all .2s">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  Painel
+</a>
+<style>.back-to-hub:hover{color:#02E8C5!important;border-color:rgba(2,232,197,.6)!important;background:rgba(10,14,43,.98)!important;transform:translateY(-2px)}@media(max-width:540px){.back-to-hub span,.back-to-hub{font-size:.78rem}}</style>
+
+<nav class="top">
+  <div class="container row">
+    <div class="logo" id="logo">
+      <img src="png/logo.png" alt="Koncluí" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="fallback" style="display:none">Koncluí<span class="dot">.</span></span>
+    </div>
+    <span class="small">Calculadora de CMV · gratuita</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow"><span class="dot"></span>Ferramenta gratuita · sem cadastro</span>
+      <h1>Quanto do seu lucro<br/>está vazando<br/><em>entre estoque e cardápio?</em></h1>
+      <p class="sub">Calcule o CMV do seu restaurante em 30 segundos. Descubra se você tá dentro da faixa saudável (20–35%) ou se a margem tá escapando entre desperdícios e erros de compra.</p>
+      <div class="actions">
+        <a href="#calculadora" class="btn-primary">▶ Calcular meu CMV agora</a>
+        <a href="#educacao" class="btn-outline">O que é CMV?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULADORA -->
+  <section id="calculadora" class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <span class="section-eyebrow">[ Calculadora ]</span>
+        <h2>Preencha 4 números. Te entrego o diagnóstico.</h2>
+        <p>Pega os dados do mês passado. Não precisa ser exato — quanto mais próximo da realidade, mais útil o resultado.</p>
+
+        <div class="calc-formula">
+          <b>CMV</b> = (Estoque Inicial + Compras) − Estoque Final<br/>
+          <b>CMV %</b> = (CMV ÷ Faturamento) × 100
+        </div>
+
+        <div class="calc-grid">
+          <div class="field">
+            <label>Estoque inicial <span class="req">*</span></label>
+            <div class="input-wrap"><input type="number" id="estoque-inicial" placeholder="0,00" min="0" step="0.01"></div>
+            <span class="field-help">Valor dos insumos no começo do mês</span>
+          </div>
+          <div class="field">
+            <label>Compras do mês <span class="req">*</span></label>
+            <div class="input-wrap"><input type="number" id="compras" placeholder="0,00" min="0" step="0.01"></div>
+            <span class="field-help">Notas fiscais + frete + devoluções</span>
+          </div>
+          <div class="field">
+            <label>Estoque final <span class="req">*</span></label>
+            <div class="input-wrap"><input type="number" id="estoque-final" placeholder="0,00" min="0" step="0.01"></div>
+            <span class="field-help">Inventário físico ao fechar o mês</span>
+          </div>
+          <div class="field">
+            <label>Faturamento do mês <span class="req">*</span></label>
+            <div class="input-wrap"><input type="number" id="faturamento" placeholder="0,00" min="0" step="0.01"></div>
+            <span class="field-help">Total de vendas (sem incluir taxas de delivery)</span>
+          </div>
+        </div>
+
+        <div class="calc-action">
+          <button onclick="calcular()">Calcular meu CMV →</button>
+        </div>
+
+        <!-- RESULTADO -->
+        <div id="result">
+          <div class="result-grid" style="margin-top: 2.4rem;">
+            <div class="result-card">
+              <div class="l">CMV em R$</div>
+              <div class="v" id="result-cmv">R$ 0,00</div>
+              <div class="sub">Custo da Mercadoria Vendida no mês</div>
+            </div>
+            <div class="result-card percent">
+              <div class="l">CMV em %</div>
+              <div class="v" id="result-percent">0%</div>
+              <div class="sub">Sobre o faturamento total</div>
+            </div>
+          </div>
+
+          <div class="diagnostic" id="diagnostic">
+            <div class="status" id="diag-status">●&nbsp;Status</div>
+            <div class="msg" id="diag-msg">Sua mensagem aparece aqui.</div>
+            <div class="scale">
+              <div class="scale-bar">
+                <div class="scale-marker" id="scale-marker" style="left:30%"></div>
+              </div>
+              <div class="scale-labels">
+                <span>0%</span>
+                <span>20%</span>
+                <span>35%</span>
+                <span>40%+</span>
+              </div>
+            </div>
+          </div>
+
+          <p style="text-align: center; margin-top: 1.8rem; font-size: .92rem; color: rgba(245,247,251,.55);">
+            👇 Bora resolver isso? <a href="#receber-guia" style="color: var(--teal); font-weight: 800;">Receba o guia completo de redução de CMV</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE É CMV -->
+  <section id="educacao" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ O que esse número significa ]</span>
+      <div class="divider"></div>
+      <h2>CMV é o <span class="teal">retrato da eficiência</span> da sua operação.</h2>
+      <p style="margin-top: 1.4rem; max-width: 780px;">Não é fórmula contábil ou relatório bonito na planilha. É o quanto do faturamento sumiu virando insumo. Quanto menor, mais sobra de margem pra pagar despesa fixa e gerar lucro.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="num">FAIXA SAUDÁVEL</div>
+          <h3>20% a 35%</h3>
+          <p>Restaurantes saudáveis ficam aqui. Bebidas costumam ter CMV menor pelo volume e margem maior por unidade.</p>
+        </div>
+        <div class="card">
+          <div class="num">ATENÇÃO</div>
+          <h3>35% a 40%</h3>
+          <p>Já dá pra ver desperdício, ficha técnica desatualizada ou compra mal negociada. Tem oportunidade clara de reduzir.</p>
+        </div>
+        <div class="card">
+          <div class="num">CRÍTICO</div>
+          <h3>40% ou mais</h3>
+          <p>Sua margem tá sendo comida. Precisa agir AGORA: revisar fichas, conferir desperdícios, renegociar fornecedor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ONDE A MARGEM VAZA -->
+  <section class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Onde a margem vaza ]</span>
+      <div class="divider"></div>
+      <h2>Os 7 ralos invisíveis<br/>da operação.</h2>
+      <p style="margin-top: 1rem; max-width: 720px;">Esses são os culpados quando o CMV sobe sem motivo aparente. Identificar é metade da solução.</p>
+
+      <div class="leaks-grid">
+        <div class="leak">
+          <span class="ico">📋</span>
+          <div>
+            <h4>Ficha técnica desatualizada</h4>
+            <p>Receita usa 200g de carne mas a ficha diz 150g. Resultado: você precifica errado e perde em cada prato.</p>
+          </div>
+        </div>
+        <div class="leak">
+          <span class="ico">🗑️</span>
+          <div>
+            <h4>Desperdício não registrado</h4>
+            <p>Sobra que vai pro lixo, quebra, vencido. Sem registro, vira CMV alto sem explicação.</p>
+          </div>
+        </div>
+        <div class="leak">
+          <span class="ico">📦</span>
+          <div>
+            <h4>Inventário sem conferência</h4>
+            <p>Estoque "no chute" distorce o cálculo. CMV que sai de inventário errado é só palpite.</p>
+          </div>
+        </div>
+        <div class="leak">
+          <span class="ico">⚖️</span>
+          <div>
+            <h4>Porcionamento "no olho"</h4>
+            <p>Cozinheiro coloca um pouco a mais. Multiplica por 200 pratos no mês — vira prejuízo real.</p>
+          </div>
+        </div>
+        <div class="leak">
+          <span class="ico">💸</span>
+          <div>
+            <h4>Compra sem negociação</h4>
+            <p>Aceitar o primeiro preço, comprar sem cotação, sem ajuste de volume. Fornecedor agradece.</p>
+          </div>
+        </div>
+        <div class="leak">
+          <span class="ico">🚫</span>
+          <div>
+            <h4>Pratos de margem ruim</h4>
+            <p>Item caro de produzir vendendo barato. Você aumenta giro mas perde margem em cada saída.</p>
+          </div>
+        </div>
+        <div class="leak" style="grid-column: 1 / -1;">
+          <span class="ico">🎯</span>
+          <div>
+            <h4>Sem padrão entre turnos / unidades</h4>
+            <p>Cada turno faz de um jeito. Cada filial tem CMV diferente. Sem processo replicável, nunca vai estar sob controle.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD CAPTURE -->
+  <section id="receber-guia" class="lead-section reveal">
+    <div class="container">
+      <div class="lead-card">
+        <span class="lead-eyebrow">▸ Material gratuito + diagnóstico</span>
+        <h2>Quer reduzir seu CMV<br/>em <em>30 dias</em>?</h2>
+        <p>Receba gratuitamente o <strong>Guia de Redução de CMV em 30 dias</strong> + a planilha de inventário pronta pra usar. Em até 1 dia útil um especialista da Koncluí te chama pra conversar sobre seu caso.</p>
+
+        <form class="lead-form" id="lead-form" onsubmit="return submitLead(event)">
+          <div class="row-2">
+            <input type="text" id="lead-nome" placeholder="Seu nome *" required>
+            <input type="text" id="lead-empresa" placeholder="Nome do restaurante *" required>
+          </div>
+          <div class="row-2">
+            <input type="email" id="lead-email" placeholder="E-mail *" required>
+            <input type="tel" id="lead-whatsapp" placeholder="WhatsApp com DDD *" required>
+          </div>
+          <div class="row-2">
+            <select id="lead-unidades" required>
+              <option value="">Quantas unidades você opera? *</option>
+              <option value="1">1 unidade</option>
+              <option value="2-3">2 a 3 unidades</option>
+              <option value="4-10">4 a 10 unidades</option>
+              <option value="10+">Mais de 10 unidades</option>
+            </select>
+            <select id="lead-cmv-atual">
+              <option value="">Seu CMV atual está em qual faixa?</option>
+              <option value="<20">Abaixo de 20%</option>
+              <option value="20-30">Entre 20% e 30%</option>
+              <option value="30-35">Entre 30% e 35%</option>
+              <option value="35-40">Entre 35% e 40%</option>
+              <option value="40+">Acima de 40%</option>
+              <option value="nao-sei">Não sei direito</option>
+            </select>
+          </div>
+          <button type="submit" id="lead-submit-btn">Quero o guia + diagnóstico →</button>
+          <div class="lead-error" id="lead-error">⚠️ Não conseguimos enviar agora. Tenta de novo ou nos chame no WhatsApp.</div>
+        </form>
+
+        <div class="lead-success" id="lead-success">
+          <h3>✅ Recebido! Bem-vindo, <span id="success-name">[nome]</span>.</h3>
+          <p>Em até <strong>1 dia útil</strong> um especialista da Koncluí te chama no WhatsApp pra conversar sobre seu caso. Enquanto isso, fica de olho no seu e-mail — o guia + a planilha estão a caminho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONCLUÍ PITCH -->
+  <section class="pitch-section reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Como Koncluí automatiza isso ]</span>
+      <div class="divider"></div>
+      <h2>Calcular CMV é fácil.<br/>O difícil é <span class="teal">manter ele sob controle</span> todo dia.</h2>
+
+      <div class="pitch-grid">
+        <div>
+          <p style="font-size: 1.1rem; margin-top: 1.4rem;">A Koncluí é o <strong>GPS da sua operação</strong>. Não é mais uma planilha. É o sistema que <strong>obriga</strong> a equipe a seguir o protocolo — e <strong>prova</strong> que seguiu.</p>
+          <p style="font-size: 1.1rem; margin-top: 1rem;">Ficha técnica, conferência de estoque, registro de desperdício, padronização entre turnos: tudo virando checklist obrigatório com foto, hora e responsável.</p>
+          <p style="font-size: 1.1rem; margin-top: 1rem;">Resultado direto no CMV: <strong style="color: var(--teal);">cliente Koncluí descobriu R$6 mil "evaporando" no primeiro mês de uso.</strong> Não era fraude. Era processo sem prova.</p>
+          <p style="margin-top: 1.6rem;">
+            <a href="#receber-guia" class="btn-primary" style="font-size: .95rem;">Quero reduzir meu CMV →</a>
+          </p>
+        </div>
+        <div>
+          <img src="png/dashboard.png" alt="Painel Koncluí" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph" style="display:none;">📊</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Perguntas frequentes ]</span>
+      <div class="divider"></div>
+      <h2>O que mais perguntam<br/>sobre CMV.</h2>
+
+      <div class="faq">
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">O que é exatamente o cálculo do CMV mensal?<span></span></div>
+          <div class="faq-a">
+            CMV (Custo da Mercadoria Vendida) é o valor gasto com insumos que efetivamente saíram do estoque pra virar venda. Mostra quanto do faturamento foi consumido por mercadoria. Fórmula: <strong>CMV = (Estoque Inicial + Compras) − Estoque Final</strong>. Pra restaurante saudável, fica entre 20% e 35% do faturamento.
+          </div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Quais erros mais distorcem o resultado do CMV?<span></span></div>
+          <div class="faq-a">
+            Os 3 mais comuns: (1) não registrar perdas, sobras ou quebras — esse desperdício some no cálculo; (2) ficha técnica desatualizada com rendimento errado; (3) inventário "no olho", sem conferência física ou com preços incorretos. Pequenas rotinas diárias (como pesar porções, registrar descarte) eliminam a maioria dessas distorções.
+          </div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Qual o CMV ideal pra meu restaurante?<span></span></div>
+          <div class="faq-a">
+            Varia por modelo, mas a faixa saudável é <strong>20% a 35%</strong>. Bar e bebidas costumam ter CMV diferente (geralmente menor) pela margem unitária maior. Hamburgueria fica próxima de 30-32%. Pizzaria 28-32%. Cafeteria 25-28%. Acima de 35% já tem oportunidade clara de reduzir; acima de 40% é crítico.
+          </div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Qual a relação entre ficha técnica e CMV?<span></span></div>
+          <div class="faq-a">
+            Sem ficha técnica, o consumo vira estimativa e o CMV perde precisão. Ficha técnica detalhada descreve quantidade, rendimento, perda e tempo de preparo de cada prato. Isso transforma "gasto estimado" em "gasto comprovado". Atualize sempre que trocar fornecedor ou processo, e pesa porções pra calibrar.
+          </div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">De quanto em quanto tempo devo calcular o CMV?<span></span></div>
+          <div class="faq-a">
+            Idealmente <strong>mensal</strong>, comparando com meses anteriores pra detectar variações. Pra itens de alto giro (proteína, embalagem), faça conferência <strong>semanal</strong>. Pra inventário geral, mensal. O segredo é criar rotina fixa — não adianta fazer um mês e esquecer dois.
+          </div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Como ferramentas como Koncluí ajudam no CMV?<span></span></div>
+          <div class="faq-a">
+            Koncluí automatiza o que sustenta o CMV: checklists obrigatórios pra conferência de estoque, registro de perdas com foto-prova, ficha técnica replicada entre turnos e unidades, alertas quando algo escapa do padrão. Isso transforma rotina manual (que ninguém faz direito) em processo automático com prova. Resultado: o CMV vira número confiável e cai pelo simples fato de ter padrão.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <div class="logo" id="logo-foot">
+      <img src="png/logo.png" alt="Koncluí" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="fallback" style="display:none">Koncluí<span class="dot">.</span></span>
+    </div>
+    <p>Koncluí · GPS da sua Operação · Calculadora de CMV gratuita</p>
+  </div>
+</footer>
+
+<script>
+  // Detect logo
+  ['logo','logo-foot'].forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    const img = el.querySelector('img'); if (!img) return;
+    img.addEventListener('load', () => el.classList.add('has-img'));
+    if (img.complete && img.naturalWidth > 0) el.classList.add('has-img');
+  });
+
+  // Format BRL
+  function formatBRL(v) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v || 0);
+  }
+
+  // CALCULAR
+  function calcular() {
+    const estoqueInicial = parseFloat(document.getElementById('estoque-inicial').value) || 0;
+    const compras = parseFloat(document.getElementById('compras').value) || 0;
+    const estoqueFinal = parseFloat(document.getElementById('estoque-final').value) || 0;
+    const faturamento = parseFloat(document.getElementById('faturamento').value) || 0;
+
+    if (faturamento <= 0) {
+      alert('Preencha o faturamento do mês pra calcular o percentual de CMV.');
+      document.getElementById('faturamento').focus();
+      return;
+    }
+    if (estoqueInicial === 0 && compras === 0 && estoqueFinal === 0) {
+      alert('Preencha estoque e compras pra calcular o CMV.');
+      return;
+    }
+
+    const cmv = (estoqueInicial + compras) - estoqueFinal;
+    const cmvPercent = (cmv / faturamento) * 100;
+
+    document.getElementById('result-cmv').textContent = formatBRL(cmv);
+    document.getElementById('result-percent').textContent = cmvPercent.toFixed(1).replace('.', ',') + '%';
+
+    // Diagnostic
+    let diagClass, status, msg;
+    if (cmvPercent < 20) {
+      diagClass = 'amber';
+      status = '⚠️ Verificação necessária';
+      msg = 'CMV abaixo de 20% pode indicar inventário incorreto, ficha técnica subestimada ou faturamento alto sem proporção. Vale revisar a contagem física do estoque e os rendimentos das fichas técnicas. Se você é uma cafeteria ou bar, esse percentual pode estar correto pelo mix de produtos.';
+    } else if (cmvPercent <= 35) {
+      diagClass = 'green';
+      status = '✅ Saudável';
+      msg = 'Seu CMV está dentro da faixa saudável pra restaurantes (20-35%). Ótimo trabalho. Mantenha o controle com inventário regular, ficha técnica atualizada e padrão entre turnos. Pequenos ajustes podem te tirar pra a faixa "ótima" (20-25%) e aumentar margem.';
+    } else if (cmvPercent <= 40) {
+      diagClass = 'amber';
+      status = '⚠️ Atenção';
+      msg = 'Seu CMV está acima do recomendado. Tem oportunidade clara de reduzir 5 a 8 pontos percentuais sem sacrificar qualidade. Comece olhando: ficha técnica desatualizada, desperdício não registrado, porcionamento "no olho" e renegociação com fornecedor. Aplicado em 30 dias, vira margem real.';
+    } else {
+      diagClass = 'red';
+      status = '🚨 Crítico';
+      msg = 'CMV em zona crítica. Sua margem está sendo comida e provavelmente o lucro também. Precisa agir AGORA: revisar TODAS as fichas técnicas, implementar registro obrigatório de desperdício, conferência semanal de estoque e renegociação imediata com fornecedores. Cada semana parado é dinheiro saindo pelo ralo.';
+    }
+
+    const diag = document.getElementById('diagnostic');
+    diag.className = 'diagnostic ' + diagClass;
+    document.getElementById('diag-status').textContent = status;
+    document.getElementById('diag-msg').textContent = msg;
+
+    // Scale marker (clamp 0-100% display)
+    const markerPos = Math.min(Math.max(cmvPercent, 0), 60); // up to 60% on the bar
+    const markerPercent = (markerPos / 60) * 100;
+    document.getElementById('scale-marker').style.left = markerPercent + '%';
+
+    // Show result
+    const result = document.getElementById('result');
+    result.classList.add('visible');
+
+    // Scroll to result
+    setTimeout(() => {
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CONFIGURAÇÃO PRA RECEBER OS LEADS POR EMAIL
+  // ═══════════════════════════════════════════════════════════════════════════
+  //
+  // Atualmente os leads salvam só no navegador da pessoa (não chegam pra você).
+  // Pra você RECEBER os leads no email/Drive, escolha UMA opção:
+  //
+  // ────────────────────────────────────────────────────────────────────────────
+  // ✅ OPÇÃO 1 — FORMSPREE (mais simples, recomendado pra começar)
+  // ────────────────────────────────────────────────────────────────────────────
+  // 1. Acesse https://formspree.io
+  // 2. Cadastre com seu email (agathabranding@gmail.com)
+  // 3. Crie um novo form e copie a URL (algo como https://formspree.io/f/abcd1234)
+  // 4. Cola na constante LEAD_WEBHOOK abaixo
+  // 5. Pronto: cada lead chega no seu email automaticamente
+  // Limite gratuito: 50 leads/mês. Plano pago: $10/mês ilimitado.
+  //
+  // ────────────────────────────────────────────────────────────────────────────
+  // ✅ OPÇÃO 2 — WEB3FORMS (gratuito ilimitado, mais simples ainda)
+  // ────────────────────────────────────────────────────────────────────────────
+  // 1. Acesse https://web3forms.com
+  // 2. Coloque seu email, gera uma access_key
+  // 3. Use LEAD_WEBHOOK = 'https://api.web3forms.com/submit'
+  // 4. E acrescente o access_key dentro do payload (ver código abaixo)
+  //
+  // ────────────────────────────────────────────────────────────────────────────
+  // ✅ OPÇÃO 3 — GOOGLE SHEETS (mais robusto, todos leads numa planilha)
+  // ────────────────────────────────────────────────────────────────────────────
+  // 1. Cria uma planilha no Google Sheets
+  // 2. Extensões → Apps Script → cola um script de webhook receiver
+  //    (busca no Google: "google sheets webhook receiver tutorial")
+  // 3. Faz Deploy como Web App, copia URL
+  // 4. Cola na LEAD_WEBHOOK abaixo
+  //
+  // ────────────────────────────────────────────────────────────────────────────
+  // ✅ OPÇÃO 4 — SEU CRM (HubSpot, RD Station, Kommo, ActiveCampaign)
+  // ────────────────────────────────────────────────────────────────────────────
+  // Cada CRM tem seu próprio webhook. Pega a URL do webhook do seu CRM e cola.
+  //
+  // ════════════════════════════════════════════════════════════════════════════
+
+  const LEAD_WEBHOOK = ''; // ← Cola sua URL de webhook aqui (Formspree, Web3Forms, etc.)
+  const LEAD_FALLBACK_EMAIL = 'agathabranding@gmail.com'; // ← Email pra abrir mailto se webhook não estiver configurado
+
+  async function submitLead(e) {
+    e.preventDefault();
+    const btn = document.getElementById('lead-submit-btn');
+    const errorEl = document.getElementById('lead-error');
+    errorEl.classList.remove('visible');
+
+    const lead = {
+      nome: document.getElementById('lead-nome').value,
+      empresa: document.getElementById('lead-empresa').value,
+      email: document.getElementById('lead-email').value,
+      whatsapp: document.getElementById('lead-whatsapp').value,
+      unidades: document.getElementById('lead-unidades').value,
+      cmvAtual: document.getElementById('lead-cmv-atual').value,
+      cmvCalculado: document.getElementById('result-percent').textContent,
+      origem: 'Calculadora CMV',
+      timestamp: new Date().toISOString()
+    };
+
+    // 1. Salva sempre no localStorage (backup)
+    try {
+      const existing = JSON.parse(localStorage.getItem('konclui-leads-cmv') || '[]');
+      existing.push(lead);
+      localStorage.setItem('konclui-leads-cmv', JSON.stringify(existing));
+    } catch(e) {}
+
+    // 2. Envia pro webhook (se configurado)
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    let sent = false;
+    if (LEAD_WEBHOOK) {
+      try {
+        const res = await fetch(LEAD_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(lead)
+        });
+        sent = res.ok;
+      } catch(err) {
+        console.error('Erro ao enviar lead:', err);
+      }
+    } else {
+      // Webhook não configurado — abre mailto como fallback
+      console.warn('⚠️ LEAD_WEBHOOK não configurado. Lead salvo só no localStorage. Configure no script pra receber por email.');
+      const subject = encodeURIComponent(`Novo lead Calculadora CMV: ${lead.nome} (${lead.empresa})`);
+      const body = encodeURIComponent(
+        `LEAD CALCULADORA CMV\n\n` +
+        `Nome: ${lead.nome}\n` +
+        `Empresa: ${lead.empresa}\n` +
+        `Email: ${lead.email}\n` +
+        `WhatsApp: ${lead.whatsapp}\n` +
+        `Unidades: ${lead.unidades}\n` +
+        `CMV atual: ${lead.cmvAtual}\n` +
+        `CMV calculado: ${lead.cmvCalculado}\n` +
+        `Origem: ${lead.origem}\n` +
+        `Quando: ${new Date().toLocaleString('pt-BR')}\n`
+      );
+      // Abre cliente de email do usuário (não ideal pra produção, só fallback)
+      window.open(`mailto:${LEAD_FALLBACK_EMAIL}?subject=${subject}&body=${body}`, '_blank');
+      sent = true; // marca como enviado pra mostrar sucesso
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Quero o guia + diagnóstico →';
+
+    if (sent) {
+      // Mostra sucesso
+      document.getElementById('success-name').textContent = lead.nome;
+      document.getElementById('lead-form').style.display = 'none';
+      document.getElementById('lead-success').classList.add('visible');
+    } else {
+      errorEl.classList.add('visible');
+    }
+
+    return false;
+  }
+
+  // Reveal animations
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

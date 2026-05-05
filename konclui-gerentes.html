@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koncluí · Operação Autogerenciável · Gerentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --navy:#0A0E2B; --navy-2:#131A3F; --navy-3:#1a2348; --teal:#02E8C5; --teal-2:#00FFC2; --teal-deep:#007974; --white:#F5F7FB; --gray:#6B7280; --gray-2:#9CA3AF; --line:rgba(255,255,255,.08); --red:#EF4444; --green:#10B981; --amber:#F59E0B; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; scroll-padding-top:90px; }
+  body { background:var(--navy); color:var(--white); font-family:'Urbanist',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%), radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%); pointer-events:none; z-index:0; }
+  main { position:relative; z-index:1; }
+  ::selection { background:var(--teal); color:var(--navy); }
+  h1,h2,h3 { letter-spacing:-0.025em; line-height:1.05; font-weight:900; }
+  h1 { font-size:clamp(2.4rem, 6vw, 5.5rem); }
+  h2 { font-size:clamp(2rem, 4.5vw, 3.6rem); font-weight:800; }
+  h3 { font-size:clamp(1.4rem, 2.4vw, 2rem); font-weight:800; }
+  h4 { font-size:clamp(1rem, 1.4vw, 1.25rem); font-weight:800; }
+  p { font-size:clamp(1rem, 1.2vw, 1.15rem); color:rgba(245,247,251,.78); font-weight:500; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .teal { color:var(--teal); }
+  strong { font-weight:800; color:var(--white); }
+  .container { max-width:1280px; margin:0 auto; padding:0 clamp(1rem, 4vw, 3rem); }
+  section { padding:clamp(4rem, 8vw, 7rem) 0; position:relative; }
+
+  nav.top { position:fixed; top:0; left:0; right:0; background:rgba(10,14,43,.85); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); z-index:100; padding:1rem 0; }
+  nav.top .row { display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  .logo { display:flex; align-items:center; gap:.65rem; }
+  .logo img.brand { height:40px; width:auto; display:block; }
+  .logo svg.brand-svg { width:32px; height:32px; display:none; }
+  .logo .logo-text { font-size:1.3rem; font-weight:900; letter-spacing:-0.02em; display:none; }
+  .logo .logo-text .dot { color:var(--teal); }
+  .logo:not(.has-img) img.brand { display:none; }
+  .logo:not(.has-img) svg.brand-svg, .logo:not(.has-img) .logo-text { display:block; }
+  .logo:not(.has-img) { gap:.5rem; }
+  .logo:not(.has-img) .logo-text { display:inline-block; }
+  nav.top ul { list-style:none; display:flex; gap:2.4rem; }
+  nav.top ul a { color:rgba(245,247,251,.65); text-decoration:none; font-size:.92rem; font-weight:600; transition:color .2s; }
+  nav.top ul a:hover { color:var(--teal); }
+  @media (max-width:880px) { nav.top ul { display:none; } }
+  .progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--teal); z-index:101; transition:width .15s ease; box-shadow:0 0 12px var(--teal); }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.5rem; background:rgba(2,232,197,0.12); color:var(--teal); padding:.45rem 1rem; border-radius:999px; font-size:.82rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; border:1px solid rgba(2,232,197,.25); margin-bottom:1.6rem; width:fit-content; }
+  .eyebrow .dot { width:6px; height:6px; background:var(--teal); border-radius:999px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(2,232,197,.6); } 70% { box-shadow:0 0 0 8px rgba(2,232,197,0); } 100% { box-shadow:0 0 0 0 rgba(2,232,197,0); } }
+  .section-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.82rem; color:var(--teal); letter-spacing:.3em; text-transform:uppercase; font-weight:700; margin-bottom:1.4rem; display:block; }
+  .divider { width:60px; height:3px; background:var(--teal); margin:0 0 2rem; box-shadow:0 0 12px var(--teal); }
+
+  .hero { padding-top:8rem; padding-bottom:5rem; }
+  .hero .grid { display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; align-items:center; }
+  @media (max-width:880px) { .hero .grid { grid-template-columns:1fr; } }
+  .hero h1 em { font-style:normal; color:var(--teal); display:block; }
+  .hero p.sub { font-size:clamp(1.1rem, 1.5vw, 1.4rem); margin-top:1.4rem; max-width:540px; }
+  .hero .trust { margin-top:3rem; display:flex; flex-wrap:wrap; gap:2.4rem; padding-top:2rem; border-top:1px solid var(--line); }
+  .hero .trust-item .n { font-size:1.7rem; font-weight:900; color:var(--teal); }
+  .hero .trust-item .l { font-size:.78rem; color:var(--gray-2); text-transform:uppercase; letter-spacing:.15em; font-weight:700; margin-top:.15rem; }
+  .hero-visual { background:linear-gradient(135deg, var(--navy-2), #06112d); border-radius:1.4rem; border:1px solid rgba(2,232,197,.2); aspect-ratio:4/5; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .hero-visual::before { content:''; position:absolute; inset:0; background-image:linear-gradient(135deg, rgba(2,232,197,.06) 1px, transparent 1px), linear-gradient(45deg, rgba(2,232,197,.06) 1px, transparent 1px); background-size:40px 40px; }
+  .hero-visual::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 30% 30%, rgba(2,232,197,.25), transparent 60%); }
+  .hero-visual img { width:80%; height:auto; position:relative; z-index:1; border-radius:.8rem; box-shadow:0 30px 80px -20px rgba(0,0,0,.6); }
+  .hero-visual span.fallback { font-size:8rem; opacity:.25; position:relative; z-index:1; }
+
+  /* DAY TIMELINE */
+  .day { display:grid; grid-template-columns:repeat(8, 1fr); gap:1rem; margin-top:2rem; position:relative; }
+  .day::before { content:''; position:absolute; left:1rem; right:1rem; top:1.2rem; height:2px; background:rgba(255,255,255,.08); z-index:0; }
+  .day-step { background:rgba(255,255,255,.04); border-radius:.7rem; padding:1.2rem .8rem; position:relative; z-index:1; border:1px solid var(--line); }
+  .day-step::before { content:''; position:absolute; left:1rem; top:-.4rem; width:.7rem; height:.7rem; background:var(--red); border-radius:999px; box-shadow:0 0 0 .25rem rgba(239,68,68,.15); }
+  .day-step .h { font-family:'JetBrains Mono',monospace; font-size:.8rem; font-weight:800; color:var(--white); }
+  .day-step .what { font-size:.82rem; font-weight:700; color:var(--white); margin-top:.7rem; line-height:1.3; }
+  .day-step .who { font-size:.6rem; font-weight:700; color:rgba(245,247,251,.45); text-transform:uppercase; letter-spacing:.12em; margin-top:.5rem; }
+  @media (max-width:880px) { .day { grid-template-columns:repeat(2, 1fr); } .day::before { display:none; } }
+
+  /* MANIFESTO */
+  .manifesto h2 { font-size:clamp(2.4rem, 6vw, 5rem); line-height:1; max-width:1100px; }
+  .manifesto h2 .strike { text-decoration:line-through; text-decoration-thickness:4px; text-decoration-color:var(--teal); }
+  .manifesto p { margin-top:2rem; font-size:1.2rem; max-width:720px; }
+
+  /* PILARES */
+  .pilares { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.6rem; margin-top:2.4rem; }
+  .pilar { background:rgba(255,255,255,.04); border-radius:1.2rem; padding:2rem; border:1px solid rgba(2,232,197,.15); border-top:3px solid var(--teal); }
+  .pilar .num { font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--teal); letter-spacing:.25em; text-transform:uppercase; font-weight:700; }
+  .pilar h3 { margin-top:.6rem; font-size:1.6rem; line-height:1.15; }
+  .pilar h3 span { color:var(--teal); }
+  .pilar p { margin-top:1rem; font-size:1rem; }
+
+  /* SHOWCASE */
+  .showcase { padding:clamp(2.5rem, 5vw, 4rem) 0; }
+  .showcase .container { display:grid; gap:clamp(1.4rem, 2.6vw, 2.4rem); align-items:center; }
+  .showcase.zig-right .container { grid-template-columns:.9fr 1.4fr; }
+  .showcase.zig-left .container { grid-template-columns:1.4fr .9fr; }
+  .showcase.zig-left .showcase-text { order:2; }
+  .showcase.full .container { grid-template-columns:1fr; gap:1.4rem; }
+  .showcase.full .showcase-text { max-width:900px; margin-bottom:0 !important; }
+  @media (max-width:880px) { .showcase.zig-right .container, .showcase.zig-left .container { grid-template-columns:1fr; } .showcase.zig-left .showcase-text { order:1; } }
+  .showcase-text h2 { font-size:clamp(1.8rem, 3.2vw, 2.6rem); }
+  .showcase-text h2 em { font-style:normal; color:var(--teal); }
+  .showcase-text p { margin-top:1rem; font-size:1.1rem; max-width:540px; }
+  .showcase-image { position:relative; border-radius:.6rem; overflow:hidden; }
+  .showcase-image img { width:100%; height:auto; display:block; }
+  .showcase-image .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:rgba(245,247,251,.4); background:linear-gradient(135deg, var(--navy-2), #06112d); aspect-ratio:16/9; pointer-events:none; border:1px dashed rgba(2,232,197,.2); border-radius:.6rem; }
+  .showcase-image.has-img .ph { display:none; }
+  .showcase-image .ph .ico { font-size:3.5rem; }
+  .showcase-image .ph code { font-family:'JetBrains Mono',monospace; background:rgba(2,232,197,.1); color:var(--teal); padding:.35rem .8rem; border-radius:.5rem; font-size:.85rem; font-weight:700; }
+
+  /* DEPOIMENTOS */
+  .depo { display:grid; grid-template-columns:1.3fr 1fr; gap:2.4rem; align-items:stretch; margin-top:3rem; }
+  @media (max-width:880px) { .depo { grid-template-columns:1fr; } }
+  .depo + .depo { margin-top:5rem; }
+  .depo-dash { background:#fff; border-radius:1rem; overflow:hidden; box-shadow:0 30px 80px -20px rgba(0,0,54,.6); color:var(--navy); display:flex; flex-direction:column; }
+  .depo-app { display:grid; grid-template-columns:110px 1fr; flex:1; }
+  .depo-side { background:var(--navy); padding:1.2rem .8rem; display:flex; flex-direction:column; gap:.25rem; }
+  .depo-side .lg { color:var(--white); font-size:1rem; font-weight:900; padding:.4rem; display:flex; align-items:center; gap:.35rem; }
+  .depo-side .lg svg { width:18px; height:18px; }
+  .depo-side .mi { font-size:.7rem; font-weight:600; color:rgba(255,255,255,.5); padding:.4rem; border-radius:.35rem; }
+  .depo-side .mi.active { background:rgba(2,232,197,.12); color:var(--teal); font-weight:800; }
+  .depo-main { padding:1.4rem 1.6rem; background:#FAFBFC; }
+  .depo-greet { font-size:1.4rem; font-weight:900; color:var(--navy); }
+  .depo-greet small { display:block; font-size:.75rem; color:var(--gray); font-weight:600; margin-top:.15rem; letter-spacing:.04em; }
+  .depo-stats { display:grid; grid-template-columns:repeat(5, 1fr); gap:.5rem; margin-top:1rem; }
+  .depo-stat { background:#fff; border:1px solid rgba(0,0,54,.08); border-radius:.5rem; padding:.65rem; position:relative; overflow:hidden; }
+  .depo-stat .l { font-size:.55rem; font-weight:800; color:var(--gray); letter-spacing:.1em; text-transform:uppercase; line-height:1.2; }
+  .depo-stat .v { font-size:1.4rem; font-weight:900; color:var(--navy); margin-top:.2rem; line-height:1; }
+  .depo-stat .pct { font-size:.65rem; color:var(--gray); font-weight:700; margin-top:.1rem; }
+  .depo-stat .b { position:absolute; bottom:0; left:0; right:0; height:3px; }
+  .depo-stat.s1 .b { background:var(--navy); }
+  .depo-stat.s2 .b { background:var(--gray-2); }
+  .depo-stat.s3 .b { background:var(--amber); }
+  .depo-stat.s4 .b { background:var(--red); }
+  .depo-stat.s5 .b { background:var(--teal); }
+  .depo-stat.s5 .v { color:var(--teal-deep); }
+  .depo-rk { display:grid; grid-template-columns:1.1fr 1fr 1fr 1fr; gap:.5rem; margin-top:.8rem; }
+  .depo-rk-c { background:#fff; border:1px solid rgba(0,0,54,.08); border-radius:.5rem; padding:.7rem; }
+  .depo-rk-c .h { font-size:.65rem; font-weight:800; color:var(--navy); margin-bottom:.5rem; letter-spacing:.04em; }
+  .depo-donut { display:flex; gap:.6rem; align-items:center; }
+  .depo-donut .ring { width:50px; height:50px; border-radius:999px; background:conic-gradient(var(--teal) 0% var(--p, 72%), #E5E7EB var(--p, 72%) 100%); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; }
+  .depo-donut .ring::before { content:''; position:absolute; inset:8px; background:#fff; border-radius:999px; }
+  .depo-donut .ring span { position:relative; font-size:.8rem; font-weight:900; color:var(--navy); z-index:1; }
+  .depo-row { display:flex; justify-content:space-between; padding:.15rem 0; font-size:.65rem; }
+  .depo-row .n { font-weight:700; color:var(--navy); }
+  .depo-row .p { color:var(--gray); font-weight:700; }
+  .depo-vid { background:#000; border-radius:1rem; overflow:hidden; aspect-ratio:9/16; position:relative; margin-bottom:1rem; box-shadow:0 30px 80px -20px rgba(0,0,54,.6); }
+  .depo-vid iframe { width:100%; height:100%; border:0; display:block; }
+  .depo-meta .name { font-size:1.6rem; font-weight:900; color:var(--white); }
+  .depo-meta .biz { font-size:1.05rem; color:var(--teal); font-weight:800; margin-top:.2rem; letter-spacing:.04em; }
+  .depo-meta .city { font-size:.8rem; color:rgba(245,247,251,.55); font-weight:600; margin-top:.2rem; text-transform:uppercase; letter-spacing:.2em; }
+
+  .deliv { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.4rem; margin-top:2.4rem; }
+  .del { background:rgba(255,255,255,.04); border-left:3px solid var(--teal); border-radius:.8rem; padding:1.4rem 1.6rem; display:flex; gap:1.2rem; align-items:flex-start; }
+  .del .ico { width:44px; height:44px; background:rgba(2,232,197,.15); border-radius:.6rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.3rem; }
+  .del h4 { font-size:1.1rem; font-weight:900; color:var(--white); }
+  .del p { font-size:.9rem; margin-top:.35rem; }
+
+  .num-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1.4rem; margin-top:2.4rem; }
+  .num-row .nb { padding:1.6rem; border-radius:1rem; background:rgba(2,232,197,.05); border:1px solid rgba(2,232,197,.18); }
+  .num-row .nb b { font-size:clamp(2.4rem, 4.5vw, 3.6rem); font-weight:900; color:var(--teal); line-height:1; letter-spacing:-.04em; display:block; }
+  .num-row .nb span { font-size:.85rem; color:rgba(245,247,251,.7); font-weight:700; margin-top:.8rem; display:block; text-transform:uppercase; letter-spacing:.15em; }
+
+  .closing-section { padding:clamp(5rem, 10vw, 9rem) 0; text-align:center; }
+  .closing-section h2 { font-size:clamp(2.4rem, 5.5vw, 4.4rem); line-height:1; max-width:1000px; margin:0 auto; }
+  .closing-section h2 em { font-style:normal; color:var(--teal); display:block; }
+  .closing-section .underline { width:100px; height:4px; background:var(--teal); margin:2rem auto; border-radius:999px; box-shadow:0 0 16px var(--teal); }
+  .closing-section p { max-width:700px; margin:0 auto; font-size:1.2rem; }
+
+  footer { padding:3rem 0; border-top:1px solid var(--line); margin-top:4rem; }
+  footer .row { display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem; align-items:center; }
+  footer p { font-size:.85rem; color:var(--gray-2); }
+
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-to-hub" title="Voltar ao painel" style="position:fixed;bottom:1.2rem;left:1.2rem;z-index:9999;display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1rem;background:rgba(10,14,43,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:rgba(245,247,251,.92);text-decoration:none;font-family:'Urbanist',sans-serif;font-size:.85rem;font-weight:700;border-radius:10px;border:1px solid rgba(2,232,197,.3);box-shadow:0 8px 24px rgba(0,0,0,.35);transition:all .2s">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  Painel
+</a>
+<style>.back-to-hub:hover{color:#02E8C5!important;border-color:rgba(2,232,197,.6)!important;background:rgba(10,14,43,.98)!important;transform:translateY(-2px)}@media(max-width:540px){.back-to-hub span,.back-to-hub{font-size:.78rem}}</style>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav class="top">
+  <div class="container row">
+    <div class="logo" id="logo">
+      <img class="brand" src="png/logo.png" alt="Koncluí">
+      <svg class="brand-svg" viewBox="0 0 30 30"><rect x="2" y="2" width="26" height="26" rx="6" fill="white"/><path d="M 8 16 L 13 21 L 22 10" stroke="#02E8C5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="logo-text">Koncluí<span class="dot">.</span></span>
+    </div>
+    <ul>
+      <li><a href="#diagnostico">Diagnóstico</a></li>
+      <li><a href="#produto">Produto</a></li>
+      <li><a href="#plataforma">Plataforma</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#pacote">Pacote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Gerentes &amp; Líderes Operacionais · 2026</span>
+          <h1>Você não precisa<br/>de mais um app.<br/><em>Precisa de menos incêndio.</em></h1>
+          <p class="sub">Pare de gastar metade do dia cobrando o que era pra estar feito. Volte a fazer o trabalho de gerente.</p>
+          <div class="trust">
+            <div class="trust-item"><div class="n">+1.150</div><div class="l">Clientes</div></div>
+            <div class="trust-item"><div class="n">+3.500</div><div class="l">Unidades</div></div>
+            <div class="trust-item"><div class="n">+32 mil</div><div class="l">Checklists</div></div>
+            <div class="trust-item"><div class="n">+2 mi</div><div class="l">Evidências</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="png/dashboard.png" alt="Painel Koncluí" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none">📱</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UM DIA NORMAL -->
+  <section id="diagnostico" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Reconhece esse dia? ]</span>
+      <div class="divider"></div>
+      <h2>Você gasta o dia <span class="teal">cobrando</span> — não <span class="teal">gerenciando</span>.</h2>
+      <div class="day">
+        <div class="day-step"><div class="h">07:30</div><div class="what">Cobrando abertura do turno</div><div class="who">WhatsApp</div></div>
+        <div class="day-step"><div class="h">09:15</div><div class="what">Conferindo limpeza</div><div class="who">No olho</div></div>
+        <div class="day-step"><div class="h">10:30</div><div class="what">Resolvendo briga turno A x B</div><div class="who">Cara a cara</div></div>
+        <div class="day-step"><div class="h">11:40</div><div class="what">Trocando turno por falta</div><div class="who">Telefone</div></div>
+        <div class="day-step"><div class="h">14:20</div><div class="what">Re-cobrando relatório</div><div class="who">WhatsApp</div></div>
+        <div class="day-step"><div class="h">17:00</div><div class="what">Reunião com o dono</div><div class="who">Cara a cara</div></div>
+        <div class="day-step"><div class="h">19:30</div><div class="what">Montando relatório</div><div class="who">Planilha</div></div>
+        <div class="day-step"><div class="h">22:00</div><div class="what">Conferindo fechamento</div><div class="who">Em casa</div></div>
+      </div>
+      <p style="margin-top:1.6rem; max-width:700px;">Sobrou tempo pra <strong>treinar a equipe, melhorar processo ou sair do reativo</strong>? Não tem.</p>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="reveal">
+    <div class="container manifesto">
+      <span class="section-eyebrow">[ Manifesto ]</span>
+      <div class="divider"></div>
+      <h2>Cargo: <span class="strike">gerente</span>.<br/>Função real: <span class="teal">tradutor de problemas</span><br/>entre o operacional e o dono.</h2>
+      <p>Quando o controle depende da sua memória, do seu olho e da sua presença, qualquer dia que você falha é um dia que a operação falha. Isso não é gestão. É equilibrismo.</p>
+    </div>
+  </section>
+
+  <!-- O QUE É KONCLUÍ -->
+  <section id="produto" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ O que é a Koncluí ]</span>
+      <div class="divider"></div>
+      <h2>Koncluí é o <span class="teal">GPS da sua operação</span> — trabalhando do <span class="teal">seu lado</span>.</h2>
+      <p style="margin-top:1.4rem; max-width:760px;">Não é mais um sistema pra você admin. É uma camada que <strong>cobra a equipe sozinha</strong>, te avisa só quando precisa, e mantém prova de tudo.</p>
+      <div class="pilares">
+        <div class="pilar">
+          <div class="num">PILAR 01</div>
+          <h3>Cobrança deixa de ser <span>manual</span></h3>
+          <p>Tarefa não feita aciona alerta sozinha. Você só entra quando precisa decidir, não quando precisa lembrar.</p>
+        </div>
+        <div class="pilar">
+          <div class="num">PILAR 02</div>
+          <h3>Auditoria deixa de ser <span>arqueologia</span></h3>
+          <p>Foto, hora e responsável de cada checklist. Auditoria virou registro automático. Pesquisável em segundos.</p>
+        </div>
+        <div class="pilar">
+          <div class="num">PILAR 03</div>
+          <h3>Briga de versão <span>acaba</span></h3>
+          <p>"Eu fiz." "Eu não fiz." Sem prova, vira teu problema. Com prova Koncluí, vira informação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATAFORMA -->
+  <div id="plataforma"></div>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/meus%20checklists.png" alt="Koncluí app mobile"><div class="ph"><div class="ico">📱</div><code>png/meus checklists.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ App Koncluí 360 ]</span>
+        <h2>O <em>chão da operação</em><br/>na palma da mão.</h2>
+        <p>Funcionário abre o app, vê tarefa do turno, executa, fecha com prova. Funciona offline. Treino de 1 hora pra equipe inteira começar a usar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase zig-right reveal">
+    <div class="container">
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Configuração inicial ]</span>
+        <h2>USE UM TEMPLATE OU <em>CRIE COM IA</em>.</h2>
+        <p>Templates prontos por categoria — Abertura, Caixa, Cozinha, Limpeza, Salão, Segurança Alimentar. Ou descreva pra <strong>Koru AI</strong> e ela monta os itens em segundos.</p>
+      </div>
+      <div class="showcase-image"><img src="png/USE%20UM%20TEMPLATE%20OU%20CRIE%20COM%20IA.png" alt="Koncluí · adicionar checklist"><div class="ph"><div class="ico">📋</div><code>png/USE UM TEMPLATE OU CRIE COM IA.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Recorrência ]</span>
+        <h2>AGENDE UMA VEZ, <em>EXECUTE SEMPRE</em>.</h2>
+        <p>Recorrência diária, semanal, mensal. Frequência, horário-limite, dias da semana. Configura uma vez — a operação cobra sozinha. Você não relembra mais ninguém.</p>
+      </div>
+      <div class="showcase-image"><img src="png/agendamento%20de%20atividades.png" alt="Koncluí · agendamento"><div class="ph"><div class="ico">📅</div><code>png/agendamento de atividades.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/descri%C3%A7%C3%A3o%20da%20atividade.png" alt="Koncluí · responsável"><div class="ph"><div class="ico">👤</div><code>png/descrição da atividade.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Atribuição ]</span>
+        <h2>UM CHECKLIST,<br/><em>UM RESPONSÁVEL</em>.</h2>
+        <p>Unidade, responsável, momento, setor. Cada checklist tem dono. "Quem fez?" deixa de ser pergunta — vira informação clara no painel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase zig-right reveal">
+    <div class="container">
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Prova obrigatória ]</span>
+        <h2>TUDO CLARO,<br/><em>SEM DESCULPAS</em>.</h2>
+        <p>Foto, vídeo, comentário, assinatura. Evidência obrigatória, item crítico, definir meta. A tarefa só fecha com prova. Briga de versão acabou.</p>
+      </div>
+      <div class="showcase-image"><img src="png/evid%C3%AAncias%20com%20fotos%2C%20v%C3%ADdeos%20e%20texto.png" alt="Koncluí · evidências"><div class="ph"><div class="ico">📸</div><code>png/evidências com fotos, vídeos e texto.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Comunicação direta ]</span>
+        <h2>RECEBA NOTIFICAÇÕES <em>NO WHATSAPP</em>.</h2>
+        <p>Tarefa atrasou, alguém errou, não-conformidade abriu? Você sabe na hora — direto no WhatsApp. Sem precisar abrir painel, sem precisar lembrar de checar.</p>
+      </div>
+      <div class="showcase-image"><img src="png/RECEBA%20NOTIFICA%C3%87%C3%95ES%2C%20NO%20WHATSAPP.png" alt="Koncluí · notificações WhatsApp"><div class="ph"><div class="ico">💬</div><code>png/RECEBA NOTIFICAÇÕES, NO WHATSAPP.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Visão consolidada ]</span>
+        <h2>TUDO CENTRALIZADO,<br/><em>MULTI-UNIDADE</em>.</h2>
+        <p>Filtre por unidade, responsável, setor, status. Ações em massa. Toda a operação numa lista só, em tempo real.</p>
+      </div>
+      <div class="showcase-image"><img src="png/TUDO%20CENTRALIZADO%2C%20MULTI-UNIDADE.png" alt="Koncluí · multi-unidade"><div class="ph"><div class="ico">🏢</div><code>png/TUDO CENTRALIZADO, MULTI-UNIDADE.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/Evolu%C3%A7%C3%A3o%20dos%20indicadores%20de%20desempenho.png" alt="Koncluí · indicadores"><div class="ph"><div class="ico">📊</div><code>png/Evolução dos indicadores de desempenho.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Indicadores ]</span>
+        <h2>A operação <em>medindo a si mesma</em>.</h2>
+        <p>Acompanhe a evolução de conformidade, taxa de conclusão e tempo médio de execução por unidade, por setor, por turno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="clientes" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Operações que rodam Koncluí ]</span>
+      <div class="divider"></div>
+      <h2>Quem já vive <span class="teal">a outra rotina</span>.</h2>
+
+      <div class="depo">
+        <div class="depo-dash">
+          <div class="depo-app">
+            <div class="depo-side">
+              <div class="lg"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="white"/><path d="M 7 12 L 10 15 L 17 8" stroke="#02E8C5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Koncluí</div>
+              <div class="mi active">Dashboard</div>
+              <div class="mi">Checklists</div>
+              <div class="mi">Onboarding</div>
+              <div class="mi" style="margin-top:1rem">Notificações</div>
+              <div class="mi">Configurações</div>
+              <div class="mi">Cursos</div>
+            </div>
+            <div class="depo-main">
+              <div class="depo-greet">Boa noite, Rodrigo<small>Santa Rita · 24 de Abril</small></div>
+              <div class="depo-stats">
+                <div class="depo-stat s1"><div class="l">Agendados</div><div class="v">691</div><div class="pct">100%</div><div class="b" style="width:100%"></div></div>
+                <div class="depo-stat s2"><div class="l">Não Iniciado</div><div class="v">3</div><div class="pct">0%</div><div class="b" style="width:1%"></div></div>
+                <div class="depo-stat s3"><div class="l">Iniciado N/F</div><div class="v">14</div><div class="pct">2%</div><div class="b" style="width:2%"></div></div>
+                <div class="depo-stat s4"><div class="l">Atrasados</div><div class="v">174</div><div class="pct">25%</div><div class="b" style="width:25%"></div></div>
+                <div class="depo-stat s5"><div class="l">Finalizado</div><div class="v">500</div><div class="pct">72%</div><div class="b" style="width:72%"></div></div>
+              </div>
+              <div class="depo-rk">
+                <div class="depo-rk-c"><div class="h">Taxa conclusão</div><div class="depo-donut"><div class="ring" style="--p: 72%"><span>72%</span></div></div></div>
+                <div class="depo-rk-c"><div class="h">Ranking</div><div class="depo-row"><span class="n">Leonardo</span><span class="p">84%</span></div><div class="depo-row"><span class="n">Rayssa</span><span class="p">67%</span></div><div class="depo-row"><span class="n">Adrielle</span><span class="p">64%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por unidade</div><div class="depo-row"><span class="n">Bazuka</span><span class="p">66%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por setor</div><div class="depo-row"><span class="n">Salão</span><span class="p">73%</span></div><div class="depo-row"><span class="n">Atendimento</span><span class="p">71%</span></div><div class="depo-row"><span class="n">Cozinha</span><span class="p">68%</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="depo-vid"><iframe src="https://drive.google.com/file/d/1wwDS28j26nNLRr2pXf1JZbYN6Qhw6eOF/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="depo-meta"><div class="name">Rodrigo Silva</div><div class="biz">Bazuka Burger</div><div class="city">Cajamar / SP</div></div>
+        </div>
+      </div>
+
+      <div class="depo">
+        <div class="depo-dash">
+          <div class="depo-app">
+            <div class="depo-side">
+              <div class="lg"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="white"/><path d="M 7 12 L 10 15 L 17 8" stroke="#02E8C5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Koncluí</div>
+              <div class="mi active">Dashboard</div>
+              <div class="mi">Checklists</div>
+              <div class="mi">Onboarding</div>
+              <div class="mi" style="margin-top:1rem">Notificações</div>
+              <div class="mi">Configurações</div>
+              <div class="mi">Cursos</div>
+            </div>
+            <div class="depo-main">
+              <div class="depo-greet">Boa noite, Paulo<small>Santa Rita · 24 de Abril</small></div>
+              <div class="depo-stats">
+                <div class="depo-stat s1"><div class="l">Agendados</div><div class="v">5036</div><div class="pct">100%</div><div class="b" style="width:100%"></div></div>
+                <div class="depo-stat s2"><div class="l">Não Iniciado</div><div class="v">9</div><div class="pct">0%</div><div class="b" style="width:1%"></div></div>
+                <div class="depo-stat s3"><div class="l">Iniciado N/F</div><div class="v">12</div><div class="pct">0%</div><div class="b" style="width:1%"></div></div>
+                <div class="depo-stat s4"><div class="l">Atrasados</div><div class="v">127</div><div class="pct">3%</div><div class="b" style="width:3%"></div></div>
+                <div class="depo-stat s5"><div class="l">Finalizado</div><div class="v">4888</div><div class="pct">97%</div><div class="b" style="width:97%"></div></div>
+              </div>
+              <div class="depo-rk">
+                <div class="depo-rk-c"><div class="h">Taxa conclusão</div><div class="depo-donut"><div class="ring" style="--p: 97%"><span>97%</span></div></div></div>
+                <div class="depo-rk-c"><div class="h">Ranking</div><div class="depo-row"><span class="n">Jaqueline</span><span class="p">94%</span></div><div class="depo-row"><span class="n">Douglas</span><span class="p">91%</span></div><div class="depo-row"><span class="n">Aleksandro</span><span class="p">89%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por unidade</div><div class="depo-row"><span class="n">Ouro Verde</span><span class="p">89%</span></div><div class="depo-row"><span class="n">C. Grande</span><span class="p">87%</span></div><div class="depo-row"><span class="n">B. Geraldo</span><span class="p">86%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por setor</div><div class="depo-row"><span class="n">Salão Ext.</span><span class="p">89%</span></div><div class="depo-row"><span class="n">Liderança</span><span class="p">85%</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="depo-vid"><iframe src="https://drive.google.com/file/d/1UUrU4U3BmAUvmlD0YNJK6hNk0K1z9vn1/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="depo-meta"><div class="name">Paulo Henrique</div><div class="biz">Kombi's Hot Dog</div><div class="city">Campinas / SP</div></div>
+        </div>
+      </div>
+
+      <div class="depo">
+        <div class="depo-dash">
+          <div class="depo-app">
+            <div class="depo-side">
+              <div class="lg"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="white"/><path d="M 7 12 L 10 15 L 17 8" stroke="#02E8C5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Koncluí</div>
+              <div class="mi active">Dashboard</div>
+              <div class="mi">Checklists</div>
+              <div class="mi">Onboarding</div>
+              <div class="mi" style="margin-top:1rem">Notificações</div>
+              <div class="mi">Configurações</div>
+              <div class="mi">Cursos</div>
+            </div>
+            <div class="depo-main">
+              <div class="depo-greet">Boa noite, Samuel<small>Santa Rita · 24 de Abril</small></div>
+              <div class="depo-stats">
+                <div class="depo-stat s1"><div class="l">Agendados</div><div class="v">4923</div><div class="pct">100%</div><div class="b" style="width:100%"></div></div>
+                <div class="depo-stat s2"><div class="l">Não Iniciado</div><div class="v">3</div><div class="pct">0%</div><div class="b" style="width:1%"></div></div>
+                <div class="depo-stat s3"><div class="l">Iniciado N/F</div><div class="v">62</div><div class="pct">1%</div><div class="b" style="width:1%"></div></div>
+                <div class="depo-stat s4"><div class="l">Atrasados</div><div class="v">623</div><div class="pct">13%</div><div class="b" style="width:13%"></div></div>
+                <div class="depo-stat s5"><div class="l">Finalizado</div><div class="v">4235</div><div class="pct">86%</div><div class="b" style="width:86%"></div></div>
+              </div>
+              <div class="depo-rk">
+                <div class="depo-rk-c"><div class="h">Taxa conclusão</div><div class="depo-donut"><div class="ring" style="--p: 86%"><span>86%</span></div></div></div>
+                <div class="depo-rk-c"><div class="h">Ranking</div><div class="depo-row"><span class="n">3 P. SBC</span><span class="p">65%</span></div><div class="depo-row"><span class="n">3 P. SCS</span><span class="p">63%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por unidade</div><div class="depo-row"><span class="n">SBC</span><span class="p">65%</span></div><div class="depo-row"><span class="n">SCS</span><span class="p">63%</span></div><div class="depo-row"><span class="n">St. André</span><span class="p">60%</span></div></div>
+                <div class="depo-rk-c"><div class="h">Por setor</div><div class="depo-row"><span class="n">Limpeza</span><span class="p">68%</span></div><div class="depo-row"><span class="n">Salão</span><span class="p">65%</span></div><div class="depo-row"><span class="n">Cozinha</span><span class="p">63%</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="depo-vid"><iframe src="https://drive.google.com/file/d/17J4SlUQc2BDmpB1nyAdpduQk9GH6CmaP/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="depo-meta"><div class="name">Samuel Martins</div><div class="biz">3 Pastéis</div><div class="city">ABC Paulista</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pacote" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Pacote completo ]</span>
+      <div class="divider"></div>
+      <h2>Tudo isso entra no seu <span class="teal">primeiro mês</span>.</h2>
+      <div class="deliv">
+        <div class="del"><div class="ico">🖥️</div><div><h4>Plataforma Koncluí Web</h4><p>Painel multi-unidade em tempo real · checklists ilimitados · auditoria completa</p></div></div>
+        <div class="del"><div class="ico">📱</div><div><h4>App Koncluí 360</h4><p>iOS e Android · usuários ilimitados · funciona offline · execução pelo chão da operação</p></div></div>
+        <div class="del"><div class="ico">✨</div><div><h4>Koru AI · criação por IA</h4><p>Descreva o checklist e a IA monta os itens · agilidade na configuração inicial</p></div></div>
+        <div class="del"><div class="ico">📋</div><div><h4>Templates prontos</h4><p>Abertura · Bar · Caixa · Cozinha · Limpeza · Salão · Segurança Alimentar · 11 categorias</p></div></div>
+        <div class="del"><div class="ico">🤝</div><div><h4>Time de implementação</h4><p>Especialista dedicado por 30 dias · setup, treinamento e acompanhamento</p></div></div>
+        <div class="del"><div class="ico">🎓</div><div><h4>Cursos e suporte contínuo</h4><p>Politi Academy · biblioteca de operações · canal direto com nosso time</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Acelera Food Nation ]</span>
+      <div class="divider"></div>
+      <h2>Koncluí em <span class="teal">escala real</span>.</h2>
+      <p style="margin-top:1rem; max-width:700px;">Não é hipótese. Não é projeção. São operações rodando hoje, todos os dias.</p>
+      <div class="num-row">
+        <div class="nb"><b>+1.150</b><span>Clientes ativos</span></div>
+        <div class="nb"><b>+3.500</b><span>Unidades operando</span></div>
+        <div class="nb"><b>+32 mil</b><span>Checklists configurados</span></div>
+        <div class="nb"><b>+2 mi</b><span>Evidências registradas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO INTERATIVA DO APP -->
+  <section class="reveal" style="padding-bottom: 2rem;">
+    <div class="container">
+      <span class="section-eyebrow">[ Visão do colaborador ]</span>
+      <div class="divider"></div>
+      <h2>O que sua equipe <span class="teal">vê no chão da operação</span>.</h2>
+      <p style="margin-top: 1rem; max-width: 720px;">Cada tarefa do dia com hora, status, progresso e prova obrigatória. <strong>Clique em "Continuar" ou "Executar"</strong> pra ver o fluxo: lista → execução → evidência → alerta → push direto no celular.</p>
+      <iframe src="konclui-demo-mockup.html"
+              style="width: 100%; height: 900px; border: 0; background: transparent; margin-top: 2.4rem; display: block;"
+              loading="lazy"
+              title="Demo interativa do app Koncluí 360">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="closing-section reveal">
+    <div class="container">
+      <h2>Operação Autogerenciável.<br/><em>Menos incêndio, mais gestão.</em></h2>
+      <div class="underline"></div>
+      <p>Koncluí · GPS da sua Operação · +1.150 operações já rodam assim.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <div class="logo" id="logo-foot">
+      <img class="brand" src="png/logo.png" alt="Koncluí">
+      <svg class="brand-svg" viewBox="0 0 30 30"><rect x="2" y="2" width="26" height="26" rx="6" fill="white"/><path d="M 8 16 L 13 21 L 22 10" stroke="#02E8C5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="logo-text">Koncluí<span class="dot">.</span></span>
+    </div>
+    <p>Koncluí · GPS da sua Operação · Apresentação Gerentes · 2026</p>
+  </div>
+</footer>
+
+<script>
+  ['logo','logo-foot'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const img=el.querySelector('img.brand');img.addEventListener('load',()=>el.classList.add('has-img'));img.addEventListener('error',()=>el.classList.remove('has-img'));if(img.complete&&img.naturalWidth>0)el.classList.add('has-img');});
+  document.querySelectorAll('.showcase-image img, .hero-visual img').forEach(img=>{const wrap=img.closest('.showcase-image, .hero-visual');if(!wrap)return;img.addEventListener('load',()=>wrap.classList.add('has-img'));if(img.complete&&img.naturalWidth>0)wrap.classList.add('has-img');});
+  const progress=document.getElementById('progress');function updateProgress(){const t=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(t>0?(window.scrollY/t)*100:0)+'%';}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koncluí · Guia de Tom de Voz</title>
+<meta name="description" content="Guia de Tom de Voz Koncluí · Como a marca fala em cada canal — vocabulário, headlines, CTAs e exemplos práticos." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0A0E2B;
+    --navy-2: #131A3F;
+    --navy-3: #1a2348;
+    --teal: #02E8C5;
+    --teal-2: #00FFC2;
+    --teal-soft: #C8F5F4;
+    --white: #F5F7FB;
+    --gray: #6B7280;
+    --gray-2: #9CA3AF;
+    --line: rgba(255,255,255,.08);
+    --red: #EF4444;
+    --green: #10B981;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Urbanist', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content:''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%),
+      radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; }
+  ::selection { background: var(--teal); color: var(--navy); }
+
+  h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.05; font-weight: 900; }
+  h1 { font-size: clamp(2.4rem, 6vw, 5rem); }
+  h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 800; }
+  h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); font-weight: 800; }
+  h4 { font-size: 1.15rem; font-weight: 800; line-height: 1.25; }
+  p { font-size: clamp(1rem, 1.2vw, 1.1rem); color: rgba(245,247,251,.78); font-weight: 500; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  strong { color: var(--white); font-weight: 800; }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 3rem); }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0;
+    background: rgba(10,14,43,.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    padding: 1rem 0;
+  }
+  nav.top .row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .nav-left { display: flex; align-items: center; gap: 1.2rem; }
+  .back-hub {
+    display: inline-flex; align-items: center; gap: .45rem;
+    color: rgba(245,247,251,.65);
+    text-decoration: none;
+    font-size: .85rem; font-weight: 700;
+    padding: .5rem .85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.1);
+    transition: all .2s;
+  }
+  .back-hub:hover { color: var(--teal); border-color: rgba(2,232,197,.3); background: rgba(2,232,197,.05); }
+  .back-hub svg { width: 14px; height: 14px; }
+  @media (max-width: 540px) { .back-hub span { display: none; } .back-hub { padding: .5rem .65rem; } }
+  .logo img { height: 36px; }
+  .nav-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .25em; text-transform: uppercase;
+    font-weight: 700;
+    padding: .35rem .8rem;
+    border: 1px solid rgba(2,232,197,.25);
+    border-radius: 999px;
+  }
+  @media (max-width: 540px) { .nav-tag { display: none; } }
+
+  /* HERO */
+  .hero { padding: clamp(4rem, 8vw, 6.5rem) 0 clamp(3rem, 6vw, 5rem); }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(2,232,197,0.12); color: var(--teal);
+    padding: .45rem 1rem; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    border: 1px solid rgba(2,232,197,.25);
+    margin-bottom: 1.6rem;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; background: var(--teal); border-radius: 999px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(2,232,197,.6); } 70% { box-shadow: 0 0 0 8px rgba(2,232,197,0); } 100% { box-shadow: 0 0 0 0 rgba(2,232,197,0); } }
+
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero p.lede { font-size: clamp(1.1rem, 1.5vw, 1.3rem); margin-top: 1.4rem; max-width: 720px; }
+
+  /* TOC */
+  .toc {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2rem; margin-bottom: 3rem;
+  }
+  .toc h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 1.4rem;
+  }
+  .toc ol {
+    list-style: none;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .7rem; counter-reset: toc;
+  }
+  .toc ol li { counter-increment: toc; }
+  .toc ol li a {
+    display: flex; align-items: center; gap: .8rem;
+    color: rgba(245,247,251,.85); text-decoration: none;
+    padding: .7rem .9rem;
+    border-radius: 8px; border: 1px solid transparent;
+    transition: all .2s;
+    font-weight: 600; font-size: .95rem;
+  }
+  .toc ol li a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--teal); font-size: .8rem; font-weight: 700;
+  }
+  .toc ol li a:hover {
+    background: rgba(2,232,197,.06);
+    border-color: rgba(2,232,197,.2);
+    color: var(--white);
+  }
+
+  /* SECTION */
+  section.cap { padding: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .cap-head {
+    display: flex; align-items: baseline; gap: 1.2rem;
+    margin-bottom: 2.2rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .cap-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem; color: var(--teal);
+    letter-spacing: .25em; font-weight: 700;
+  }
+  .cap-head h2 { flex: 1; }
+  .cap-intro { max-width: 760px; margin-bottom: 2.5rem; font-size: 1.1rem; }
+
+  /* ATRIBUTOS */
+  .attrs {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .attr {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem; padding: 1.8rem;
+    position: relative; overflow: hidden;
+  }
+  .attr::before {
+    content: '';
+    position: absolute; top: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(2,232,197,.12), transparent 70%);
+    border-radius: 50%;
+  }
+  .attr .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem; font-weight: 700;
+    color: rgba(2,232,197,.4); line-height: 1;
+    margin-bottom: .8rem;
+  }
+  .attr h4 { color: var(--teal); font-size: 1.5rem; margin-bottom: .6rem; }
+  .attr p { font-size: 1rem; }
+
+  /* COLUMNS YES/NO */
+  .twocol {
+    display: grid; gap: 1.4rem;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 760px) { .twocol { grid-template-columns: 1fr; } }
+  .col {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem; padding: 1.8rem 2rem;
+  }
+  .col h3 {
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .65rem;
+  }
+  .col.yes h3 { color: var(--teal); }
+  .col.no h3 { color: var(--red); }
+  .col ul { list-style: none; }
+  .col li {
+    padding: .8rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: .98rem; line-height: 1.5;
+    display: flex; align-items: flex-start; gap: .7rem;
+    color: rgba(245,247,251,.85);
+    font-weight: 500;
+  }
+  .col li:last-child { border-bottom: none; }
+  .col.yes li::before { content: '✓'; color: var(--teal); font-weight: 800; flex-shrink: 0; }
+  .col.no li::before { content: '✕'; color: var(--red); font-weight: 800; flex-shrink: 0; }
+  .col li em { font-style: italic; color: var(--gray-2); font-weight: 500; }
+
+  /* VOCAB CHIPS */
+  .chips {
+    display: flex; flex-wrap: wrap; gap: .55rem;
+    margin-top: .8rem;
+  }
+  .chip {
+    background: rgba(2,232,197,.08);
+    border: 1px solid rgba(2,232,197,.2);
+    color: var(--teal);
+    padding: .4rem .85rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 600;
+  }
+  .chip.bad {
+    background: rgba(239,68,68,.08);
+    border-color: rgba(239,68,68,.25);
+    color: #f87171;
+    text-decoration: line-through;
+    text-decoration-color: rgba(239,68,68,.5);
+  }
+
+  /* SUBSTITUIÇÕES */
+  .subs {
+    display: grid; gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  .sub-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem; padding: 1.5rem 1.7rem;
+  }
+  .sub-card .before, .sub-card .after { padding: .6rem 0; }
+  .sub-card .before {
+    color: rgba(245,247,251,.5);
+    text-decoration: line-through;
+    text-decoration-color: rgba(239,68,68,.4);
+    font-size: .95rem;
+  }
+  .sub-card .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem; color: var(--teal);
+    letter-spacing: .25em; text-transform: uppercase;
+    font-weight: 700; margin: .5rem 0;
+  }
+  .sub-card .after {
+    color: var(--white);
+    font-size: 1.05rem; font-weight: 700;
+    line-height: 1.4;
+  }
+
+  /* TABELA CANAIS */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+  table.canais {
+    width: 100%; border-collapse: collapse;
+    background: var(--navy-2);
+  }
+  table.canais th {
+    text-align: left;
+    padding: 1.1rem 1.3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    background: rgba(2,232,197,.04);
+  }
+  table.canais td {
+    padding: 1.05rem 1.3rem;
+    border-bottom: 1px solid var(--line);
+    font-size: .95rem; vertical-align: top;
+  }
+  table.canais tr:last-child td { border-bottom: none; }
+  table.canais td:first-child { font-weight: 700; color: var(--teal); }
+  @media (max-width: 640px) {
+    table.canais th, table.canais td { padding: .85rem 1rem; font-size: .85rem; }
+  }
+
+  /* HEADLINES */
+  .hl-grid {
+    display: grid; gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  .hl-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem; padding: 1.8rem;
+  }
+  .hl-card .ctx {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 1rem;
+  }
+  .hl-card .head {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: .5rem;
+  }
+  .hl-card .head em { font-style: normal; color: var(--teal); }
+  .hl-card .sub { font-size: .92rem; color: rgba(245,247,251,.65); }
+  .hl-card .cta-tag {
+    margin-top: 1rem;
+    display: inline-block;
+    background: rgba(2,232,197,.08);
+    color: var(--teal);
+    padding: .45rem .9rem;
+    border-radius: 6px;
+    font-size: .82rem;
+    font-weight: 700;
+  }
+
+  /* CTAs FUNIL */
+  .funnel {
+    display: grid; gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .funnel-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem; padding: 1.6rem;
+  }
+  .funnel-card .lvl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem; color: var(--gray-2);
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: .35rem;
+  }
+  .funnel-card h4 { color: var(--teal); margin-bottom: 1rem; }
+  .funnel-card .ctas { display: flex; flex-direction: column; gap: .6rem; }
+  .funnel-card .cta-pri {
+    background: var(--teal);
+    color: var(--navy);
+    padding: .7rem 1rem;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: .9rem;
+    text-align: center;
+  }
+  .funnel-card .cta-sec {
+    background: transparent;
+    border: 1.5px solid rgba(245,247,251,.2);
+    color: var(--white);
+    padding: .65rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: .88rem;
+    text-align: center;
+  }
+  .funnel-card .cta-ter {
+    color: var(--teal);
+    padding: .5rem 0;
+    font-weight: 600;
+    font-size: .85rem;
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: rgba(2,232,197,.3);
+  }
+
+  /* STORY ARC */
+  .arc {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    counter-reset: arc;
+  }
+  .arc-step {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.4rem;
+    counter-increment: arc;
+    position: relative;
+  }
+  .arc-step::before {
+    content: counter(arc, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem; color: var(--teal);
+    letter-spacing: .22em; font-weight: 700;
+    display: block; margin-bottom: .5rem;
+  }
+  .arc-step h5 { font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: .35rem; }
+  .arc-step p { font-size: .87rem; line-height: 1.45; }
+
+  /* TRANSFORM */
+  .transform-grid {
+    display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  .transform-card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem; overflow: hidden;
+  }
+  .transform-card h5 {
+    padding: 1.2rem 1.5rem .8rem;
+    font-size: 1.05rem; font-weight: 800;
+    color: var(--teal);
+  }
+  .transform-card .row {
+    padding: .9rem 1.5rem;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  .transform-card .row .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .transform-card .row.before .label { color: var(--red); }
+  .transform-card .row.middle .label { color: var(--gray-2); }
+  .transform-card .row.after .label { color: var(--teal); }
+  .transform-card .row .text { font-size: .92rem; color: rgba(245,247,251,.85); line-height: 1.45; }
+
+  /* EXEMPLOS ON/OFF */
+  .ex-grid { display: grid; gap: 1.2rem; }
+  .ex {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.6rem 1.8rem;
+    border-left: 4px solid;
+    position: relative;
+  }
+  .ex.on { border-left-color: var(--teal); }
+  .ex.off { border-left-color: var(--red); }
+  .ex .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    margin-bottom: .8rem;
+    display: inline-flex; align-items: center; gap: .45rem;
+  }
+  .ex.on .badge { color: var(--teal); }
+  .ex.off .badge { color: var(--red); }
+  .ex .quote {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: .5rem;
+  }
+  .ex.off .quote {
+    color: rgba(245,247,251,.5);
+    font-style: italic;
+  }
+  .ex .why {
+    font-size: .88rem;
+    color: var(--gray-2);
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--line);
+  }
+  footer .row { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .76rem; color: var(--gray-2);
+    letter-spacing: .15em; text-transform: uppercase;
+  }
+  footer p span.t { color: var(--teal); }
+  footer a {
+    color: var(--teal); text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .76rem;
+    letter-spacing: .15em; text-transform: uppercase;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <div class="nav-left">
+      <a href="index.html" class="back-hub" title="Voltar ao painel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <span>Painel</span>
+      </a>
+      <div class="logo">
+        <img src="png/logo.png" alt="Koncluí" onerror="this.style.display='none'" />
+      </div>
+    </div>
+    <span class="nav-tag">Tom de Voz</span>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span>Copywriting &amp; Voice · v1</div>
+      <h1>Como a Koncluí <em>fala.</em></h1>
+      <p class="lede">Tom de voz não é estilo. É decisão. Aqui está exatamente como a marca abre a boca em cada canal — e o que ela <strong>nunca</strong> deixaria escapar. Quem fala em nome da Koncluí precisa entender por quê.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <nav class="toc" aria-label="Sumário">
+      <h4>Sumário</h4>
+      <ol>
+        <li><a href="#atributos">Os 5 atributos da voz</a></li>
+        <li><a href="#nao-somos">O que a Koncluí NÃO é</a></li>
+        <li><a href="#vocabulario">Vocabulário · usamos × evitamos</a></li>
+        <li><a href="#substituicoes">Substituições inteligentes</a></li>
+        <li><a href="#canais">Tom por canal</a></li>
+        <li><a href="#headlines">Headlines por contexto</a></li>
+        <li><a href="#ctas">CTAs por funil</a></li>
+        <li><a href="#story">Storytelling framework</a></li>
+        <li><a href="#exemplos">Exemplos · on × off brand</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- 01 ATRIBUTOS -->
+  <section class="cap" id="atributos">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">01</span>
+        <h2>Os 5 atributos da voz</h2>
+      </div>
+      <p class="cap-intro">Toda peça pública passa por esse filtro antes de virar copy. Se um desses cinco está faltando, a peça não soa Koncluí — soa qualquer SaaS genérico que prometeria a mesma coisa.</p>
+
+      <div class="attrs">
+        <div class="attr"><div class="num">01</div><h4>Direta</h4><p>Frase curta. Verbo forte. Conclusão clara. A pessoa lendo está no rush — respeite o tempo dela.</p></div>
+        <div class="attr"><div class="num">02</div><h4>Crítica</h4><p>Aponta o que está errado sem suavizar. Mas <strong>sempre</strong> com saída. Nunca crítica sem porta.</p></div>
+        <div class="attr"><div class="num">03</div><h4>Operacional</h4><p>Fala de chão de loja, não de "ecossistema digital de transformação". Termos do mundo real: ronda, gargalo, turno, padrão.</p></div>
+        <div class="attr"><div class="num">04</div><h4>Próxima</h4><p>Trata o dono como quem está sentado do lado, não em pedestal. Conversa, não comunicado.</p></div>
+        <div class="attr"><div class="num">05</div><h4>Confiante</h4><p>Tem 1.150 clientes pra provar. Não precisa pedir desculpa nem rodear pra dizer o que sabe.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 NÃO SOMOS -->
+  <section class="cap" id="nao-somos">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">02</span>
+        <h2>O que a Koncluí <span style="color:var(--red)">não</span> é</h2>
+      </div>
+      <p class="cap-intro">Tudo abaixo é proibido em qualquer peça pública. Se aparecer numa pauta, joga fora e refaz.</p>
+
+      <div class="col no" style="background:linear-gradient(155deg,var(--navy-2),var(--navy-3));border:1px solid var(--line);border-radius:1.2rem;padding:1.8rem 2rem">
+        <ul>
+          <li>"Solução inteligente que revoluciona seu negócio." <em>— vazio, todo SaaS fala isso.</em></li>
+          <li>"Onde a tecnologia encontra o restaurante." <em>— frase de outdoor de aeroporto.</em></li>
+          <li>"Empoderando gestores." <em>— sentimental, sem promessa.</em></li>
+          <li>"Disruptivo, inovador, transformador." <em>— buzzword soup.</em></li>
+          <li>"A Koncluí acredita que cada operação merece..." <em>— marca não acredita em coisa nenhuma. Marca entrega.</em></li>
+          <li>"Aumente 300% suas vendas em 7 dias." <em>— vendedor de óleo de cobra.</em></li>
+          <li>Linguagem corporativa fria. <em>— "stakeholders", "ecossistema", "sinergia".</em></li>
+          <li>Tech jargon sem necessidade. <em>— "cloud native", "AI-powered", "machine learning".</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 VOCABULÁRIO -->
+  <section class="cap" id="vocabulario">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">03</span>
+        <h2>Vocabulário</h2>
+      </div>
+      <p class="cap-intro">As palavras que a marca <strong>usa</strong> e as que ela <strong>não</strong> usa. Não é frescura — é coerência. Cada palavra carrega um posicionamento.</p>
+
+      <div class="twocol">
+        <div class="col yes">
+          <h3>✓ Usamos sempre</h3>
+          <p style="font-size:.92rem;margin-bottom:1rem">Vocabulário que ancora a marca em <strong>operação real</strong> — não em tecnologia abstrata.</p>
+          <div class="chips">
+            <span class="chip">GPS</span>
+            <span class="chip">operação</span>
+            <span class="chip">cobra sozinha</span>
+            <span class="chip">prova</span>
+            <span class="chip">evidência</span>
+            <span class="chip">padrão</span>
+            <span class="chip">gargalo</span>
+            <span class="chip">ronda</span>
+            <span class="chip">checklist</span>
+            <span class="chip">responsável</span>
+            <span class="chip">turno</span>
+            <span class="chip">auditoria</span>
+            <span class="chip">do seu lado</span>
+            <span class="chip">multi-unidade</span>
+            <span class="chip">escala</span>
+            <span class="chip">24/7</span>
+            <span class="chip">se reporta sozinha</span>
+            <span class="chip">domingo é domingo</span>
+          </div>
+          <p style="font-size:.92rem;margin-top:1.4rem;margin-bottom:.6rem">Termos do setor — usar com naturalidade:</p>
+          <div class="chips">
+            <span class="chip">food service</span>
+            <span class="chip">estabelecimento</span>
+            <span class="chip">brigada</span>
+            <span class="chip">aderência</span>
+            <span class="chip">falhas operacionais</span>
+            <span class="chip">mise en place</span>
+            <span class="chip">PVPS</span>
+          </div>
+        </div>
+
+        <div class="col no">
+          <h3>✕ Evitamos sempre</h3>
+          <p style="font-size:.92rem;margin-bottom:1rem">Palavras que diluem o tom — ou que qualquer concorrente também usaria.</p>
+          <div class="chips">
+            <span class="chip bad">sinergia</span>
+            <span class="chip bad">disruptivo</span>
+            <span class="chip bad">revolucionário</span>
+            <span class="chip bad">empoderamento</span>
+            <span class="chip bad">jornada</span>
+            <span class="chip bad">ecossistema</span>
+            <span class="chip bad">solução completa</span>
+            <span class="chip bad">all-in-one</span>
+            <span class="chip bad">transformação digital</span>
+            <span class="chip bad">experiência</span>
+            <span class="chip bad">cutting-edge</span>
+            <span class="chip bad">cloud native</span>
+            <span class="chip bad">AI-powered</span>
+            <span class="chip bad">machine learning</span>
+            <span class="chip bad">big data</span>
+            <span class="chip bad">otimizar processos</span>
+            <span class="chip bad">maximizar eficiência</span>
+            <span class="chip bad">melhor custo-benefício</span>
+            <span class="chip bad">resultados garantidos</span>
+            <span class="chip bad">zero problemas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SUBSTITUIÇÕES -->
+  <section class="cap" id="substituicoes">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">04</span>
+        <h2>Substituições inteligentes</h2>
+      </div>
+      <p class="cap-intro">Cada vez que você sentir vontade de escrever uma frase corporativa, troque por uma versão que cabe na boca da marca. Aqui estão as mais comuns.</p>
+
+      <div class="subs">
+        <div class="sub-card">
+          <div class="before">"Nossa solução otimiza processos."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Transformamos seu checklist de papel em segurança digital.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"Plataforma completa de gestão."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">O sistema que dá paz de espírito ao dono.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"IA avançada."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Inteligência que cria checklist a partir de uma foto.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"ROI positivo."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Economia real, comprovada no primeiro mês.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"Suporte 24/7."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Equipe que entende de cozinha respondendo em 2h.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"Empoderamos gestores."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Gerente para de fazer microgestão. Equipe vira autônoma.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"Aumente sua eficiência."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Cada erro com nome, hora, foto e responsável.</div>
+        </div>
+        <div class="sub-card">
+          <div class="before">"Transforme seu negócio."</div>
+          <div class="arrow">→ Em vez disso</div>
+          <div class="after">Sai do olho do furacão. A operação roda sem você.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CANAIS -->
+  <section class="cap" id="canais">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">05</span>
+        <h2>Tom por canal</h2>
+      </div>
+      <p class="cap-intro">Mesma marca, vibração ajustada pro contexto. Stories permite "oi, tudo bem?" — anúncio Meta, não.</p>
+
+      <div class="table-wrap">
+        <table class="canais">
+          <thead>
+            <tr><th>Canal</th><th>Vibe</th><th>Exemplo de abertura</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anúncio Meta</td>
+              <td>Hook agressivo. Dor primeiro. CTA direto.</td>
+              <td>"Você não é mais dono. Você virou o gerente mais caro da sua própria empresa."</td>
+            </tr>
+            <tr>
+              <td>Reels</td>
+              <td>Crítica + virada. Manu Gavassi de operação — afiada e didática.</td>
+              <td>"Quer saber se sua operação tem padrão? Some daqui dois domingos e veja o que sobra."</td>
+            </tr>
+            <tr>
+              <td>Stories</td>
+              <td>Conversa. "Oi, tudo bem?" liberado aqui.</td>
+              <td>"Galera, hoje é review do mês. Vou mostrar 3 coisas que travaram a operação dos clientes em maio. Vamo?"</td>
+            </tr>
+            <tr>
+              <td>LP / Site</td>
+              <td>Dor + prova + número + CTA. Sem rodeio.</td>
+              <td>"1.150 operações deixaram de depender do dono. A sua é a próxima."</td>
+            </tr>
+            <tr>
+              <td>WhatsApp</td>
+              <td>Coloquial, mas sem gírias da moda.</td>
+              <td>"Oi [Nome], tudo certo? Vi que você baixou o checklist. Queria te perguntar uma coisa."</td>
+            </tr>
+            <tr>
+              <td>Apresentação comercial</td>
+              <td>Direto, com peso. "Vamos junto?" no fechamento.</td>
+              <td>"Antes da gente entrar em ferramenta, deixa eu te mostrar onde tá o vazamento real da sua operação."</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>Mais formal que WhatsApp, menos formal que comunicado oficial.</td>
+              <td>"[Nome], anotei aqui o que ficou pendente da nossa última conversa. Segue:"</td>
+            </tr>
+            <tr>
+              <td>LinkedIn</td>
+              <td>Educativo + thought leadership. Sem clichê de B2B.</td>
+              <td>"Empresa que depende de uma pessoa pra funcionar não é empresa. É um cargo disfarçado de CNPJ."</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 HEADLINES -->
+  <section class="cap" id="headlines">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">06</span>
+        <h2>Headlines por contexto</h2>
+      </div>
+      <p class="cap-intro">Três opções pra cada lugar do site / material — escolha a que funciona pro momento da audiência. Todas seguem a mesma fórmula: dor concreta, promessa específica, sem rodeio.</p>
+
+      <h3 style="margin-bottom:1rem">Hero do site (above the fold)</h3>
+      <div class="hl-grid" style="margin-bottom:2.5rem">
+        <div class="hl-card">
+          <div class="ctx">Opção 1 · Dor + virada</div>
+          <div class="head">Você não é mais dono.<br/><em>Virou o gerente mais caro da empresa.</em></div>
+          <div class="sub">A Koncluí devolve sua função real — a de tomar decisão. A operação cobra sozinha.</div>
+          <div class="cta-tag">CTA: Ver como funciona</div>
+        </div>
+        <div class="hl-card">
+          <div class="ctx">Opção 2 · Promessa concreta</div>
+          <div class="head">A operação <em>cobra sozinha.</em></div>
+          <div class="sub">Checklist, ronda, evidência e auditoria que não dependem de você gritar no grupo do WhatsApp.</div>
+          <div class="cta-tag">CTA: Agendar demo</div>
+        </div>
+        <div class="hl-card">
+          <div class="ctx">Opção 3 · Especialização</div>
+          <div class="head">O <em>GPS da operação</em> que rede de food service usa.</div>
+          <div class="sub">1.150 estabelecimentos saíram do "bombeiro" pra padrão replicável. A sua é a próxima.</div>
+          <div class="cta-tag">CTA: Falar com especialista</div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:1rem">Seções recorrentes</h3>
+      <div class="hl-grid">
+        <div class="hl-card">
+          <div class="ctx">Como funciona</div>
+          <div class="head">3 passos pra sair do <em>modo bombeiro.</em></div>
+          <div class="sub">Não é mágica. É metodologia comprovada — Politi Academy — embarcada em ferramenta.</div>
+        </div>
+        <div class="hl-card">
+          <div class="ctx">Resultados</div>
+          <div class="head">Resultado que você <em>mede</em>, não que você acha.</div>
+          <div class="sub">Cada erro com nome, hora, foto e responsável. "Quem fez?" deixa de ser pergunta.</div>
+        </div>
+        <div class="hl-card">
+          <div class="ctx">Depoimentos</div>
+          <div class="head">Quem já saiu do gargalo <em>recomenda.</em></div>
+          <div class="sub">Casos reais de donos que recuperaram o sábado de manhã.</div>
+        </div>
+        <div class="hl-card">
+          <div class="ctx">Pricing</div>
+          <div class="head">Investimento que se paga no <em>primeiro mês.</em></div>
+          <div class="sub">Calcule sua economia. Sem vendedor, sem cadastro, sem letrinha miúda.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CTAs -->
+  <section class="cap" id="ctas">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">07</span>
+        <h2>CTAs por funil</h2>
+      </div>
+      <p class="cap-intro">CTA é compromisso, não enfeite. Cada etapa do funil pede um nível diferente de comprometimento — quem está descobrindo a marca não vai "aceitar proposta" no primeiro clique.</p>
+
+      <div class="funnel">
+        <div class="funnel-card">
+          <div class="lvl">Topo do funil</div>
+          <h4>Descoberta</h4>
+          <div class="ctas">
+            <div class="cta-pri">Ver como funciona</div>
+            <div class="cta-sec">Baixar checklist gratuito</div>
+            <div class="cta-ter">Calcular minha economia</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--gray-2);margin-top:1rem;line-height:1.45">Baixo compromisso. Curiosidade primeiro, contato depois.</p>
+        </div>
+        <div class="funnel-card">
+          <div class="lvl">Meio do funil</div>
+          <h4>Consideração</h4>
+          <div class="ctas">
+            <div class="cta-pri">Agendar demo personalizada</div>
+            <div class="cta-sec">Falar com especialista</div>
+            <div class="cta-ter">Receber análise gratuita</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--gray-2);margin-top:1rem;line-height:1.45">Demo é a peça-chave. "Personalizada" reduz ansiedade.</p>
+        </div>
+        <div class="funnel-card">
+          <div class="lvl">Fundo do funil</div>
+          <h4>Decisão</h4>
+          <div class="ctas">
+            <div class="cta-pri">Vamos junto?</div>
+            <div class="cta-sec">Aceitar proposta</div>
+            <div class="cta-ter">Garantir condição de lançamento</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--gray-2);margin-top:1rem;line-height:1.45">"Vamos junto?" é a assinatura da marca em momento de fechamento.</p>
+        </div>
+        <div class="funnel-card">
+          <div class="lvl">Pós-venda</div>
+          <h4>Expansão</h4>
+          <div class="ctas">
+            <div class="cta-pri">Adicionar nova unidade</div>
+            <div class="cta-sec">Indicar um amigo</div>
+            <div class="cta-ter">Agendar QBR</div>
+          </div>
+          <p style="font-size:.85rem;color:var(--gray-2);margin-top:1rem;line-height:1.45">Cliente bom é cliente que cresce. Expansão começa em conversa, não em renovação automática.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.6rem 1.8rem;background:rgba(2,232,197,.05);border:1px solid rgba(2,232,197,.2);border-radius:10px">
+        <h4 style="color:var(--teal);margin-bottom:.6rem">Regra geral pra escrever CTA</h4>
+        <p style="font-size:.95rem">Verbo + resultado. Máximo 3 palavras em mobile. Segunda pessoa ("você", "seu"). Presente ou imperativo. <strong>Nunca</strong> "clique aqui", "saiba mais", "enviar" ou "OK" — são vagos demais pra marca que se posiciona como direta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 STORYTELLING -->
+  <section class="cap" id="story">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">08</span>
+        <h2>Storytelling framework</h2>
+      </div>
+      <p class="cap-intro">Toda história de cliente que a marca conta segue a mesma estrutura. É a Jornada do Herói adaptada pra realidade do dono de food service. <strong>O dono é o herói. A Koncluí é o mentor.</strong> Nunca o contrário.</p>
+
+      <h3 style="margin-bottom:1.2rem">A jornada em 7 passos</h3>
+      <div class="arc">
+        <div class="arc-step"><h5>Mundo comum</h5><p>Restaurante "na raça". Dono exausto, equipe travada.</p></div>
+        <div class="arc-step"><h5>Chamado</h5><p>Necessidade de crescer ou parar de perder dinheiro com falha boba.</p></div>
+        <div class="arc-step"><h5>Encontro com mentor</h5><p>Koncluí entra com metodologia Politi e ferramenta especializada.</p></div>
+        <div class="arc-step"><h5>Travessia</h5><p>Decisão de digitalizar. Primeiros checklists na mão da equipe.</p></div>
+        <div class="arc-step"><h5>Provas</h5><p>Resistência inicial. Treinamento. Ajuste fino do que funciona.</p></div>
+        <div class="arc-step"><h5>Recompensa</h5><p>Operação padrão. Dados confiáveis. Sábado de manhã livre.</p></div>
+        <div class="arc-step"><h5>Retorno</h5><p>Crescimento sustentável. Nova unidade. Equipe autônoma.</p></div>
+      </div>
+
+      <h3 style="margin-top:3rem;margin-bottom:1.2rem">Templates de transformação</h3>
+      <p style="margin-bottom:1.5rem;max-width:680px">Três arcos que se repetem em todo case real. Use a estrutura, troque o conteúdo pelo cliente específico.</p>
+
+      <div class="transform-grid">
+        <div class="transform-card">
+          <h5>Do caos ao controle</h5>
+          <div class="row before"><div class="label">Antes</div><div class="text">Operava no modo "bombeiro", apagando incêndio o dia todo.</div></div>
+          <div class="row middle"><div class="label">Virada</div><div class="text">Implementou checklist digital + ronda automatizada.</div></div>
+          <div class="row after"><div class="label">Depois</div><div class="text">Visibilidade total, equipe autônoma, crescimento seguro.</div></div>
+        </div>
+        <div class="transform-card">
+          <h5>Do estresse à paz</h5>
+          <div class="row before"><div class="label">Antes</div><div class="text">Não conseguia se afastar — sem confiança na equipe.</div></div>
+          <div class="row middle"><div class="label">Virada</div><div class="text">Dashboard em tempo real + comprovação por foto.</div></div>
+          <div class="row after"><div class="label">Depois</div><div class="text">Dorme tranquilo. Sábado de manhã livre. Operação se reporta sozinha.</div></div>
+        </div>
+        <div class="transform-card">
+          <h5>Da dependência à autonomia</h5>
+          <div class="row before"><div class="label">Antes</div><div class="text">Tudo dependia da presença física do dono.</div></div>
+          <div class="row middle"><div class="label">Virada</div><div class="text">Processos digitalizados + treinamento estruturado.</div></div>
+          <div class="row after"><div class="label">Depois</div><div class="text">Equipe independente. Padrão mantido sem microgestão.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 EXEMPLOS -->
+  <section class="cap" id="exemplos">
+    <div class="container">
+      <div class="cap-head">
+        <span class="cap-num">09</span>
+        <h2>Exemplos · on × off brand</h2>
+      </div>
+      <p class="cap-intro">A diferença entre soar Koncluí e soar qualquer SaaS está em decisões pequenas. Aqui o lado certo e o lado errado, com explicação do porquê.</p>
+
+      <div class="ex-grid">
+        <div class="ex on">
+          <div class="badge">✓ On-brand</div>
+          <div class="quote">"Empresa que depende de uma pessoa pra funcionar não é empresa. É um cargo disfarçado de CNPJ."</div>
+          <div class="why">Crítica afiada, mas com promessa implícita: a Koncluí transforma cargo em empresa.</div>
+        </div>
+        <div class="ex on">
+          <div class="badge">✓ On-brand</div>
+          <div class="quote">"Cada erro com nome, hora, foto e responsável. 'Quem fez?' deixa de ser pergunta."</div>
+          <div class="why">Específico. Operacional. A promessa é tão concreta que o leitor visualiza.</div>
+        </div>
+        <div class="ex on">
+          <div class="badge">✓ On-brand</div>
+          <div class="quote">"Você não é mais dono. Você virou o gerente mais caro da sua própria empresa."</div>
+          <div class="why">Reposiciona a dor sem suavizar. Provoca reação — e abre espaço pra solução.</div>
+        </div>
+
+        <div class="ex off">
+          <div class="badge">✕ Off-brand</div>
+          <div class="quote">"A Koncluí acredita que cada operação merece a melhor experiência digital possível."</div>
+          <div class="why">Genérico. Vazio. Sem peso. "Acreditar" é frase de quem não tem o que entregar.</div>
+        </div>
+        <div class="ex off">
+          <div class="badge">✕ Off-brand</div>
+          <div class="quote">"Transformamos a gestão do seu restaurante com inteligência artificial de ponta."</div>
+          <div class="why">Buzzword soup. Foca em feature, não em problema. Qualquer SaaS poderia ter escrito.</div>
+        </div>
+        <div class="ex off">
+          <div class="badge">✕ Off-brand</div>
+          <div class="quote">"Empodere sua equipe com a Koncluí!"</div>
+          <div class="why">Sentimental. Sem promessa concreta. Não diz <em>como</em> nem <em>com o quê</em>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <p>Guia de Tom de Voz Koncluí <span class="t">·</span> v1.0 <span class="t">·</span> Maio 2026</p>
+    <a href="index.html">← Voltar à central de materiais</a>
+  </div>
+</footer>
+
+</body>
+</html>

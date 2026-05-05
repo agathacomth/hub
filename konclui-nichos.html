@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koncluí · Operação Autogerenciável · Multissetor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --navy:#0A0E2B; --navy-2:#131A3F; --navy-3:#1a2348; --teal:#02E8C5; --teal-2:#00FFC2; --teal-deep:#007974; --white:#F5F7FB; --gray:#6B7280; --gray-2:#9CA3AF; --line:rgba(255,255,255,.08); --red:#EF4444; --green:#10B981; --amber:#F59E0B; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; scroll-padding-top:90px; }
+  body { background:var(--navy); color:var(--white); font-family:'Urbanist',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%), radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%); pointer-events:none; z-index:0; }
+  main { position:relative; z-index:1; }
+  ::selection { background:var(--teal); color:var(--navy); }
+  h1,h2,h3 { letter-spacing:-0.025em; line-height:1.05; font-weight:900; }
+  h1 { font-size:clamp(2.4rem, 6vw, 5.5rem); }
+  h2 { font-size:clamp(2rem, 4.5vw, 3.6rem); font-weight:800; }
+  h3 { font-size:clamp(1.4rem, 2.4vw, 2rem); font-weight:800; }
+  h4 { font-size:clamp(1rem, 1.4vw, 1.25rem); font-weight:800; }
+  p { font-size:clamp(1rem, 1.2vw, 1.15rem); color:rgba(245,247,251,.78); font-weight:500; }
+  .mono { font-family:'JetBrains Mono',monospace; }
+  .teal { color:var(--teal); }
+  strong { font-weight:800; color:var(--white); }
+  .container { max-width:1280px; margin:0 auto; padding:0 clamp(1rem, 4vw, 3rem); }
+  section { padding:clamp(4rem, 8vw, 7rem) 0; position:relative; }
+
+  nav.top { position:fixed; top:0; left:0; right:0; background:rgba(10,14,43,.85); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); z-index:100; padding:1rem 0; }
+  nav.top .row { display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+  .logo { display:flex; align-items:center; gap:.65rem; }
+  .logo img.brand { height:40px; width:auto; display:block; }
+  .logo svg.brand-svg { width:32px; height:32px; display:none; }
+  .logo .logo-text { font-size:1.3rem; font-weight:900; letter-spacing:-0.02em; display:none; }
+  .logo .logo-text .dot { color:var(--teal); }
+  .logo:not(.has-img) img.brand { display:none; }
+  .logo:not(.has-img) svg.brand-svg, .logo:not(.has-img) .logo-text { display:block; }
+  .logo:not(.has-img) { gap:.5rem; }
+  .logo:not(.has-img) .logo-text { display:inline-block; }
+  nav.top ul { list-style:none; display:flex; gap:2.4rem; }
+  nav.top ul a { color:rgba(245,247,251,.65); text-decoration:none; font-size:.92rem; font-weight:600; transition:color .2s; }
+  nav.top ul a:hover { color:var(--teal); }
+  @media (max-width:880px) { nav.top ul { display:none; } }
+  .progress-bar { position:fixed; top:0; left:0; height:3px; background:var(--teal); z-index:101; transition:width .15s ease; box-shadow:0 0 12px var(--teal); }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.5rem; background:rgba(2,232,197,0.12); color:var(--teal); padding:.45rem 1rem; border-radius:999px; font-size:.82rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; border:1px solid rgba(2,232,197,.25); margin-bottom:1.6rem; width:fit-content; }
+  .eyebrow .dot { width:6px; height:6px; background:var(--teal); border-radius:999px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(2,232,197,.6); } 70% { box-shadow:0 0 0 8px rgba(2,232,197,0); } 100% { box-shadow:0 0 0 0 rgba(2,232,197,0); } }
+  .section-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.82rem; color:var(--teal); letter-spacing:.3em; text-transform:uppercase; font-weight:700; margin-bottom:1.4rem; display:block; }
+  .divider { width:60px; height:3px; background:var(--teal); margin:0 0 2rem; box-shadow:0 0 12px var(--teal); }
+
+  .hero { padding-top:8rem; padding-bottom:5rem; }
+  .hero .grid { display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; align-items:center; }
+  @media (max-width:880px) { .hero .grid { grid-template-columns:1fr; } }
+  .hero h1 em { font-style:normal; color:var(--teal); display:block; }
+  .hero p.sub { font-size:clamp(1.1rem, 1.5vw, 1.4rem); margin-top:1.4rem; max-width:540px; }
+  .hero .trust { margin-top:3rem; display:flex; flex-wrap:wrap; gap:2.4rem; padding-top:2rem; border-top:1px solid var(--line); }
+  .hero .trust-item .n { font-size:1.7rem; font-weight:900; color:var(--teal); }
+  .hero .trust-item .l { font-size:.78rem; color:var(--gray-2); text-transform:uppercase; letter-spacing:.15em; font-weight:700; margin-top:.15rem; }
+  .hero-visual { background:linear-gradient(135deg, var(--navy-2), #06112d); border-radius:1.4rem; border:1px solid rgba(2,232,197,.2); aspect-ratio:4/5; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; }
+  .hero-visual::before { content:''; position:absolute; inset:0; background-image:linear-gradient(135deg, rgba(2,232,197,.06) 1px, transparent 1px), linear-gradient(45deg, rgba(2,232,197,.06) 1px, transparent 1px); background-size:40px 40px; }
+  .hero-visual::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 30% 30%, rgba(2,232,197,.25), transparent 60%); }
+  .hero-visual .icons { display:flex; gap:1.5rem; font-size:5rem; opacity:.55; position:relative; z-index:1; }
+
+  .manifesto h2 { font-size:clamp(2.4rem, 6vw, 5rem); line-height:1; max-width:1100px; }
+  .manifesto h2 em { font-style:normal; color:var(--teal); }
+  .manifesto p { margin-top:2rem; font-size:1.2rem; max-width:720px; }
+
+  /* NICHE CARDS */
+  .niche-row { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.6rem; margin-top:2.4rem; }
+  @media (max-width:880px) { .niche-row { grid-template-columns:1fr; } }
+  .niche { background:rgba(255,255,255,.04); border-radius:1.2rem; padding:2rem; border:1px solid rgba(2,232,197,.15); border-top:3px solid var(--teal); text-align:center; }
+  .niche .emoji { font-size:3.5rem; line-height:1; }
+  .niche h3 { margin-top:1rem; font-size:1.5rem; }
+  .niche .tag { font-size:.75rem; font-weight:800; color:var(--teal); letter-spacing:.18em; text-transform:uppercase; margin-top:.4rem; }
+
+  /* DOR PADRÃO */
+  .pilares { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.6rem; margin-top:2.4rem; }
+  .pilar { background:rgba(255,255,255,.04); border-radius:1.2rem; padding:2rem; border:1px solid rgba(2,232,197,.15); border-top:3px solid var(--teal); }
+  .pilar .num { font-family:'JetBrains Mono',monospace; font-size:.85rem; color:var(--teal); letter-spacing:.25em; text-transform:uppercase; font-weight:700; }
+  .pilar h3 { margin-top:.6rem; font-size:1.4rem; line-height:1.2; }
+  .pilar p { margin-top:1rem; font-size:1rem; }
+
+  /* CASE NICHE */
+  .case { padding:clamp(3rem, 6vw, 5rem) 0; }
+  .case .container { display:grid; grid-template-columns:.7fr 1.3fr; gap:3rem; align-items:center; }
+  @media (max-width:880px) { .case .container { grid-template-columns:1fr; } }
+  .case-emoji { font-size:clamp(7rem, 14vw, 12rem); line-height:1; opacity:.85; text-align:center; }
+  .case-text h2 { font-size:clamp(1.8rem, 3.4vw, 2.8rem); }
+  .case-text h2 em { font-style:normal; color:var(--teal); }
+  .case-text p { margin-top:1rem; font-size:1.1rem; max-width:600px; }
+  .case-cats { background:rgba(2,232,197,.05); border:1px solid rgba(2,232,197,.2); border-radius:.8rem; padding:1.2rem 1.4rem; margin-top:1.4rem; }
+  .case-cats h5 { font-size:.7rem; font-weight:800; color:var(--teal); letter-spacing:.22em; text-transform:uppercase; margin-bottom:.7rem; }
+  .case-cats .tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+  .case-cats .tags span { font-size:.78rem; font-weight:700; color:var(--white); padding:.35rem .8rem; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:999px; }
+
+  /* SHOWCASE */
+  .showcase { padding:clamp(2.5rem, 5vw, 4rem) 0; }
+  .showcase .container { display:grid; gap:clamp(1.4rem, 2.6vw, 2.4rem); align-items:center; }
+  .showcase.zig-right .container { grid-template-columns:.9fr 1.4fr; }
+  .showcase.zig-left .container { grid-template-columns:1.4fr .9fr; }
+  .showcase.zig-left .showcase-text { order:2; }
+  .showcase.full .container { grid-template-columns:1fr; gap:1.4rem; }
+  .showcase.full .showcase-text { max-width:900px; margin-bottom:0 !important; }
+  @media (max-width:880px) { .showcase.zig-right .container, .showcase.zig-left .container { grid-template-columns:1fr; } .showcase.zig-left .showcase-text { order:1; } }
+  .showcase-text h2 { font-size:clamp(1.8rem, 3.2vw, 2.6rem); }
+  .showcase-text h2 em { font-style:normal; color:var(--teal); }
+  .showcase-text p { margin-top:1rem; font-size:1.1rem; max-width:540px; }
+  .showcase-image { position:relative; border-radius:.6rem; overflow:hidden; }
+  .showcase-image img { width:100%; height:auto; display:block; }
+  .showcase-image .ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:rgba(245,247,251,.4); background:linear-gradient(135deg, var(--navy-2), #06112d); aspect-ratio:16/9; pointer-events:none; border:1px dashed rgba(2,232,197,.2); border-radius:.6rem; }
+  .showcase-image.has-img .ph { display:none; }
+  .showcase-image .ph .ico { font-size:3.5rem; }
+  .showcase-image .ph code { font-family:'JetBrains Mono',monospace; background:rgba(2,232,197,.1); color:var(--teal); padding:.35rem .8rem; border-radius:.5rem; font-size:.85rem; font-weight:700; }
+
+  /* DEPOIMENTOS COMPACTOS (3 em grid) */
+  .depo-trio { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.6rem; margin-top:2.4rem; }
+  @media (max-width:880px) { .depo-trio { grid-template-columns:1fr; } }
+  .depo-card { background:rgba(255,255,255,.04); border-radius:1rem; padding:1.4rem; border:1px solid rgba(2,232,197,.18); display:flex; flex-direction:column; }
+  .depo-card .vid { background:#000; border-radius:.7rem; overflow:hidden; aspect-ratio:9/16; margin-bottom:1rem; }
+  .depo-card iframe { width:100%; height:100%; border:0; display:block; }
+  .depo-card .name { font-size:1.2rem; font-weight:900; color:var(--white); }
+  .depo-card .biz { font-size:.9rem; color:var(--teal); font-weight:800; margin-top:.2rem; }
+  .depo-card .city { font-size:.7rem; color:rgba(245,247,251,.5); font-weight:600; margin-top:.2rem; text-transform:uppercase; letter-spacing:.18em; }
+
+  .deliv { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.4rem; margin-top:2.4rem; }
+  .del { background:rgba(255,255,255,.04); border-left:3px solid var(--teal); border-radius:.8rem; padding:1.4rem 1.6rem; display:flex; gap:1.2rem; align-items:flex-start; }
+  .del .ico { width:44px; height:44px; background:rgba(2,232,197,.15); border-radius:.6rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.3rem; }
+  .del h4 { font-size:1.1rem; font-weight:900; color:var(--white); }
+  .del p { font-size:.9rem; margin-top:.35rem; }
+
+  .num-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1.4rem; margin-top:2.4rem; }
+  .num-row .nb { padding:1.6rem; border-radius:1rem; background:rgba(2,232,197,.05); border:1px solid rgba(2,232,197,.18); }
+  .num-row .nb b { font-size:clamp(2.4rem, 4.5vw, 3.6rem); font-weight:900; color:var(--teal); line-height:1; letter-spacing:-.04em; display:block; }
+  .num-row .nb span { font-size:.85rem; color:rgba(245,247,251,.7); font-weight:700; margin-top:.8rem; display:block; text-transform:uppercase; letter-spacing:.15em; }
+
+  .closing-section { padding:clamp(5rem, 10vw, 9rem) 0; text-align:center; }
+  .closing-section h2 { font-size:clamp(2.4rem, 5.5vw, 4.4rem); line-height:1; max-width:1000px; margin:0 auto; }
+  .closing-section h2 em { font-style:normal; color:var(--teal); display:block; }
+  .closing-section .underline { width:100px; height:4px; background:var(--teal); margin:2rem auto; border-radius:999px; box-shadow:0 0 16px var(--teal); }
+  .closing-section p { max-width:700px; margin:0 auto; font-size:1.2rem; }
+
+  footer { padding:3rem 0; border-top:1px solid var(--line); margin-top:4rem; }
+  footer .row { display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem; align-items:center; }
+  footer p { font-size:.85rem; color:var(--gray-2); }
+
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-to-hub" title="Voltar ao painel" style="position:fixed;bottom:1.2rem;left:1.2rem;z-index:9999;display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1rem;background:rgba(10,14,43,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:rgba(245,247,251,.92);text-decoration:none;font-family:'Urbanist',sans-serif;font-size:.85rem;font-weight:700;border-radius:10px;border:1px solid rgba(2,232,197,.3);box-shadow:0 8px 24px rgba(0,0,0,.35);transition:all .2s">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+  Painel
+</a>
+<style>.back-to-hub:hover{color:#02E8C5!important;border-color:rgba(2,232,197,.6)!important;background:rgba(10,14,43,.98)!important;transform:translateY(-2px)}@media(max-width:540px){.back-to-hub span,.back-to-hub{font-size:.78rem}}</style>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav class="top">
+  <div class="container row">
+    <div class="logo" id="logo">
+      <img class="brand" src="png/logo.png" alt="Koncluí">
+      <svg class="brand-svg" viewBox="0 0 30 30"><rect x="2" y="2" width="26" height="26" rx="6" fill="white"/><path d="M 8 16 L 13 21 L 22 10" stroke="#02E8C5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="logo-text">Koncluí<span class="dot">.</span></span>
+    </div>
+    <ul>
+      <li><a href="#nichos">Nichos</a></li>
+      <li><a href="#produto">Produto</a></li>
+      <li><a href="#plataforma">Plataforma</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#pacote">Pacote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Operações Multissetor · 2026</span>
+          <h1>Operação<br/>Autogerenciável.<br/><em>O setor não importa.</em></h1>
+          <p class="sub">Koncluí não foi feita pra um segmento. Foi feita pra um sintoma — operação que depende de gente lembrar de fazer o que tinha que ser feito.</p>
+          <div class="trust">
+            <div class="trust-item"><div class="n">+1.150</div><div class="l">Clientes</div></div>
+            <div class="trust-item"><div class="n">+3.500</div><div class="l">Unidades</div></div>
+            <div class="trust-item"><div class="n">+32 mil</div><div class="l">Checklists</div></div>
+            <div class="trust-item"><div class="n">+2 mi</div><div class="l">Evidências</div></div>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="icons"><span>🦁</span><span>🔧</span><span>🐶</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nichos" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ O denominador comum ]</span>
+      <div class="divider"></div>
+      <h2>Setor diferente.<br/><span class="teal">Mesma dor</span> embaixo.</h2>
+      <p style="margin-top:1.4rem; max-width:780px;">Você pode estar trocando óleo, alimentando um leão ou tosando um Yorkshire. Em qualquer um dos três casos, sua operação depende de três coisas todo dia: <strong>checklist, padrão e responsável</strong>. Quando uma falha, a conta chega.</p>
+
+      <div class="niche-row">
+        <div class="niche"><div class="emoji">🦁</div><h3>Zoológico</h3><div class="tag">Bem-estar animal</div></div>
+        <div class="niche"><div class="emoji">🔧</div><h3>Oficina mecânica</h3><div class="tag">Padrão de serviço</div></div>
+        <div class="niche"><div class="emoji">🐶</div><h3>Pet shop</h3><div class="tag">Confiança do tutor</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ O padrão de dor ]</span>
+      <div class="divider"></div>
+      <h2>Toda operação que <span class="teal">depende de cumprir protocolo</span><br/>tem o mesmo gargalo.</h2>
+      <div class="pilares">
+        <div class="pilar"><div class="num">PROBLEMA 01</div><h3>Padrão existe — mas não é cobrado</h3><p>Tem POP, manual, treinamento. Só que ninguém checa. O que não é checado, não é cobrado. O que não é cobrado, vira opcional.</p></div>
+        <div class="pilar"><div class="num">PROBLEMA 02</div><h3>Erro só aparece quando vira problema</h3><p>Você descobre que não foi feito quando o cliente reclama, o fiscal autua ou o bicho fica doente. Tarde demais.</p></div>
+        <div class="pilar"><div class="num">PROBLEMA 03</div><h3>Sem prova, sem responsável</h3><p>Quando dá ruim, ninguém lembra quem era do turno. Vira "minha palavra contra a sua".</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produto" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ O que é a Koncluí ]</span>
+      <div class="divider"></div>
+      <h2>Koncluí é o <span class="teal">GPS da sua operação</span> — independente do que você opera.</h2>
+      <p style="margin-top:1.4rem; max-width:760px;">Sistema que <strong>obriga o protocolo a acontecer</strong> e <strong>prova que aconteceu</strong>. Categorias, momentos e setores configuráveis ao seu negócio.</p>
+    </div>
+  </section>
+
+  <!-- CASOS POR NICHO -->
+  <section class="case reveal">
+    <div class="container">
+      <div class="case-emoji">🦁</div>
+      <div class="case-text">
+        <span class="section-eyebrow">[ Caso 1 · Zoológicos &amp; aquários ]</span>
+        <h2>Quando o erro vira <em>questão de bem-estar animal</em>.</h2>
+        <p>Manejo, alimentação, enriquecimento ambiental, limpeza — todo dia, em cada recinto. Falhar é multa do IBAMA e bicho doente. <strong>Sem registro, é só palavra do tratador.</strong></p>
+        <div class="case-cats">
+          <h5>Categorias adaptadas pra zoológico</h5>
+          <div class="tags"><span>Manejo</span><span>Alimentação</span><span>Limpeza Recinto</span><span>Enriquecimento</span><span>Inspeção Veterinária</span><span>IBAMA</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case reveal">
+    <div class="container">
+      <div class="case-emoji">🔧</div>
+      <div class="case-text">
+        <span class="section-eyebrow">[ Caso 2 · Oficinas mecânicas ]</span>
+        <h2>Quando o "esqueci de fazer" volta <em>no guincho</em>.</h2>
+        <p>Cada veículo passa por uma sequência de checagens. Pular uma é cliente voltando, retrabalho não cobrado e reputação na rua. <strong>O carro só sai do box com OS aprovada.</strong></p>
+        <div class="case-cats">
+          <h5>Categorias adaptadas pra oficina</h5>
+          <div class="tags"><span>OS</span><span>Inspeção</span><span>Torque</span><span>Foto Antes/Depois</span><span>QA</span><span>Liberação</span><span>Garantia</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case reveal">
+    <div class="container">
+      <div class="case-emoji">🐶</div>
+      <div class="case-text">
+        <span class="section-eyebrow">[ Caso 3 · Pet shops &amp; banho/tosa ]</span>
+        <h2>Quando o cliente confia <em>o que ele mais ama</em> com você.</h2>
+        <p>Tosa, vacina, hospedagem, banho. Cada serviço com protocolo. Cada bicho com ficha. <strong>Erro aqui não é número numa planilha — é dono no balcão chorando.</strong></p>
+        <div class="case-cats">
+          <h5>Categorias adaptadas pra pet shop</h5>
+          <div class="tags"><span>Banho</span><span>Tosa</span><span>Hidratação</span><span>Vacinação</span><span>Hospedagem</span><span>Devolução</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATAFORMA -->
+  <div id="plataforma"></div>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/meus%20checklists.png" alt="Koncluí app mobile"><div class="ph"><div class="ico">📱</div><code>png/meus checklists.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ App Koncluí 360 ]</span>
+        <h2>O <em>chão da operação</em><br/>na palma da mão.</h2>
+        <p>Funcionário abre o app, vê tarefa do turno, executa, fecha com prova. Funciona offline. Treino de 1 hora.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase zig-right reveal">
+    <div class="container">
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Configuração inicial ]</span>
+        <h2>USE UM TEMPLATE OU <em>CRIE COM IA</em>.</h2>
+        <p>Categorias adaptáveis a qualquer setor. Crie do zero, escolha um template ou descreva pra <strong>Koru AI</strong> montar pra você.</p>
+      </div>
+      <div class="showcase-image"><img src="png/USE%20UM%20TEMPLATE%20OU%20CRIE%20COM%20IA.png" alt="Koncluí · adicionar checklist"><div class="ph"><div class="ico">📋</div><code>png/USE UM TEMPLATE OU CRIE COM IA.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Recorrência ]</span>
+        <h2>AGENDE UMA VEZ, <em>EXECUTE SEMPRE</em>.</h2>
+        <p>Recorrência diária, semanal, mensal. Frequência, horário-limite, dias da semana. A operação cobra sozinha.</p>
+      </div>
+      <div class="showcase-image"><img src="png/agendamento%20de%20atividades.png" alt="Koncluí · agendamento"><div class="ph"><div class="ico">📅</div><code>png/agendamento de atividades.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/descri%C3%A7%C3%A3o%20da%20atividade.png" alt="Koncluí · responsável"><div class="ph"><div class="ico">👤</div><code>png/descrição da atividade.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Atribuição ]</span>
+        <h2>UM CHECKLIST,<br/><em>UM RESPONSÁVEL</em>.</h2>
+        <p>Unidade, responsável, momento, setor. Cada checklist tem dono. "Quem fez?" deixa de ser pergunta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase zig-right reveal">
+    <div class="container">
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Prova obrigatória ]</span>
+        <h2>TUDO CLARO,<br/><em>SEM DESCULPAS</em>.</h2>
+        <p>Foto, vídeo, comentário, assinatura. Evidência obrigatória, item crítico, definir meta. A tarefa só fecha com prova.</p>
+      </div>
+      <div class="showcase-image"><img src="png/evid%C3%AAncias%20com%20fotos%2C%20v%C3%ADdeos%20e%20texto.png" alt="Koncluí · evidências"><div class="ph"><div class="ico">📸</div><code>png/evidências com fotos, vídeos e texto.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Comunicação direta ]</span>
+        <h2>RECEBA NOTIFICAÇÕES <em>NO WHATSAPP</em>.</h2>
+        <p>Tarefa atrasou, alguém errou, não-conformidade abriu? Você sabe na hora — direto no WhatsApp. Sem precisar abrir painel.</p>
+      </div>
+      <div class="showcase-image"><img src="png/RECEBA%20NOTIFICA%C3%87%C3%95ES%2C%20NO%20WHATSAPP.png" alt="Koncluí · notificações WhatsApp"><div class="ph"><div class="ico">💬</div><code>png/RECEBA NOTIFICAÇÕES, NO WHATSAPP.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase full reveal">
+    <div class="container">
+      <div class="showcase-text" style="">
+        <span class="section-eyebrow">[ Visão consolidada ]</span>
+        <h2>TUDO CENTRALIZADO,<br/><em>MULTI-UNIDADE</em>.</h2>
+        <p>Filtre por unidade, responsável, setor, status. Toda a operação numa lista só, em tempo real.</p>
+      </div>
+      <div class="showcase-image"><img src="png/TUDO%20CENTRALIZADO%2C%20MULTI-UNIDADE.png" alt="Koncluí · multi-unidade"><div class="ph"><div class="ico">🏢</div><code>png/TUDO CENTRALIZADO, MULTI-UNIDADE.png</code></div></div>
+    </div>
+  </section>
+
+  <section class="showcase zig-left reveal">
+    <div class="container">
+      <div class="showcase-image"><img src="png/Evolu%C3%A7%C3%A3o%20dos%20indicadores%20de%20desempenho.png" alt="Koncluí · indicadores"><div class="ph"><div class="ico">📊</div><code>png/Evolução dos indicadores de desempenho.png</code></div></div>
+      <div class="showcase-text">
+        <span class="section-eyebrow">[ Indicadores ]</span>
+        <h2>A operação <em>medindo a si mesma</em>.</h2>
+        <p>Acompanhe a evolução de conformidade, taxa de conclusão e tempo médio de execução por unidade, por setor, por turno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS COMPACTOS -->
+  <section id="clientes" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Operações que rodam Koncluí ]</span>
+      <div class="divider"></div>
+      <h2>Setor diferente.<br/>O <span class="teal">resultado</span>, igual.</h2>
+      <p style="margin-top:1rem; max-width:780px;">Esses são donos do segmento alimentação rodando Koncluí. A lógica e o ROI se reproduzem em qualquer operação que tenha checklist, padrão e responsável.</p>
+
+      <div class="depo-trio">
+        <div class="depo-card">
+          <div class="vid"><iframe src="https://drive.google.com/file/d/1wwDS28j26nNLRr2pXf1JZbYN6Qhw6eOF/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="name">Rodrigo Silva</div>
+          <div class="biz">Bazuka Burger</div>
+          <div class="city">Cajamar / SP</div>
+        </div>
+        <div class="depo-card">
+          <div class="vid"><iframe src="https://drive.google.com/file/d/1UUrU4U3BmAUvmlD0YNJK6hNk0K1z9vn1/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="name">Paulo Henrique</div>
+          <div class="biz">Kombi's Hot Dog</div>
+          <div class="city">Campinas / SP</div>
+        </div>
+        <div class="depo-card">
+          <div class="vid"><iframe src="https://drive.google.com/file/d/17J4SlUQc2BDmpB1nyAdpduQk9GH6CmaP/preview" allow="autoplay" allowfullscreen></iframe></div>
+          <div class="name">Samuel Martins</div>
+          <div class="biz">3 Pastéis</div>
+          <div class="city">ABC Paulista</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pacote" class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Pacote completo ]</span>
+      <div class="divider"></div>
+      <h2>Tudo isso entra no seu <span class="teal">primeiro mês</span>.</h2>
+      <div class="deliv">
+        <div class="del"><div class="ico">🖥️</div><div><h4>Plataforma Koncluí Web</h4><p>Painel multi-unidade em tempo real · checklists ilimitados · auditoria completa</p></div></div>
+        <div class="del"><div class="ico">📱</div><div><h4>App Koncluí 360</h4><p>iOS e Android · usuários ilimitados · funciona offline · execução pelo chão da operação</p></div></div>
+        <div class="del"><div class="ico">✨</div><div><h4>Koru AI · criação por IA</h4><p>Descreva o checklist do seu setor e a IA monta os itens · agilidade na configuração</p></div></div>
+        <div class="del"><div class="ico">📋</div><div><h4>Categorias customizadas</h4><p>Defina suas próprias categorias, momentos e setores · do seu jeito, do seu setor</p></div></div>
+        <div class="del"><div class="ico">🤝</div><div><h4>Time de implementação</h4><p>Especialista dedicado por 30 dias · setup, treinamento e acompanhamento</p></div></div>
+        <div class="del"><div class="ico">🎓</div><div><h4>Cursos e suporte contínuo</h4><p>Politi Academy · biblioteca de operações · canal direto com nosso time</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <span class="section-eyebrow">[ Acelera Food Nation ]</span>
+      <div class="divider"></div>
+      <h2>Koncluí em <span class="teal">escala real</span>.</h2>
+      <p style="margin-top:1rem; max-width:700px;">Não é hipótese. Não é projeção. São operações rodando hoje, todos os dias.</p>
+      <div class="num-row">
+        <div class="nb"><b>+1.150</b><span>Clientes ativos</span></div>
+        <div class="nb"><b>+3.500</b><span>Unidades operando</span></div>
+        <div class="nb"><b>+32 mil</b><span>Checklists configurados</span></div>
+        <div class="nb"><b>+2 mi</b><span>Evidências registradas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO INTERATIVA DO APP -->
+  <section class="reveal" style="padding-bottom: 2rem;">
+    <div class="container">
+      <span class="section-eyebrow">[ Visão do colaborador ]</span>
+      <div class="divider"></div>
+      <h2>O que sua equipe <span class="teal">vê no chão da operação</span>.</h2>
+      <p style="margin-top: 1rem; max-width: 720px;">Independente do setor — restaurante, oficina, zoo, pet — o fluxo é o mesmo: tarefa, execução, prova obrigatória, alerta. <strong>Clique em qualquer botão</strong> pra ver o ciclo completo do app.</p>
+      <iframe src="konclui-demo-mockup.html"
+              style="width: 100%; height: 900px; border: 0; background: transparent; margin-top: 2.4rem; display: block;"
+              loading="lazy"
+              title="Demo interativa do app Koncluí 360">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="closing-section reveal">
+    <div class="container">
+      <h2>Não importa o que você opera.<br/><em>Importa como.</em></h2>
+      <div class="underline"></div>
+      <p>Koncluí · GPS da sua Operação · O setor não importa.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <div class="logo" id="logo-foot">
+      <img class="brand" src="png/logo.png" alt="Koncluí">
+      <svg class="brand-svg" viewBox="0 0 30 30"><rect x="2" y="2" width="26" height="26" rx="6" fill="white"/><path d="M 8 16 L 13 21 L 22 10" stroke="#02E8C5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <span class="logo-text">Koncluí<span class="dot">.</span></span>
+    </div>
+    <p>Koncluí · GPS da sua Operação · Apresentação Multissetor · 2026</p>
+  </div>
+</footer>
+
+<script>
+  ['logo','logo-foot'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const img=el.querySelector('img.brand');img.addEventListener('load',()=>el.classList.add('has-img'));img.addEventListener('error',()=>el.classList.remove('has-img'));if(img.complete&&img.naturalWidth>0)el.classList.add('has-img');});
+  document.querySelectorAll('.showcase-image img, .hero-visual img').forEach(img=>{const wrap=img.closest('.showcase-image, .hero-visual');if(!wrap)return;img.addEventListener('load',()=>wrap.classList.add('has-img'));if(img.complete&&img.naturalWidth>0)wrap.classList.add('has-img');});
+  const progress=document.getElementById('progress');function updateProgress(){const t=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(t>0?(window.scrollY/t)*100:0)+'%';}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
