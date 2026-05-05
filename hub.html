@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koncluí · Central de Materiais</title>
+<meta name="description" content="Central de materiais Koncluí — sites de venda, demonstrações, calculadoras e propostas comerciais." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0A0E2B;
+    --navy-2: #131A3F;
+    --navy-3: #1a2348;
+    --teal: #02E8C5;
+    --teal-2: #00FFC2;
+    --teal-deep: #007974;
+    --white: #F5F7FB;
+    --gray: #6B7280;
+    --gray-2: #9CA3AF;
+    --line: rgba(255,255,255,.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Urbanist', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  body::before {
+    content:''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 90% -10%, rgba(2,232,197,.18), transparent 50%),
+      radial-gradient(ellipse at -10% 110%, rgba(2,232,197,.10), transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+  main { position: relative; z-index: 1; }
+  ::selection { background: var(--teal); color: var(--navy); }
+
+  h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.05; font-weight: 900; }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; }
+  h3 { font-size: clamp(1.15rem, 1.6vw, 1.4rem); font-weight: 800; }
+  p { font-size: clamp(1rem, 1.2vw, 1.1rem); color: rgba(245,247,251,.78); font-weight: 500; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .teal { color: var(--teal); }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1.2rem, 4vw, 3rem); }
+
+  /* NAV */
+  nav.top {
+    position: sticky; top: 0;
+    background: rgba(10,14,43,.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    padding: 1rem 0;
+  }
+  nav.top .row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .logo { display: flex; align-items: center; gap: .65rem; }
+  .logo img.brand { height: 38px; width: auto; display: block; }
+  .nav-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .75rem;
+    color: var(--teal);
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: .35rem .8rem;
+    border: 1px solid rgba(2,232,197,.25);
+    border-radius: 999px;
+  }
+  @media (max-width: 540px) { .nav-tag { display: none; } }
+
+  /* HERO */
+  .hero {
+    padding: clamp(4rem, 8vw, 6.5rem) 0 clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(2,232,197,0.12); color: var(--teal);
+    padding: .45rem 1rem; border-radius: 999px;
+    font-size: .82rem; font-weight: 800;
+    letter-spacing: .18em; text-transform: uppercase;
+    border: 1px solid rgba(2,232,197,.25);
+    margin-bottom: 1.6rem;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; background: var(--teal); border-radius: 999px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(2,232,197,.6); } 70% { box-shadow: 0 0 0 8px rgba(2,232,197,0); } 100% { box-shadow: 0 0 0 0 rgba(2,232,197,0); } }
+
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero p.sub {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    margin: 1.6rem auto 0;
+    max-width: 620px;
+  }
+  .hero .meta {
+    margin-top: 2.2rem;
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem;
+    color: var(--gray-2);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+  .hero .meta .pill {
+    padding: .3rem .7rem;
+    background: var(--navy-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+
+  /* SECTIONS */
+  section.cat { padding: clamp(2rem, 5vw, 3.5rem) 0; }
+  .cat-head {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .cat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem;
+    color: var(--teal);
+    letter-spacing: .25em;
+    font-weight: 700;
+  }
+  .cat-head h2 { flex: 1; }
+  .cat-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem;
+    color: var(--gray-2);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.4rem;
+  }
+
+  /* CARD */
+  .card {
+    background: linear-gradient(155deg, var(--navy-2), var(--navy-3));
+    border: 1px solid var(--line);
+    border-radius: 1.2rem;
+    padding: 2rem 1.8rem 1.8rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(2,232,197,.1), transparent 50%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(2,232,197,.4);
+    box-shadow: 0 18px 40px rgba(0,0,0,.4), 0 0 0 1px rgba(2,232,197,.15);
+  }
+  .card:hover::before { opacity: 1; }
+  .card:hover .card-cta { color: var(--teal-2); }
+  .card:hover .card-cta svg { transform: translateX(4px); }
+  .card:hover .card-icon { border-color: rgba(2,232,197,.4); background: rgba(2,232,197,.1); }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .card-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(2,232,197,.06);
+    border: 1px solid rgba(2,232,197,.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal);
+    transition: background .3s ease, border-color .3s ease;
+    flex-shrink: 0;
+  }
+  .card-icon svg { width: 22px; height: 22px; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--gray-2);
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: .35rem .65rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: rgba(255,255,255,.02);
+    white-space: nowrap;
+  }
+
+  .card h3 { color: var(--white); }
+  .card p { color: rgba(245,247,251,.7); font-size: .98rem; line-height: 1.55; }
+
+  .card-cta {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; gap: .55rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: color .25s ease;
+  }
+  .card-cta svg { width: 16px; height: 16px; transition: transform .25s ease; }
+
+  /* FOOTER */
+  footer {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: 2.5rem 0 3rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem;
+    color: var(--gray-2);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+  footer p span.t { color: var(--teal); }
+
+  @media (max-width: 540px) {
+    .card { padding: 1.6rem 1.4rem 1.4rem; }
+    .grid { grid-template-columns: 1fr; }
+    .cat-head { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <div class="logo">
+      <img class="brand" src="png/logo.png" alt="Koncluí" onerror="this.style.display='none'" />
+    </div>
+    <span class="nav-tag">Central de Materiais</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow"><span class="dot"></span>Acesso interno · v1.0</div>
+      <h1>Tudo da <em>Koncluí</em><br/>num lugar só.</h1>
+      <p class="sub">As apresentações, a demo do app, a calculadora de CMV, a proposta comercial, a página de pré‑reserva, o brand book e o guia de tom de voz — organizados pra você navegar sem precisar abrir 9 abas e perder o fio da meada.</p>
+      <div class="meta">
+        <span class="pill">9 materiais</span>
+        <span>·</span>
+        <span>Atualizado em maio · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITES DE VENDA -->
+  <section class="cat">
+    <div class="container">
+      <div class="cat-head">
+        <span class="cat-num">01</span>
+        <h2>Apresentações</h2>
+        <span class="cat-count">3 páginas</span>
+      </div>
+
+      <div class="grid">
+
+        <a class="card" href="konclui-donos.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/><path d="M14 9h1"/><path d="M14 13h1"/><path d="M14 17h1"/></svg>
+            </div>
+            <span class="badge">Donos</span>
+          </div>
+          <h3>Pra quem é dono</h3>
+          <p>O site para o dono que cansou de ser bombeiro da própria empresa. Operação que roda sem ele puxar a corda toda hora.</p>
+          <span class="card-cta">Abrir página
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="card" href="konclui-gerentes.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="badge">Gerentes</span>
+          </div>
+          <h3>Pra quem gerencia</h3>
+          <p>O site para o gerente que precisa de ferramenta, não de cobrança. Visibilidade da equipe sem virar carrasco.</p>
+          <span class="card-cta">Abrir página
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="card" href="konclui-nichos.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <span class="badge">Multissetor</span>
+          </div>
+          <h3>Pra outros nichos</h3>
+          <p>O site para qualquer operação que vive de processo — clínicas, escolas, indústrias, redes. Se tem checklist, tem Koncluí.</p>
+          <span class="card-cta">Abrir página
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMOS & FERRAMENTAS -->
+  <section class="cat">
+    <div class="container">
+      <div class="cat-head">
+        <span class="cat-num">02</span>
+        <h2>Demonstrações &amp; ferramentas</h2>
+        <span class="cat-count">2 itens</span>
+      </div>
+
+      <div class="grid">
+
+        <a class="card" href="konclui-demo-mockup.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+            </div>
+            <span class="badge">Demo Interativa</span>
+          </div>
+          <h3>Mockup do app</h3>
+          <p>Simulação do produto rodando num celular — telas, push notifications, fluxo do dia a dia. Pra mostrar como a coisa funciona de verdade, sem PowerPoint.</p>
+          <span class="card-cta">Abrir demo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="card" href="konclui-calculadora-cmv.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="13" y1="11" x2="14" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="13" y1="15" x2="14" y2="15"/><line x1="16" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="10" y2="19"/><line x1="13" y1="19" x2="16" y2="19"/></svg>
+            </div>
+            <span class="badge">Calculadora</span>
+          </div>
+          <h3>Calculadora de CMV</h3>
+          <p>Ferramenta interativa pra mostrar pro cliente, na frente dele, quanto de margem está sangrando por falta de processo. Diagnóstico que vende sozinho.</p>
+          <span class="card-cta">Abrir calculadora
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIAIS COMERCIAIS -->
+  <section class="cat">
+    <div class="container">
+      <div class="cat-head">
+        <span class="cat-num">03</span>
+        <h2>Materiais comerciais</h2>
+        <span class="cat-count">2 documentos</span>
+      </div>
+
+      <div class="grid">
+
+        <a class="card" href="konclui-proposta.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+            </div>
+            <span class="badge">Proposta</span>
+          </div>
+          <h3>Proposta comercial</h3>
+          <p>Apresentação completa da oferta — diagnóstico, plano, investimento e próximos passos. Pra fechar a conversa que começou na reunião.</p>
+          <span class="card-cta">Abrir proposta
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="card" href="pagina-pre-reserva.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="badge">Pré‑reserva</span>
+          </div>
+          <h3>Página de pré‑agendamento</h3>
+          <p>Captura de interesse para garantir prioridade na fila de implantação. Quem entra primeiro, começa primeiro.</p>
+          <span class="card-cta">Abrir página
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND & IDENTIDADE -->
+  <section class="cat">
+    <div class="container">
+      <div class="cat-head">
+        <span class="cat-num">04</span>
+        <h2>Brand &amp; identidade</h2>
+        <span class="cat-count">2 documentos</span>
+      </div>
+
+      <div class="grid">
+
+        <a class="card" href="konclui-brand-book.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+            </div>
+            <span class="badge">Brand Book</span>
+          </div>
+          <h3>Brand Book v1</h3>
+          <p>Identidade visual completa: paleta, tipografia, logo, motif e iconografia. A marca em uma só página, do jeito que ela existe — direta, com regras claras pra ninguém errar.</p>
+          <span class="card-cta">Abrir brand book
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a class="card" href="konclui-guia-tom-de-voz.html">
+          <div class="card-top">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
+            </div>
+            <span class="badge">Tom de voz</span>
+          </div>
+          <h3>Guia de tom de voz</h3>
+          <p>Como a marca fala em cada canal: vocabulário, headlines, CTAs por funil, exemplos on/off-brand. Pra quem escreve em nome da Koncluí — copy, social, comercial.</p>
+          <span class="card-cta">Abrir guia
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>Koncluí <span class="t">·</span> Operação Autogerenciável <span class="t">·</span> Central de Materiais</p>
+  </div>
+</footer>
+
+</body>
+</html>
