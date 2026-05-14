@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>C036 · Story 01</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap');
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 40%,#06101f 0%,#020610 100%);font-family:'Inter',system-ui,sans-serif;color:#fff;overflow:hidden;position:relative}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(15,37,64,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(15,37,64,0.2) 1px,transparent 1px);background-size:90px 90px;pointer-events:none}
+.frame{position:absolute;inset:0;padding:240px 90px 240px}
+.headline{font-size:90px;font-weight:900;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:50px}
+.notebook-wrap{display:flex;justify-content:center;margin-bottom:40px}
+.notebook{width:680px;height:820px;background:#d4c8a8;border-radius:14px;padding:50px 45px;transform:rotate(-3deg);box-shadow:0 30px 60px rgba(0,0,0,0.5);position:relative;font-family:'Caveat',cursive}
+.nb-stain{position:absolute;top:120px;right:60px;width:140px;height:90px;background:radial-gradient(ellipse,rgba(120,80,40,0.5),transparent 70%);border-radius:50%}
+.nb-line{border-bottom:1.5px solid rgba(80,60,20,0.3);padding-bottom:14px;margin-bottom:24px;font-size:36px;color:#2a2a2a;display:flex;align-items:center;gap:14px}
+.nb-title{font-size:58px;font-weight:700;color:#1a1a1a;margin-bottom:34px;border-bottom:3px solid #1a1a1a;padding-bottom:14px;letter-spacing:1px}
+.nb-x{display:inline-block;width:36px;font-size:38px;font-weight:700}
+.nb-blank{display:inline-block;width:200px;height:3px;background:#2a2a2a;margin-left:14px;position:relative}
+.nb-strike{position:relative}
+.nb-strike::after{content:'';position:absolute;left:-4px;right:-4px;top:55%;height:3px;background:#a01020;transform:rotate(-2deg)}
+.nb-marco{font-size:32px;color:#a01020;font-style:italic;margin-top:18px;transform:rotate(-1deg);display:inline-block}
+.nb-amassei{font-size:26px;color:#888;font-style:italic;position:absolute;bottom:80px;right:80px;transform:rotate(4deg)}
+.caption{font-size:40px;font-weight:800;color:#4dd4ff;text-align:center;margin-top:30px}
+.logo{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:280px}
+.logo img{width:100%;height:auto;display:block}
+</style></head>
+<body>
+<div class="grid"></div>
+<div class="frame">
+  <div class="headline">Reconhece esse caderno?</div>
+  <div class="notebook-wrap">
+    <div class="notebook">
+      <div class="nb-stain"></div>
+      <div class="nb-title">CHECKLIST</div>
+      <div class="nb-line"><span class="nb-x">☑</span> Câmara fria</div>
+      <div class="nb-line"><span class="nb-x">☑</span> Bancada</div>
+      <div class="nb-line"><span class="nb-x">☑</span> <span class="nb-strike">Estoque</span> <span class="nb-blank"></span></div>
+      <div class="nb-line"><span class="nb-x">☐</span> Limpeza</div>
+      <div class="nb-marco">marco depois</div>
+      <div class="nb-line" style="margin-top:18px"><span class="nb-x">☐</span> <span class="nb-blank" style="width:280px"></span></div>
+      <div class="nb-amassei">(amassei aqui)</div>
+    </div>
+  </div>
+  <div class="caption">Semana 4. Sempre.</div>
+</div>
+<div class="logo"><img src="../../png/logo.png" alt="Koncluí"/></div>
+</body></html>

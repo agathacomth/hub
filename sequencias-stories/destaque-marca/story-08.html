@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>Marca · Story 08</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap');
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 40%,#06101f 0%,#020610 100%);font-family:'Inter',system-ui,sans-serif;color:#fff;overflow:hidden;position:relative}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(15,37,64,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(15,37,64,0.2) 1px,transparent 1px);background-size:90px 90px;pointer-events:none}
+.frame{position:absolute;inset:0;padding:280px 90px 240px}
+.headline{font-size:88px;font-weight:900;line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:50px}
+.cyan{color:#4dd4ff}
+.hl{background:#1a4a5c;padding:4px 18px;border-radius:6px;color:#4dd4ff}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:50px}
+.col{padding:32px 28px;border-radius:22px}
+.col.before{background:rgba(255,84,112,0.08);border:1px solid rgba(255,84,112,0.3)}
+.col.after{background:rgba(77,212,255,0.08);border:1px solid rgba(77,212,255,0.3)}
+.col-label{font-size:22px;font-weight:800;letter-spacing:3px;margin-bottom:16px}
+.col.before .col-label{color:#ff5470}
+.col.after .col-label{color:#4dd4ff}
+.col-list{font-size:24px;font-weight:500;line-height:1.55;color:#fff}
+.col-list .it{margin-bottom:10px;display:flex;align-items:flex-start;gap:10px}
+.body{font-size:30px;font-weight:600;color:#fff;text-align:center;margin-top:50px;line-height:1.4}
+.logo{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:280px}
+.logo img{width:100%;height:auto;display:block}
+</style></head>
+<body>
+<div class="grid"></div>
+<div class="frame">
+  <div class="headline">Antes vs Depois<br>da <span class="hl">Koncluí</span>.</div>
+  <div class="compare">
+    <div class="col before">
+      <div class="col-label">ANTES</div>
+      <div class="col-list">
+        <div class="it">❌ &ldquo;Eu acho que fizeram&rdquo;</div>
+        <div class="it">❌ Checklist em papel rasgado</div>
+        <div class="it">❌ Saber pelo cliente</div>
+        <div class="it">❌ Dono = bombeiro</div>
+        <div class="it">❌ Cada loja roda diferente</div>
+      </div>
+    </div>
+    <div class="col after">
+      <div class="col-label">DEPOIS</div>
+      <div class="col-list">
+        <div class="it">✅ &ldquo;Eu sei. Tem foto&rdquo;</div>
+        <div class="it">✅ Digital, com hora e foto</div>
+        <div class="it">✅ Saber pelo dashboard</div>
+        <div class="it">✅ Dono = gestor</div>
+        <div class="it">✅ Padrão em qualquer turno</div>
+      </div>
+    </div>
+  </div>
+  <div class="body">Em <span class="cyan">30 dias</span>, a chave já virou.</div>
+</div>
+<div class="logo"><img src="../../png/logo.png" alt="Koncluí"/></div>
+</body></html>

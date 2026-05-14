@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>C016 · Story 07</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+body{width:1080px;height:1920px;background:radial-gradient(ellipse at 50% 40%,#06101f 0%,#020610 100%);font-family:'Inter',system-ui,sans-serif;color:#fff;overflow:hidden;position:relative}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(15,37,64,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(15,37,64,0.2) 1px,transparent 1px);background-size:90px 90px;pointer-events:none}
+.frame{position:absolute;inset:0;padding:200px 90px 240px}
+.headline{font-size:64px;font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;color:#fff}
+.cyan{color:#4dd4ff}
+.sub{font-size:32px;font-weight:500;color:#8b9bb4;line-height:1.4;margin-bottom:50px}
+.image-wrap{position:relative;width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:40px}
+.image-wrap::before{content:'';position:absolute;width:800px;height:600px;background:radial-gradient(ellipse,rgba(77,212,255,0.18) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);z-index:0}
+.image-wrap img{width:100%;height:auto;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.6));-webkit-mask-image:radial-gradient(ellipse at center,black 70%,transparent 96%);mask-image:radial-gradient(ellipse at center,black 70%,transparent 96%)}
+.body{font-size:30px;font-weight:500;color:#fff;line-height:1.4;text-align:center;background:rgba(77,212,255,0.08);border:1px solid rgba(77,212,255,0.3);border-radius:18px;padding:24px 30px}
+.body .cyan{font-weight:700}
+.logo{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:280px}
+.logo img{width:100%;height:auto;display:block}
+</style></head>
+<body>
+<div class="grid"></div>
+<div class="frame">
+  <div class="headline">Dashboard em <span class="cyan">tempo real</span>.</div>
+  <div class="sub">Você vê o vazamento enquanto ainda dá tempo<br>de fechar a torneira.</div>
+  <div class="image-wrap">
+    <img src="../../png/dashboard.png" alt="Dashboard Koncluí"/>
+  </div>
+  <div class="body">Diferença detectada → <span class="cyan">alerta automático no WhatsApp</span> pro gestor.</div>
+</div>
+<div class="logo"><img src="../../png/logo.png" alt="Koncluí"/></div>
+</body></html>

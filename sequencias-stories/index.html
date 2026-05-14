@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Stories Koncluí — Todas as sequências</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+body{background:#020610;color:#fff;font-family:'Inter',system-ui,sans-serif;padding:60px 40px;min-height:100vh}
+.container{max-width:1600px;margin:0 auto}
+h1{font-size:48px;font-weight:900;letter-spacing:-0.02em;margin-bottom:12px}
+h1 .cyan{color:#4dd4ff}
+.intro{color:#8b9bb4;max-width:760px;font-size:18px;line-height:1.55;margin-bottom:60px}
+.section-title{display:flex;align-items:center;gap:14px;margin:80px 0 8px}
+.section-title .pin{font-size:12px;letter-spacing:3px;font-weight:900;padding:6px 12px;border-radius:20px;text-transform:uppercase}
+.pin.destaque{background:#4dd4ff;color:#06101f}
+.pin.semanal{background:rgba(77,212,255,0.15);color:#4dd4ff;border:1px solid rgba(77,212,255,0.4)}
+h2{color:#fff;font-size:30px;font-weight:900;letter-spacing:-0.01em}
+.sub-title{color:#8b9bb4;font-size:17px;font-weight:500;margin-bottom:24px;margin-top:6px}
+.copy-link{display:inline-block;margin-bottom:24px;color:#4dd4ff;font-size:14px;font-weight:600;border-bottom:1px solid #4dd4ff;padding-bottom:2px;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.card{background:#0f1f33;border:1px solid #1a2f4a;border-radius:16px;padding:14px;transition:transform 0.2s,border-color 0.2s}
+.card:hover{transform:translateY(-4px);border-color:#4dd4ff}
+.card iframe{width:100%;aspect-ratio:9/16;border:none;border-radius:8px;background:#020610;pointer-events:none}
+.card .meta{padding:12px 4px 4px}
+.card .label{font-size:11px;color:#8b9bb4;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.card .strat{font-size:13px;color:#4dd4ff;font-weight:700;margin-bottom:10px}
+.card .actions{display:flex;gap:8px}
+.card .actions a{flex:1;text-align:center;padding:8px 4px;border-radius:6px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:1px;background:#4dd4ff;color:#06101f}
+.footer{margin-top:80px;padding-top:30px;border-top:1px solid #1a2f4a;color:#8b9bb4;font-size:13px;text-align:center;letter-spacing:2px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Stories Koncluí <span class="cyan">— Banco completo.</span></h1>
+<p class="intro">2 sequências evergreen pra fixar nos Destaques (marca + funcionalidades) e 3 sequências semanais acompanhando os carrosséis. Total: 45 stories. Cada uma segue uma das 39 estratégias da metodologia. Clique em <strong>Tela cheia</strong> pra abrir no formato 1080×1920 dos Stories e screenshotar.</p>
+
+<div class="section-title">
+  <span class="pin destaque">★ Destaque fixo</span>
+  <h2>Apresentação da Koncluí</h2>
+</div>
+<p class="sub-title">Pra quem ainda não conhece a marca · fim com CTA DEMO</p>
+<a class="copy-link" href="destaque-marca/copy.md" target="_blank">Ver copy completa →</a>
+<div class="grid" id="grid-marca"></div>
+
+<div class="section-title">
+  <span class="pin destaque">★ Destaque fixo</span>
+  <h2>Funcionalidades</h2>
+</div>
+<p class="sub-title">Tour pelos 8 recursos do produto · fim com CTA DEMO</p>
+<a class="copy-link" href="destaque-funcionalidades/copy.md" target="_blank">Ver copy completa →</a>
+<div class="grid" id="grid-func"></div>
+
+<div class="section-title">
+  <span class="pin semanal">Semanal</span>
+  <h2>C002 — &ldquo;Eu acho que fizeram&rdquo;</h2>
+</div>
+<p class="sub-title">Achismo vs Prova · acompanha o carrossel C002</p>
+<a class="copy-link" href="c002-achismo/copy.md" target="_blank">Ver copy completa →</a>
+<div class="grid" id="grid-c002"></div>
+
+<div class="section-title">
+  <span class="pin semanal">Semanal</span>
+  <h2>C016 — CMV Teórico x CMV Real</h2>
+</div>
+<p class="sub-title">Lucro Invisível · acompanha o carrossel C016</p>
+<a class="copy-link" href="c016-cmv/copy.md" target="_blank">Ver copy completa →</a>
+<div class="grid" id="grid-c016"></div>
+
+<div class="section-title">
+  <span class="pin semanal">Semanal</span>
+  <h2>C036 — Checklist de papel já era</h2>
+</div>
+<p class="sub-title">Checklists e Padronização · acompanha o carrossel C036</p>
+<a class="copy-link" href="c036-checklist/copy.md" target="_blank">Ver copy completa →</a>
+<div class="grid" id="grid-c036"></div>
+
+<div class="footer">KONCLUÍ — SEU RESTAURANTE, NO PADRÃO. SEMPRE.</div>
+
+</div>
+
+<script>
+const data = {
+  'destaque-marca': {
+    id: 'marca',
+    strats: ['Hook','Apresentação','Crença','Promessa + Pra quem','5 Ferramentas','Prova Social','Demonstração','Antes vs Depois','CTA DEMO']
+  },
+  'destaque-funcionalidades': {
+    id: 'func',
+    strats: ['Hook','Checklists','Evidências','WhatsApp Alert','Dashboard','Agendamento','Descrição rica','Templates + IA','CTA DEMO']
+  },
+  'c002-achismo': {
+    id: 'c002',
+    strats: ['Curiosidade em Fatos','Afirmação','Dor Latente','Enquete','Quebra de Padrões','Posicionamento','Demonstração','Caixinha','CTA']
+  },
+  'c016-cmv': {
+    id: 'c016',
+    strats: ['Curiosidade em Fatos','Explicação','Dor Latente','Bastidores','Pesquisa do Sucesso','Resultado','Demonstração','Enquete','Bônus + CTA']
+  },
+  'c036-checklist': {
+    id: 'c036',
+    strats: ['Humor Privado','Afirmação','Jornada','Dor Latente','Quebra de Padrões','Diferenciais','Prova Social','Enquete','Bônus + CTA']
+  }
+};
+
+Object.entries(data).forEach(([folder, info]) => {
+  const grid = document.getElementById('grid-' + info.id);
+  for (let i = 1; i <= 9; i++) {
+    const n = String(i).padStart(2, '0');
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <iframe src="${folder}/story-${n}.html" sandbox loading="lazy"></iframe>
+      <div class="meta">
+        <div class="label">Story ${i}</div>
+        <div class="strat">${info.strats[i-1]}</div>
+        <div class="actions">
+          <a href="${folder}/story-${n}.html" target="_blank">Tela cheia →</a>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+});
+</script>
+</body></html>
