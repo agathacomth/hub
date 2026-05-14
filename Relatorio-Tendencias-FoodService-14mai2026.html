@@ -56,6 +56,25 @@
     pointer-events:none;
   }
   .hero .wrap{position:relative;z-index:2;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;
+    color:var(--teal);
+    text-decoration:none;
+    border:1px solid rgba(2,232,197,.28);
+    background:rgba(2,232,197,.06);
+    padding:9px 15px;border-radius:999px;
+    margin-bottom:26px;
+    transition:transform .15s ease,background .15s ease,border-color .15s ease;
+  }
+  .back-link:hover{
+    transform:translateX(-3px);
+    background:rgba(2,232,197,.12);
+    border-color:rgba(2,232,197,.5);
+  }
+  .back-link svg{width:14px;height:14px;}
   .brandline{display:flex;align-items:center;gap:12px;margin-bottom:30px;}
   .kmark{
     width:34px;height:34px;border-radius:9px;
@@ -265,6 +284,10 @@
 <!-- ===================== HERO ===================== -->
 <header class="hero">
   <div class="wrap">
+    <a class="back-link" href="hub.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Voltar para a Central de Materiais
+    </a>
     <div class="brandline">
       <div class="kmark">K</div>
       <div class="kword">Konclu<span>í</span></div>
