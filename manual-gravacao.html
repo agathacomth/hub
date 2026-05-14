@@ -16,6 +16,9 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
 .topnav-inner{max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .nav-logo{background:#0c1d33;padding:9px 16px;border-radius:10px;display:flex;align-items:center}
 .nav-logo img{height:22px;width:auto;display:block}
+.nav-left{display:flex;align-items:center;gap:18px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:#5d6b80;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.5px;padding:9px 16px;border:1px solid #dde4ee;border-radius:9px;background:#fff;transition:border-color 0.15s,color 0.15s;white-space:nowrap}
+.back-link:hover{border-color:#0e9fd4;color:#0e83b0}
 .topnav .nav-links{display:flex;gap:6px;flex-wrap:wrap}
 .topnav .nav-links a{color:#5d6b80;text-decoration:none;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;letter-spacing:0.5px;transition:background 0.15s,color 0.15s}
 .topnav .nav-links a:hover{background:rgba(77,212,255,0.15);color:#0e83b0}
@@ -123,7 +126,10 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <div class="nav-logo"><img src="png/logo.png" alt="Koncluí"/></div>
+    <div class="nav-left">
+      <a href="hub.html" class="back-link">&larr; Central de Materiais</a>
+      <div class="nav-logo"><img src="png/logo.png" alt="Koncluí"/></div>
+    </div>
     <div class="nav-links">
       <a href="#diretrizes">Diretrizes</a>
       <a href="#formula">Fórmula</a>
