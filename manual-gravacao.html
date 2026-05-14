@@ -22,6 +22,10 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
 .topnav .nav-links{display:flex;gap:6px;flex-wrap:wrap}
 .topnav .nav-links a{color:#5d6b80;text-decoration:none;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;letter-spacing:0.5px;transition:background 0.15s,color 0.15s}
 .topnav .nav-links a:hover{background:rgba(77,212,255,0.15);color:#0e83b0}
+.topnav .nav-links a.gpt-btn{background:linear-gradient(135deg,#0e9fd4,#1f6fd6);color:#fff;font-weight:800;box-shadow:0 4px 14px rgba(14,159,212,0.35)}
+.topnav .nav-links a.gpt-btn:hover{background:linear-gradient(135deg,#0c8ec0,#1a61c0);color:#fff;transform:translateY(-1px)}
+.topnav .nav-links a.sheet-btn{background:#0c1d33;color:#fff;font-weight:800}
+.topnav .nav-links a.sheet-btn:hover{background:#13315c;color:#fff;transform:translateY(-1px)}
 
 /* Hero */
 .hero{text-align:center;padding:80px 0 60px}
@@ -104,6 +108,39 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
 .rb-side .item .ival{font-size:15px;color:#3d4a5e;line-height:1.4}
 .cta-pill{background:linear-gradient(135deg,#0e9fd4,#1f6fd6);color:#fff;padding:14px 18px;border-radius:12px;font-size:16px;font-weight:800;line-height:1.3}
 
+/* CTA block linking to GPT */
+.gpt-cta{background:linear-gradient(135deg,#0c1d33,#13315c);border-radius:24px;padding:38px 40px;margin-bottom:50px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;box-shadow:0 12px 36px rgba(12,29,51,0.22)}
+.gpt-cta .gc-text{flex:1;min-width:260px}
+.gpt-cta .gc-kicker{font-size:12px;font-weight:900;letter-spacing:3px;color:#4dd4ff;text-transform:uppercase;margin-bottom:10px}
+.gpt-cta .gc-title{font-size:28px;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-0.01em;margin-bottom:8px}
+.gpt-cta .gc-desc{font-size:15px;color:#b9c6da;line-height:1.5}
+.gpt-cta .gc-btns{display:flex;flex-direction:column;gap:12px;flex-shrink:0}
+.gpt-cta .gc-btn{background:linear-gradient(135deg,#0e9fd4,#4dd4ff);color:#0c1d33;font-size:16px;font-weight:900;padding:16px 26px;border-radius:14px;text-decoration:none;white-space:nowrap;text-align:center;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 8px 24px rgba(77,212,255,0.3)}
+.gpt-cta .gc-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(77,212,255,0.45)}
+.gpt-cta .gc-btn.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.4);box-shadow:none}
+.gpt-cta .gc-btn.secondary:hover{background:rgba(255,255,255,0.08);box-shadow:none}
+
+/* Carrosséis de funcionalidade */
+.carrosseis{display:flex;flex-direction:column;gap:20px}
+.carrossel{background:#fff;border:1px solid #dde4ee;border-radius:20px;overflow:hidden;box-shadow:0 2px 10px rgba(20,35,60,0.05)}
+.carrossel-head{display:flex;align-items:center;gap:16px;padding:22px 28px;background:#f0f9fc;border-bottom:1px solid #dde4ee;flex-wrap:wrap}
+.carrossel-n{font-size:28px;font-weight:900;color:#0e9fd4;line-height:1;flex-shrink:0}
+.carrossel-func{flex:1;min-width:200px}
+.carrossel-func .cflabel{font-size:11px;font-weight:800;letter-spacing:2px;color:#5d6b80;text-transform:uppercase;margin-bottom:3px}
+.carrossel-func .cfval{font-size:21px;font-weight:900;line-height:1.15;color:#0c1d33}
+.carrossel-meta{display:flex;gap:10px;flex-shrink:0}
+.carrossel-body{padding:28px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px}
+.slides{display:flex;flex-direction:column;gap:10px}
+.slide{display:flex;gap:14px;align-items:flex-start}
+.slide .snum{flex-shrink:0;width:30px;height:30px;background:rgba(14,131,176,0.13);color:#0e83b0;font-weight:900;font-size:13px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.slide .stext{font-size:16px;font-weight:600;line-height:1.35;color:#1c2c44}
+.slide.capa .stext{font-weight:800;color:#0c1d33}
+.slide.cta-slide .snum{background:#0e9fd4;color:#fff}
+.slide.cta-slide .stext{font-weight:800;color:#0e83b0}
+.legenda-block{background:#f8fafc;border:1px solid #dde4ee;border-radius:14px;padding:20px}
+.legenda-block .llabel{font-size:11px;font-weight:900;letter-spacing:2px;color:#0e83b0;text-transform:uppercase;margin-bottom:10px}
+.legenda-block .ltext{font-size:14px;color:#3d4a5e;line-height:1.6}
+
 /* Footer */
 .footer{padding:60px 0 50px;border-top:1px solid #dde4ee;text-align:center;color:#8a93a3;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:40px}
 .footer strong{color:#0e83b0}
@@ -117,6 +154,8 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
   .formula-steps{grid-template-columns:1fr 1fr}
   .fstep:nth-child(2)::after{display:none}
   .roteiro-body{grid-template-columns:1fr}
+  .carrossel-body{grid-template-columns:1fr}
+  .gpt-cta{flex-direction:column;align-items:flex-start;padding:28px 24px}
   .topnav .nav-links{display:none}
 }
 </style>
@@ -134,7 +173,11 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
       <a href="#diretrizes">Diretrizes</a>
       <a href="#formula">Fórmula</a>
       <a href="#ganchos">Banco de Ganchos</a>
-      <a href="#roteiros">25 Roteiros</a>
+      <a href="#roteiros">Roteiros</a>
+      <a href="#funcionalidades">Funcionalidades</a>
+      <a href="#carrosseis">Carrosséis</a>
+      <a href="https://docs.google.com/spreadsheets/d/1bDIDNw1LdtiBKZhgBewMgytAwbftbmnQDHYeeldIwxE/edit?usp=sharing" target="_blank" rel="noopener" class="sheet-btn">📊 Excel Master</a>
+      <a href="https://chatgpt.com/g/g-69d80e232e088191a4518a8efbd225b1-konclui" target="_blank" rel="noopener" class="gpt-btn">⚡ Criar conteúdo com a IA</a>
     </div>
   </div>
 </nav>
@@ -147,6 +190,19 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
     <div class="hero-kicker">Manual de Gravação</div>
     <h1>Como gravar vídeos<br>que <span class="cyan">geram conversa</span>.</h1>
     <p>Transformar conhecimento de operação em vídeos curtos que geram autoridade, desejo e conversas comerciais. Esse é o guia da equipe — leia antes de cada gravação.</p>
+  </div>
+
+  <!-- CTA GPT + EXCEL MASTER -->
+  <div class="gpt-cta">
+    <div class="gc-text">
+      <div class="gc-kicker">— Atalhos de criação</div>
+      <div class="gc-title">Precisa de um roteiro agora?</div>
+      <div class="gc-desc">Fala com o criador de conteúdo da Koncluí no ChatGPT — ele já conhece o tom da marca, a fórmula fixa e as funcionalidades. E acompanhe tudo que já foi gravado e publicado no nosso Excel Master.</div>
+    </div>
+    <div class="gc-btns">
+      <a href="https://chatgpt.com/g/g-69d80e232e088191a4518a8efbd225b1-konclui" target="_blank" rel="noopener" class="gc-btn">⚡ Abrir o GPT criador de conteúdo →</a>
+      <a href="https://docs.google.com/spreadsheets/d/1bDIDNw1LdtiBKZhgBewMgytAwbftbmnQDHYeeldIwxE/edit?usp=sharing" target="_blank" rel="noopener" class="gc-btn secondary">📊 Abrir o Excel Master de conteúdo →</a>
+    </div>
   </div>
 
   <!-- FÓRMULA -->
@@ -240,8 +296,8 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
   <!-- GANCHOS -->
   <div class="section" id="ganchos">
     <div class="section-num">— REFERÊNCIA RÁPIDA</div>
-    <div class="section-title">Banco de 25 ganchos</div>
-    <div class="section-desc">Sem ideia de abertura? Pega um daqui. Cada gancho já vem com o contexto certo de uso.</div>
+    <div class="section-title">Banco de 50 ganchos</div>
+    <div class="section-desc">Sem ideia de abertura? Pega um daqui. Cada gancho já vem com o contexto certo de uso. Os 25 primeiros são de dor e gestão; do 26 ao 50, ganchos ancorados nas funcionalidades reais do app.</div>
     <div class="ganchos" id="ganchos-grid"></div>
   </div>
 
@@ -249,12 +305,28 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
   <div class="section" id="roteiros">
     <div class="section-num">— PRONTO PRA GRAVAR</div>
     <div class="section-title">25 roteiros completos</div>
-    <div class="section-desc">Cada roteiro tem tudo: gancho, fala palavra por palavra, cena de abertura, b-roll, CTA e duração. É só decorar a fala e gravar. Regra fixa: todo vídeo fecha chamando pra comentar <strong>QUERO</strong> — é assim que o time comercial recebe o lead.</div>
+    <div class="section-desc">Cada roteiro tem tudo: gancho, fala palavra por palavra, CTA e duração. É só decorar a fala e gravar. Regra fixa: todo vídeo fecha chamando pra comentar <strong>QUERO</strong> — é assim que o time comercial recebe o lead.</div>
     <div class="search-wrap">
       <input type="text" id="search" placeholder="Buscar por tema, gancho ou palavra-chave… (ex: CMV, férias, freezer)"/>
     </div>
     <div class="roteiros" id="roteiros-list"></div>
     <div class="no-result" id="no-result">Nenhum roteiro encontrado pra essa busca.</div>
+  </div>
+
+  <!-- ROTEIROS DE FUNCIONALIDADE -->
+  <div class="section" id="funcionalidades">
+    <div class="section-num">— PROBLEMA × FUNCIONALIDADE</div>
+    <div class="section-title">10 roteiros de funcionalidade</div>
+    <div class="section-desc">Aqui o vídeo parte de uma dor concreta do dono e mostra exatamente qual recurso da Koncluí resolve. Mesma fórmula fixa, mesma estrutura dos roteiros acima — só que ancorada no que o app faz de verdade. Fecha sempre chamando pra comentar <strong>QUERO</strong>.</div>
+    <div class="roteiros" id="func-list"></div>
+  </div>
+
+  <!-- CARROSSÉIS DE FUNCIONALIDADE -->
+  <div class="section" id="carrosseis">
+    <div class="section-num">— PRONTO PRA POSTAR</div>
+    <div class="section-title">10 carrosséis de funcionalidade</div>
+    <div class="section-desc">As mesmas 10 funcionalidades, agora em versão carrossel: a copy de cada slide e a legenda completa. É o par estático dos roteiros de vídeo acima — use os dois juntos ou separados, slide por slide.</div>
+    <div class="carrosseis" id="carrosseis-list"></div>
   </div>
 
   <div class="footer">
@@ -264,33 +336,58 @@ body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-heig
 </div>
 
 <script>
-// ---- BANCO DE GANCHOS ----
+// ---- BANCO DE 50 GANCHOS ----
 const ganchos = [
-  ["Microgerenciar não é dedicação. É o sintoma de quem não confia na própria operação.","dono centralizador, liderança"],
-  ["Todo mundo acha que padrão engessa. Padrão é justamente o que liberta o dono da operação.","padronização"],
-  ["Seu checklist de papel funciona uma semana. Na segunda, já virou teatro.","checklists, papel x digital"],
-  ["Você acha que fizeram. Mas achar não é saber. E achar custa caro.","prova operacional"],
-  ["Texto qualquer um inventa em 30 segundos. Foto com hora e nome, ninguém forja.","foto obrigatória, evidência"],
-  ["Qual a temperatura do seu freezer agora? Se você não sabe, já pode estar virando prejuízo.","controle operacional, itens críticos"],
-  ["94,9% dos donos ainda controlam o restaurante na planilha. E quase nenhum controla de verdade.","migração de planilha"],
-  ["73% dos donos ainda anotam tudo num caderninho. E caderninho não avisa quando algo dá errado.","organização, digitalização"],
+  ["Você não microgerencia por dedicação. Microgerencia porque, no fundo, não confia que a operação anda sem você.","dono centralizador, liderança"],
+  ["Dono acha que padrão engessa. Padrão é o que finalmente tira você de dentro da operação.","padronização"],
+  ["Checklist de papel funciona uma semana. Na segunda, já virou teatro: assina sem fazer.","checklists, papel x digital"],
+  ["Você acha que limparam a bancada. Acha que o freezer fechou. Achar é o que sai mais caro num restaurante.","prova operacional"],
+  ["Texto, qualquer um digita correndo sem ter feito nada. Foto com hora e responsável, ninguém forja.","foto obrigatória, evidência"],
+  ["Qual a temperatura do seu freezer agora? Se a resposta é 'não sei', o prejuízo já pode ter começado.","controle operacional, itens críticos"],
+  ["94,9% dos donos dizem que controlam a operação na planilha. Planilha mostra o que digitaram — não o que aconteceu.","migração de planilha"],
+  ["O caderninho registra que a tarefa foi feita. Ele nunca te avisa quando ela não foi.","organização, digitalização"],
   ["Era 22h e o dono ainda estava no restaurante. Não porque quis. Porque sem ele, ninguém fecha.","sobrecarga do dono"],
-  ["“Nunca tirei férias” não é troféu. É um aviso de que o restaurante não anda sem você.","casos reais, dependência"],
+  ["'Nunca tirei férias' você fala como troféu. É um atestado de que o restaurante não anda sem você.","casos reais, dependência"],
   ["O cliente médio da Koncluí economiza R$3 mil por mês. E nunca tinha visto esse dinheiro vazar.","ROI, prova de resultado"],
   ["A Koncluí se paga em 90 dias, em média. O resto é lucro que você não enxergava.","objeção de preço"],
-  ["Tem dinheiro saindo pela porta dos fundos do seu restaurante. E não é roubo. É desperdício.","CMV, desperdício"],
+  ["Tem dinheiro saindo pela porta dos fundos do seu restaurante. Não é roubo. É desperdício que ninguém registrou.","CMV, desperdício"],
   ["Vender mais não é lucrar mais. Casa cheia com operação ruim é prejuízo em quantidade maior.","financeiro, margem"],
   ["A culpa nunca é da equipe. Se cinco pessoas erram igual, o problema é o processo.","gestão, processo"],
   ["Sistema é melhor que memória. Memória pede demissão, falta e tira férias.","padronização, conhecimento"],
-  ["Você confia na sua planilha? Ela mostra o que digitaram, não o que de fato aconteceu.","CMV, controle real"],
+  ["Sua planilha nunca te contou uma mentira. Ela só repete, sem checar, o que alguém digitou nela.","controle real"],
   ["Quando a tarefa é de todo mundo, ela acaba não sendo de ninguém.","liderança, responsabilidade"],
-  ["Restaurante que não alinha no começo do turno passa o dia inteiro apagando incêndio.","ritual diário, alinhamento"],
+  ["Restaurante que não alinha o turno na abertura passa o resto do dia apagando incêndio.","ritual diário, alinhamento"],
   ["Você confere a operação porque não confia. E não confia porque nunca tem prova.","controle, confiança"],
-  ["O grupo de WhatsApp parece organização. Mas é onde o problema importante se esconde.","organização, comunicação"],
+  ["O grupo do WhatsApp parece organização. É onde a tarefa importante some embaixo de bom dia e meme.","organização, comunicação"],
   ["A ANVISA não avisa quando chega. No dia da visita, ou você tem processo, ou tem desculpa.","compliance, fiscalização"],
-  ["Dono que não tem agenda definida pra equipe deixa o restaurante rodar no improviso.","liderança, rotina"],
+  ["Sem rotina escrita, sua equipe não trabalha errado. Trabalha no improviso — e improviso não escala.","liderança, rotina"],
   ["Seu restaurante funciona sem você? Some por meio expediente e descubra a verdade.","liberdade do dono"],
-  ["A Koncluí não é ERP. ERP cuida do número. A gente prova que a operação aconteceu.","posicionamento"]
+  ["A Koncluí não é ERP. ERP cuida do número. A gente prova que a operação aconteceu.","posicionamento"],
+  ["Você descobre que o freezer falhou no dia seguinte. Quem tem alerta de item crítico descobre em 1 minuto.","notificação, item crítico"],
+  ["Seu fiscal de loja disse que passou na unidade. O GPS do checklist não aceita 'disse'.","multi-unidade, fiscal de loja"],
+  ["Tablet na cozinha com um login só: ninguém é responsável por nada. Com PIN, cada tarefa tem nome.","troca rápida, responsável"],
+  ["Você fecha a loja sem saber o que rodou. Às 22h15, o resumo do dia podia chegar sozinho no seu WhatsApp.","relatório de encerramento"],
+  ["415 checklists na semana, 171 atrasados. Sem um dashboard, esse número não existe — ele só acontece.","dashboard, taxa de conclusão"],
+  ["Você não precisa montar checklist do zero. Descreve a operação pra Coroa e ela monta. Você só ajusta.","IA Coroa, criação de checklist"],
+  ["Pizzaria nenhuma reinventa a roda. Pega um template pronto e adapta pra sua cozinha.","templates, onboarding"],
+  ["'Tá limpo' some quando você cobra. A foto do balcão com hora fica.","evidência, foto obrigatória"],
+  ["Checklist marcado às 22h, feito às pressas, não controlou nada. O limite de horário fecha a brecha.","restrição de horário, atraso"],
+  ["Fechou pro feriado e a equipe levou falta no sistema sem culpa? Isso tem conserto antes de acontecer.","exceção de unidade"],
+  ["Você sabe qual das suas unidades trabalha melhor? Quem tem ranking não chuta — lê.","multi-unidade, ranking"],
+  ["Faltou gente e o checklist ficou órfão? Outro do mesmo setor assume e a tarefa não cai.","setor, cobertura de falta"],
+  ["Estoque abaixo do mínimo devia disparar um alerta — não virar uma descoberta no sábado.","contagem de estoque, item crítico"],
+  ["Funcionário bom não é o que você 'acha' que é bom. É o que aparece no score de pontualidade, esforço e qualidade.","ranking por usuário, score"],
+  ["No dia da auditoria, você não vai caçar foto no grupo do WhatsApp. Vai exportar o checklist em PDF.","auditoria, exportar relatório"],
+  ["Empresa que só roda com você dentro não é empresa. É um cargo disfarçado de CNPJ.","dono gargalo, posicionamento"],
+  ["'Quem fez isso?' devia ter resposta. Com nome, hora e foto, deixa de ser mistério.","responsabilidade, evidência"],
+  ["Você só descobre que o checklist não foi feito quando o problema estoura. 1 minuto após o prazo, já dava pra saber.","notificação, atraso"],
+  ["Operador pulou a etapa que importava? Com ordem de execução, o item 2 só abre depois do item 1.","ordem de execução, processo"],
+  ["Funcionário novo não precisa de uma semana grudado no gerente. Precisa de um checklist com a ordem certa.","rotatividade, treinamento"],
+  ["Imagina abrir o celular de manhã e ver, num número só, como a operação tá. Não mês passado. Hoje.","dashboard, saúde da operação"],
+  ["Funcionário refazendo o que já foi feito não é esforço. É hora paga duas vezes por falta de registro.","retrabalho, produtividade"],
+  ["Reunião resolve no discurso. Checklist resolve na execução. E discurso não abre a loja domingo de manhã.","gestão, execução"],
+  ["Sua segunda unidade não vai funcionar dentro da sua cabeça. O que não está escrito não se duplica.","expansão, multi-unidade"],
+  ["Sua equipe não entra num sistema novo a toda hora. Mas todo mundo abre o WhatsApp — e é lá que a Koncluí avisa.","notificação WhatsApp, adoção"]
 ];
 
 const gg = document.getElementById('ganchos-grid');
@@ -415,8 +512,6 @@ function renderRoteiros(filter){
           </div>
         </div>
         <div class="rb-side">
-          <div class="item"><div class="ilabel">Cena de abertura</div><div class="ival">${r.cena}</div></div>
-          <div class="item"><div class="ilabel">B-roll / o que mostrar</div><div class="ival">${r.broll}</div></div>
           <div class="item"><div class="ilabel">CTA de fechamento</div><div class="cta-pill">${r.cta}</div></div>
         </div>
       </div>`;
@@ -425,7 +520,148 @@ function renderRoteiros(filter){
   document.getElementById('no-result').style.display = count===0 ? 'block' : 'none';
 }
 renderRoteiros('');
-document.getElementById('search').addEventListener('input',e=>renderRoteiros(e.target.value));
+
+// ---- 10 ROTEIROS DE FUNCIONALIDADE (problema do dono × recurso da Koncluí) ----
+const roteirosFunc = [
+  {n:26,gancho:"Você descobre os problemas tarde demais.",tema:"Notificação / item crítico",dur:"40s",cena:"Dono olhando o celular de manhã, expressão preocupada",
+   copy:["O freezer saiu da temperatura ontem à noite.","A entrega chegou com produto vencido lá no fundo.","E você só ficou sabendo hoje de manhã. Tarde demais.","O problema nunca foi a falha. Falha acontece em todo restaurante.","O problema é o tempo entre a falha acontecer e você descobrir.","Na Koncluí, o item que você marca como crítico vira alerta.","Deu errado, a gente te avisa no WhatsApp em até um minuto.","Não no dia seguinte. Na hora em que ainda dá pra resolver."],
+   broll:"Checklist com item crítico → notificação chegando no WhatsApp",cta:"Comenta QUERO e a gente te mostra como ser avisado antes do prejuízo fechar."},
+  {n:27,gancho:"'Passei na unidade hoje, tá tudo certo.'",tema:"Multi-unidade / GPS",dur:"40s",cena:"Celular mostrando o mapa com o raio em volta da unidade",
+   copy:["Seu fiscal de loja te manda a mensagem: passei lá, tá tudo certo.","Passou mesmo? Ou respondeu do carro, no caminho pra outra coisa?","Sem prova de presença, você fica refém da palavra.","E palavra não é controle.","Na Koncluí, você define um raio em volta de cada unidade.","O checklist só abre se a pessoa estiver dentro daquele raio.","Ou esteve na unidade de verdade, ou o sistema não deixou marcar.","Fiscalização à distância deixou de ser à distância."],
+   broll:"Mapa com raio → checklist bloqueado fora da área → liberado dentro",cta:"Comenta QUERO e a gente te mostra como saber quem esteve mesmo na sua unidade."},
+  {n:28,gancho:"Um login pra cozinha inteira.",tema:"Usuários / responsável",dur:"40s",cena:"Tablet preso na parede da cozinha, equipe passando",
+   copy:["Você botou um tablet na cozinha pra equipe registrar as tarefas.","Boa ideia. Mas é um login só. Todo mundo usa a mesma conta.","Aí quando algo dá errado, não tem nome. Foi 'a cozinha'.","E 'a cozinha' não senta pra conversar com você.","Na Koncluí, cada operador tem um PIN de cinco dígitos.","Trocar de usuário no turno é um toque na tela. Dois segundos.","Cada tarefa fechada fica com o nome de quem fez.","'Quem foi?' deixa de ser pergunta."],
+   broll:"Tablet → troca de PIN → checklist com nome do responsável",cta:"Comenta QUERO e a gente te mostra como dar nome pra cada tarefa da operação."},
+  {n:29,gancho:"Você não monta checklist porque dá preguiça.",tema:"IA Coroa / produto",dur:"40s",cena:"Pessoa olhando uma tela em branco, sem saber por onde começar",
+   copy:["Você sabe que precisa de checklist. Só nunca senta pra montar.","Parece trabalho de uma tarde inteira. Aí fica pra depois.","E depois nunca chega.","A Coroa é a inteligência artificial da Koncluí.","Você escreve do seu jeito: limpeza da cozinha de uma pizzaria, até dez itens.","Ela monta o checklist. Os itens, a ordem, o que pedir de evidência.","Você não começa do zero. Começa ajustando.","O que travava virou cinco minutos."],
+   broll:"Texto digitado pra Coroa → checklist pronto aparecendo na tela",cta:"Comenta QUERO e a gente te mostra a Coroa montando um checklist na sua frente."},
+  {n:30,gancho:"Você fecha a loja no escuro.",tema:"Notificação / relatório",dur:"40s",cena:"Dono trancando a porta da loja à noite",
+   copy:["Fim de expediente. Você tranca a porta e vai pra casa.","Mas você sabe o que de fato rodou hoje? Ou só acha que rodou?","Quantos checklists tinham. Quantos fecharam. Quantos ficaram pra trás.","E, principalmente: quem deixou tarefa sem fazer.","Na Koncluí, você escolhe um horário. 22h15, por exemplo.","E o resumo do dia inteiro chega sozinho no seu WhatsApp.","Você fecha a loja sabendo. Não achando."],
+   broll:"Loja fechando → notificação de relatório no WhatsApp com os números",cta:"Comenta QUERO e a gente te mostra como fechar o dia com o resumo na mão."},
+  {n:31,gancho:"'Tá tudo certo.'",tema:"Evidência / prova",dur:"40s",cena:"Funcionário respondendo 'ok' numa lista sem olhar pra operação",
+   copy:["Essa é a frase mais cara que existe num restaurante.","'Tá tudo certo', dita por quem talvez nem tenha olhado.","Texto numa lista, qualquer um marca correndo. Custa zero mentir.","Na Koncluí, o item crítico pede prova. Foto, vídeo ou registro escrito.","A foto do estoque. O vídeo da câmara fria. A temperatura digitada na hora.","Não é desconfiança da equipe. É tirar a operação do 'eu acho'.","Quem trabalha bem não tem medo de provar que trabalhou."],
+   broll:"Checklist pedindo foto → foto sendo anexada com hora e responsável",cta:"Comenta QUERO e a gente te mostra como trocar o 'tá certo' por prova."},
+  {n:32,gancho:"415 checklists. 171 atrasados.",tema:"Dashboard / produto",dur:"40s",cena:"Tela do dashboard com os cards de status",
+   copy:["Esse é um cenário real de dashboard. 415 checklists numa semana.","171 atrasados. Quase metade da operação rodando fora do prazo.","Sem isso numa tela, esse número não existe. Ele só acontece.","O dashboard da Koncluí mostra a taxa de conclusão, a métrica que importa.","E o ranking: qual unidade trabalha melhor, qual setor trava.","Você para de governar a operação pela sensação.","E passa a governar pelo número."],
+   broll:"Dashboard → cards de status → ranking por unidade",cta:"Comenta QUERO e a gente te mostra seu dashboard com seus números reais."},
+  {n:33,gancho:"Tudo marcado às 22h.",tema:"Agendamento / controle",dur:"35s",cena:"Lista de checklists toda preenchida de uma vez, no fim do dia",
+   copy:["Você abre o sistema e vê: todos os checklists do dia, feitos.","Bonito. Até você reparar que foram todos marcados às 22h. De uma vez.","Ninguém fez a abertura às 8h. Marcaram tudo no fim, sem ter feito.","Na Koncluí você define a janela: a partir de que horas pode iniciar, até quando vale.","Passou do limite, conta como atraso. E atraso aparece no painel.","Checklist feito fora da hora não controla a operação. Ele só finge."],
+   broll:"Configuração de antecedência e limite → checklist marcado como atrasado",cta:"Comenta QUERO e a gente te mostra como fechar a brecha do 'marquei tudo depois'."},
+  {n:34,gancho:"O rombo no estoque você descobre no sábado.",tema:"Estoque / item crítico",dur:"40s",cena:"Pessoa abrindo a câmara fria e percebendo que faltou insumo",
+   copy:["Sexta de movimento. Sábado você vai pegar o insumo e não tem.","Aí corre, compra no susto, paga caro, e o cardápio ainda fica capado.","A contagem até era feita. Mas era só um número anotado que ninguém olhava.","Na Koncluí, a contagem de estoque é um item numérico com meta.","Você define o mínimo. Bateu abaixo, a gente te avisa no WhatsApp na hora.","Você não descobre o rombo no sábado.","É avisado na quarta, quando ainda dá pra repor sem pânico."],
+   broll:"Checklist de contagem → número abaixo da meta → alerta no WhatsApp",cta:"Comenta QUERO e a gente te mostra como seu estoque te avisa antes de faltar."},
+  {n:35,gancho:"A mercadoria chega e ninguém confere de verdade.",tema:"Recebimento / qualidade",dur:"40s",cena:"Caixas sendo recebidas na porta dos fundos",
+   copy:["O fornecedor entrega. Alguém assina. As caixas entram.","Mas a qualidade do que chegou, alguém registrou? Ou só 'tava ok'?","Um cliente nosso, dono de padaria, resolveu isso.","No recebimento, o funcionário dá uma nota de estrelas pra qualidade do pão.","Caiu abaixo de quatro estrelas, ele é avisado na hora, no WhatsApp.","Recebimento deixou de ser 'descarrega e assina'.","Virou um ponto de controle. Com nota, com prova, com responsável."],
+   broll:"Recebimento → avaliação por estrelas → alerta de qualidade baixa",cta:"Comenta QUERO e a gente te mostra como transformar seu recebimento em controle."}
+];
+const funcList = document.getElementById('func-list');
+function renderFunc(filter){
+  funcList.innerHTML='';
+  const f=(filter||'').toLowerCase().trim();
+  let count=0;
+  roteirosFunc.forEach(r=>{
+    const haystack=(r.gancho+' '+r.tema+' '+r.copy.join(' ')+' '+r.cena+' '+r.broll+' '+r.cta).toLowerCase();
+    if(f && !haystack.includes(f)) return;
+    count++;
+    const el=document.createElement('div');
+    el.className='roteiro';
+    el.innerHTML=`
+      <div class="roteiro-head">
+        <div class="roteiro-n">${String(r.n).padStart(2,'0')}</div>
+        <div class="roteiro-gancho">
+          <div class="glabel">Gancho · 0–3s</div>
+          <div class="gval">${r.gancho}</div>
+        </div>
+        <div class="roteiro-meta">
+          <span class="chip chip-tema">${r.tema}</span>
+          <span class="chip chip-dur">${r.dur}</span>
+        </div>
+      </div>
+      <div class="roteiro-body">
+        <div class="rb-block">
+          <div class="rb-label">Fala (decore e grave)</div>
+          <div class="script-lines">
+            ${r.copy.map(l=>`<div class="sl">${l}</div>`).join('')}
+          </div>
+        </div>
+        <div class="rb-side">
+          <div class="item"><div class="ilabel">CTA de fechamento</div><div class="cta-pill">${r.cta}</div></div>
+        </div>
+      </div>`;
+    funcList.appendChild(el);
+  });
+  if(count===0) funcList.innerHTML='<div class="no-result" style="display:block">Nenhum roteiro de funcionalidade encontrado pra essa busca.</div>';
+}
+renderFunc('');
+
+// ---- 10 CARROSSÉIS DE FUNCIONALIDADE ----
+const carrosseis = [
+  {n:1,func:"Alerta de item crítico no WhatsApp",
+   slides:["O freezer falhou ontem à noite. Você só foi saber hoje de manhã.","Falha acontece em todo restaurante, todo mês. O problema nunca foi a falha.","O problema é o tempo entre ela acontecer e você descobrir. É nesse buraco que o prejuízo se forma.","Item que você marca como crítico vira alerta. Deu errado, chega no seu WhatsApp em até 1 minuto.","Descobrir na hora é um ajuste. Descobrir amanhã é prejuízo. Comenta QUERO."],
+   legenda:"Todo restaurante tem falha — câmara que oscila, entrega errada, item que ninguém conferiu. O que separa quem perde dinheiro de quem não perde é uma coisa só: tempo de resposta. Na Koncluí, o item crítico que sai da meta te avisa no WhatsApp em até 1 minuto. Não no fechamento, não no dia seguinte: na hora em que ainda dá pra resolver. Comenta QUERO que a gente te mostra como funciona na sua operação."},
+  {n:2,func:"Restrição de execução por localização (GPS)",
+   slides:["'Passei na unidade, tá tudo certo.' Passou mesmo?","Fiscalização à distância não é fiscalização. É confiar na palavra e torcer.","Sem prova de presença, seu fiscal pode responder de qualquer lugar — inclusive de casa.","Na Koncluí você define um raio em volta da unidade. O checklist só abre lá dentro.","Ou a pessoa esteve na unidade, ou o sistema não deixou marcar. Comenta QUERO."],
+   legenda:"Restaurante multi-unidade vive do fiscal de loja. Mas 'passei lá' não é controle — é torcida. Na Koncluí, você desenha um raio em volta de cada unidade e o checklist só pode ser executado dentro dele. Quem fiscaliza precisa estar onde diz que está. A presença deixa de ser palavra e vira registro. Comenta QUERO que a gente te mostra como aplicar nas suas unidades."},
+  {n:3,func:"PIN de troca rápida de usuário",
+   slides:["Um tablet na cozinha. Um login só. Ninguém é responsável por nada.","Quando a conta é de todo mundo, o erro não tem nome. Foi 'a cozinha'.","E 'a cozinha' não senta pra conversar com você sobre o que saiu errado.","Na Koncluí, cada operador tem um PIN. Trocar de usuário no turno é um toque na tela.","Cada tarefa fechada com o nome de quem fez. Comenta QUERO."],
+   legenda:"Você colocou um tablet na cozinha pra organizar — e sem querer apagou a responsabilidade. Login compartilhado quer dizer que ninguém responde por nada. Na Koncluí, cada pessoa tem um PIN de 5 dígitos: a troca de usuário leva 2 segundos e cada checklist fechado carrega o nome de quem executou. 'Quem fez isso?' deixa de ser pergunta sem resposta. Comenta QUERO que a gente te mostra."},
+  {n:4,func:"Coroa — IA que monta o checklist",
+   slides:["Você sabe que precisa de checklist. Só nunca senta pra montar.","Parece trabalho de uma tarde inteira. Aí fica pra depois — e depois não chega.","A Coroa é a IA da Koncluí. Você descreve a operação do seu jeito.","'Limpeza da cozinha de uma pizzaria, até 10 itens.' Ela monta. Você ajusta.","O que travava virou 5 minutos. Comenta QUERO."],
+   legenda:"O maior motivo pra um restaurante não ter checklist não é falta de vontade — é a preguiça de começar do zero. A Coroa, a inteligência artificial da Koncluí, resolve isso: você escreve com suas palavras o que precisa e ela monta o checklist com itens, ordem e o que pedir de evidência. Você não começa do zero, começa ajustando. Comenta QUERO que a gente te mostra a Coroa funcionando."},
+  {n:5,func:"Relatório de encerramento no WhatsApp",
+   slides:["Você tranca a loja e vai pra casa. Sabe o que rodou hoje?","Ou só acha que rodou? Quantos checklists fecharam, quantos ficaram pra trás?","Fechar a operação sem esse número é dirigir olhando só pelo retrovisor.","Na Koncluí, você escolhe um horário e o resumo do dia chega sozinho no WhatsApp.","Quantos fecharam, quantos não, e quem deixou pra trás. Comenta QUERO."],
+   legenda:"Fim de expediente não devia ser fim da informação. Na Koncluí você define um horário — 22h15, por exemplo — e recebe no WhatsApp o resumo do dia inteiro: quantos checklists tinham, quantos foram concluídos, quantos ficaram pra trás e quem deixou tarefa sem fazer. Você fecha a loja sabendo, não achando. Comenta QUERO que a gente configura com você."},
+  {n:6,func:"Evidência obrigatória: foto, vídeo ou texto",
+   slides:["'Tá tudo certo.' A frase mais cara de um restaurante.","Dita, muitas vezes, por quem nem chegou a olhar a operação.","Texto numa lista, qualquer um marca correndo. Custa zero mentir.","Na Koncluí, o item crítico pede prova: foto, vídeo ou registro escrito na hora.","Quem trabalha bem não tem medo de provar. Comenta QUERO."],
+   legenda:"'Tá tudo certo' não é informação — é esperança. Na Koncluí, os itens que importam pedem evidência: a foto do estoque, o vídeo da câmara fria, a temperatura digitada na hora da conferência. Não é desconfiar da equipe — é tirar a operação do 'eu acho' e botar no 'eu vi'. Comenta QUERO que a gente te mostra como funciona a evidência obrigatória."},
+  {n:7,func:"Dashboard: taxa de conclusão e ranking",
+   slides:["415 checklists na semana. 171 atrasados.","Quase metade da operação rodando fora do prazo. E você só descobre se tiver onde ver.","Sem dashboard, esse número não existe. Ele só acontece, em silêncio.","A Koncluí mostra a taxa de conclusão e o ranking: qual unidade puxa, qual trava.","Pare de governar a operação pela sensação. Comenta QUERO."],
+   legenda:"Esse é um cenário real de dashboard: 415 checklists numa semana, 171 atrasados. Quase metade da operação fora do prazo — e isso só vira informação quando tem onde ler. O dashboard da Koncluí te entrega a taxa de conclusão (a métrica que importa) e o ranking por unidade, setor e usuário. Você troca a sensação de que 'tá indo' pelo número que diz se tá mesmo. Comenta QUERO que a gente te mostra seu painel."},
+  {n:8,func:"Restrição de horário do checklist",
+   slides:["Todos os checklists do dia: feitos. Todos marcados às 22h.","Ninguém fez a abertura às 8h. Marcaram tudo no fim, de uma vez, sem ter feito.","Checklist preenchido fora da hora não controla nada. Ele só finge que controlou.","Na Koncluí você define a janela: de que horas pode iniciar, até quando vale.","Passou do limite, conta como atraso — e atraso aparece. Comenta QUERO."],
+   legenda:"O checklist mais perigoso é o que parece feito. Equipe que marca tudo de uma vez no fim do turno não está controlando a operação — está encenando. Na Koncluí você define uma janela de execução: a antecedência máxima pra iniciar e o limite depois do prazo. Passou, vira atraso e aparece no painel. O 'marquei tudo depois' deixa de funcionar. Comenta QUERO que a gente te mostra como configurar."},
+  {n:9,func:"Item crítico numérico na contagem de estoque",
+   slides:["O rombo no estoque você descobre no sábado de movimento.","Aí compra no susto, paga caro, e o cardápio ainda fica capado.","A contagem até era feita. Mas era um número anotado que ninguém olhava.","Na Koncluí, a contagem é item numérico com meta. Bateu abaixo do mínimo, te avisa.","Avisado na quarta, não no sábado. Comenta QUERO."],
+   legenda:"Estoque não te trai no dia da contagem — te trai no sábado, quando o insumo acabou e a casa está cheia. A contagem anotada num caderno é só um número parado. Na Koncluí, ela é um item numérico com meta: você define o mínimo aceitável e, se a contagem bater abaixo, o alerta chega no seu WhatsApp na hora. Você é avisado enquanto ainda dá pra repor sem pânico. Comenta QUERO que a gente te mostra."},
+  {n:10,func:"Item avaliativo no recebimento de mercadoria",
+   slides:["A mercadoria chega, alguém assina, as caixas entram. E a qualidade?","Recebimento sem registro é só 'descarrega e assina'. O fornecedor sabe disso.","Um cliente nosso, dono de padaria, virou esse jogo.","No recebimento, o funcionário dá nota de estrelas à qualidade do pão. Caiu de 4, avisa.","Recebimento virou ponto de controle. Comenta QUERO."],
+   legenda:"A porta dos fundos é onde o dinheiro entra — e onde o controle costuma não existir. Recebimento sem registro é só descarregar e assinar, e o fornecedor sabe disso. Um cliente nosso, dono de padaria, transformou o recebimento num ponto de controle: o funcionário avalia a qualidade do pão por estrelas e, se cair abaixo de 4, o alerta chega na hora. Nota, prova e responsável — na porta dos fundos. Comenta QUERO que a gente te mostra como aplicar no seu recebimento."}
+];
+const carrosseisList = document.getElementById('carrosseis-list');
+carrosseis.forEach(c=>{
+  const el=document.createElement('div');
+  el.className='carrossel';
+  const lastIdx=c.slides.length-1;
+  el.innerHTML=`
+    <div class="carrossel-head">
+      <div class="carrossel-n">${String(c.n).padStart(2,'0')}</div>
+      <div class="carrossel-func">
+        <div class="cflabel">Funcionalidade</div>
+        <div class="cfval">${c.func}</div>
+      </div>
+      <div class="carrossel-meta">
+        <span class="chip chip-tema">Carrossel</span>
+        <span class="chip chip-dur">${c.slides.length} slides</span>
+      </div>
+    </div>
+    <div class="carrossel-body">
+      <div class="rb-block">
+        <div class="rb-label">Copy slide a slide</div>
+        <div class="slides">
+          ${c.slides.map((s,i)=>`<div class="slide ${i===0?'capa':''} ${i===lastIdx?'cta-slide':''}"><div class="snum">${i+1}</div><div class="stext">${s}</div></div>`).join('')}
+        </div>
+      </div>
+      <div class="rb-side">
+        <div class="legenda-block">
+          <div class="llabel">Legenda completa</div>
+          <div class="ltext">${c.legenda}</div>
+        </div>
+      </div>
+    </div>`;
+  carrosseisList.appendChild(el);
+});
+
+document.getElementById('search').addEventListener('input',e=>{renderRoteiros(e.target.value);renderFunc(e.target.value);});
 </script>
 </body>
 </html>
