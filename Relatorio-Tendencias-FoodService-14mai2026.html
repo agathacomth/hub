@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Tendências · Food Service · 14 Mai 2026 · Koncluí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A0E2B;
+    --navy-soft:#131A3F;
+    --teal:#02E8C5;
+    --teal-2:#00FFC2;
+    --teal-soft:#C8F5F4;
+    --white:#F5F7FB;
+    --gray:#6B7280;
+    --gray-light:#9AA3B2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--navy);
+    color:var(--white);
+    font-family:'Urbanist',sans-serif;
+    font-weight:500;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      linear-gradient(135deg, rgba(2,232,197,.035) 1px, transparent 1px),
+      linear-gradient(45deg, rgba(2,232,197,.035) 1px, transparent 1px);
+    background-size:46px 46px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:11px;
+    color:var(--teal);
+  }
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:78px 0 64px;
+    background:radial-gradient(900px 380px at 88% -10%, rgba(2,232,197,.22), transparent 60%);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(135deg, rgba(2,232,197,.05) 1px, transparent 1px),
+      linear-gradient(45deg, rgba(2,232,197,.05) 1px, transparent 1px);
+    background-size:46px 46px;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .brandline{display:flex;align-items:center;gap:12px;margin-bottom:30px;}
+  .kmark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(140deg,var(--teal),var(--teal-2));
+    color:var(--navy);font-weight:900;font-size:20px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Urbanist',sans-serif;
+  }
+  .kword{font-weight:900;font-size:19px;letter-spacing:-.02em;}
+  .kword span{color:var(--teal);}
+  h1{
+    font-weight:900;
+    font-size:54px;
+    line-height:1.04;
+    letter-spacing:-.025em;
+    margin:14px 0 18px;
+    max-width:760px;
+  }
+  h1 .hl{color:var(--teal);}
+  .hero-sub{
+    font-size:18px;color:var(--gray-light);max-width:620px;font-weight:500;
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;
+  }
+  .chip{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:500;
+    border:1px solid rgba(2,232,197,.22);
+    background:rgba(2,232,197,.06);
+    color:var(--teal-soft);
+    padding:7px 13px;border-radius:999px;
+  }
+  /* ---------- STATS ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin:-30px auto 0;position:relative;z-index:5;
+  }
+  .stat{
+    background:var(--navy-soft);
+    border:1px solid rgba(2,232,197,.15);
+    border-radius:16px;
+    padding:22px 20px;
+  }
+  .stat .num{font-weight:900;font-size:30px;color:var(--teal);letter-spacing:-.02em;line-height:1;}
+  .stat .lbl{font-size:13px;color:var(--gray-light);margin-top:8px;line-height:1.35;}
+  /* ---------- SECTIONS ---------- */
+  section{padding:62px 0 8px;}
+  .sec-head{margin-bottom:30px;}
+  .sec-head h2{
+    font-weight:800;font-size:32px;letter-spacing:-.02em;margin-top:8px;
+  }
+  .sec-head p{color:var(--gray-light);font-size:16px;margin-top:8px;max-width:680px;}
+  /* ---------- MOODBOARD ---------- */
+  .moodboard{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .mood{
+    background:var(--navy-soft);
+    border:1px solid rgba(2,232,197,.15);
+    border-radius:18px;
+    padding:24px 22px;
+    display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+  .mood::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--teal),transparent);
+  }
+  .mood.big{grid-column:span 2;}
+  .mood .emoji{font-size:30px;margin-bottom:12px;}
+  .mood .tag{
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.16em;color:var(--teal);
+    margin-bottom:6px;
+  }
+  .mood h3{font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2;}
+  .mood p{font-size:14px;color:var(--gray-light);margin-bottom:16px;}
+  .use{
+    margin-top:auto;
+    background:rgba(2,232,197,.07);
+    border:1px solid rgba(2,232,197,.18);
+    border-radius:12px;
+    padding:13px 14px;
+  }
+  .use .ut{
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--teal);
+    display:block;margin-bottom:5px;
+  }
+  .use p{font-size:13.5px;color:var(--white);margin:0;font-weight:600;}
+  /* ---------- NEWS ---------- */
+  .news{display:flex;flex-direction:column;gap:0;}
+  .news-item{
+    display:grid;grid-template-columns:128px 1fr;gap:24px;
+    padding:24px 0;
+    border-bottom:1px solid rgba(2,232,197,.12);
+  }
+  .news-item:first-child{border-top:1px solid rgba(2,232,197,.12);}
+  .news-date{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+    color:var(--teal);padding-top:3px;
+  }
+  .news-date span{display:block;color:var(--gray);font-weight:500;font-size:11px;margin-top:3px;}
+  .news-body h3{font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:6px;}
+  .news-body p{font-size:14.5px;color:var(--gray-light);}
+  .news-body .src{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray);
+    margin-top:7px;
+  }
+  /* ---------- VIRAIS ---------- */
+  .viral-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .viral{
+    background:var(--navy-soft);
+    border:1px solid rgba(2,232,197,.15);
+    border-radius:16px;
+    padding:22px;
+    display:flex;flex-direction:column;
+  }
+  .viral .vtype{
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--teal);margin-bottom:8px;
+  }
+  .viral h3{font-weight:800;font-size:18px;margin-bottom:7px;letter-spacing:-.01em;}
+  .viral p{font-size:14px;color:var(--gray-light);margin-bottom:16px;}
+  .vlink{
+    margin-top:auto;
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+    color:var(--navy);
+    background:linear-gradient(140deg,var(--teal),var(--teal-2));
+    padding:10px 16px;border-radius:999px;
+    text-decoration:none;width:fit-content;
+    transition:transform .15s ease;
+  }
+  .vlink:hover{transform:translateY(-2px);}
+  .vlink.ghost{
+    background:transparent;color:var(--teal);
+    border:1px solid rgba(2,232,197,.35);
+  }
+  /* ---------- ACTION PLAN ---------- */
+  .plan{
+    background:var(--navy-soft);
+    border:1px solid rgba(2,232,197,.18);
+    border-radius:20px;
+    padding:36px 34px;
+    margin-top:12px;
+  }
+  .plan-row{
+    display:grid;grid-template-columns:54px 1fr;gap:20px;
+    padding:20px 0;border-bottom:1px solid rgba(2,232,197,.1);
+  }
+  .plan-row:last-child{border-bottom:none;padding-bottom:0;}
+  .plan-row:first-child{padding-top:0;}
+  .plan-num{
+    font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;
+    color:var(--navy);background:var(--teal);
+    width:38px;height:38px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .plan-row h3{font-weight:800;font-size:17px;margin-bottom:4px;}
+  .plan-row p{font-size:14px;color:var(--gray-light);}
+  .plan-row .fmt{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);
+    margin-top:6px;text-transform:uppercase;letter-spacing:.1em;
+  }
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    border-left:3px solid var(--teal);
+    background:rgba(2,232,197,.06);
+    padding:20px 24px;border-radius:0 14px 14px 0;
+    margin-top:24px;
+    font-size:15.5px;font-weight:600;
+  }
+  .callout strong{color:var(--teal);}
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:70px;padding:44px 0 60px;
+    border-top:1px solid rgba(2,232,197,.14);
+  }
+  footer .wrap{display:flex;flex-direction:column;gap:20px;}
+  .sources h4{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:12px;
+  }
+  .sources ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;}
+  .sources a{
+    color:var(--gray-light);font-size:12.5px;text-decoration:none;
+    border-bottom:1px dotted rgba(154,163,178,.4);
+  }
+  .sources a:hover{color:var(--teal);}
+  .foot-note{font-size:12px;color:var(--gray);font-family:'JetBrains Mono',monospace;}
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:880px){
+    h1{font-size:38px;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .moodboard{grid-template-columns:1fr;}
+    .mood.big{grid-column:span 1;}
+    .viral-grid{grid-template-columns:1fr;}
+    .news-item{grid-template-columns:1fr;gap:6px;}
+    .plan{padding:26px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline">
+      <div class="kmark">K</div>
+      <div class="kword">Konclu<span>í</span></div>
+    </div>
+    <div class="eyebrow">Relatório de Tendências · Food Service</div>
+    <h1>O que <span class="hl">moveu o setor</span> nos últimos 7 dias — e onde a Koncluí entra.</h1>
+    <p class="hero-sub">Pulso semanal de notícias, assuntos em alta e conteúdo viral do mercado de alimentação fora do lar. Sem achismo: o que tá pegando e como transformar isso em post.</p>
+    <div class="meta-row">
+      <span class="chip">PERÍODO · 07 a 14 MAI 2026</span>
+      <span class="chip">FONTES · GOOGLE + INSTAGRAM + TIKTOK</span>
+      <span class="chip">FOCO · ALIMENTAÇÃO FORA DO LAR</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== STATS ===================== -->
+<div class="wrap">
+  <div class="stats">
+    <div class="stat">
+      <div class="num">R$455 bi</div>
+      <div class="lbl">tamanho do mercado de food service no Brasil em 2026</div>
+    </div>
+    <div class="stat">
+      <div class="num">+22,6%</div>
+      <div class="lbl">crescimento do segmento de serviço rápido (QSR)</div>
+    </div>
+    <div class="stat">
+      <div class="num">70%</div>
+      <div class="lbl">dos clientes escolhem onde comer pelas redes sociais</div>
+    </div>
+    <div class="stat">
+      <div class="num">~30%</div>
+      <div class="lbl">dos restaurantes no iFood já são dark kitchens</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MOODBOARD ===================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Moodboard · Assuntos em alta</div>
+      <h2>9 conversas que o mercado tá tendo agora</h2>
+      <p>Cada bloco é um tema quente da semana — e já vem com a tradução pronta: o que a Koncluí faz com isso no feed e nos stories.</p>
+    </div>
+
+    <div class="moodboard">
+
+      <div class="mood big">
+        <div class="emoji">🤖</div>
+        <div class="tag">Tecnologia · Gestão</div>
+        <h3>IA e automação viraram pauta de operação, não de palestra</h3>
+        <p>A semana foi dominada por matérias de que tecnologia e dados estão redefinindo o foodservice. O recado mudou de "no futuro" para "com R$500–900/mês você já tira desperdício e padroniza turno". É exatamente o terreno da Koncluí.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Reel educativo: "Automação em restaurante não é robô na cozinha. É a operação se reportando sozinha." Mostra o painel real respondendo o que o dono perguntaria.</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🌑</div>
+        <div class="tag">Modelo de negócio</div>
+        <h3>Dark kitchens em alta</h3>
+        <p>Quase 30% dos restaurantes do iFood já operam sem salão. Visita presencial caiu 35%, delivery subiu 34%. Operação 100% delivery não perdoa erro de processo.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Carrossel: "Dark kitchen sem checklist é dark de verdade — ninguém enxerga o que deu errado." Padrão de cozinha com prova por foto.</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🔁</div>
+        <div class="tag">Tendência de receita</div>
+        <h3>Food-as-a-Service (FaaS)</h3>
+        <p>Assinatura e recorrência no "fora do lar" atingiram ponto de virada como resposta à volatilidade de caixa. Recorrência só funciona com entrega padronizada.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Post de posicionamento: "Cliente recorrente cobra padrão recorrente. E padrão não se promete — se audita."</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🔥</div>
+        <div class="tag">Conteúdo · Comportamento</div>
+        <h3>A "fadiga do gourmet"</h3>
+        <p>Saturou prato cenográfico e fumaça artificial. A virada da semana: menos filtro, mais fogo. Público quer bastidor real, equipe de verdade, operação sem maquiagem.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Série de bastidores: o dia real de quem opera com Koncluí — abertura, ronda, fechamento. Cru, sem produção de comercial.</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">📱</div>
+        <div class="tag">Marketing · Dados</div>
+        <h3>Social Food: a vitrine virou a rede</h3>
+        <p>70% dos consumidores decidem onde comer pelo que veem nas redes. Quem mostra bastidor e história real da operação cresceu engajamento — sobretudo em vídeo.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Reel + Stories: "Sua operação aparece bem na foto. Mas aparece bem na auditoria?" Vitrine bonita x bastidor sob controle.</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🍸</div>
+        <div class="tag">Cardápio · Sazonal</div>
+        <h3>Moderação alcoólica e mocktails</h3>
+        <p>Dia Mundial do Coquetel (13/mai) puxou a pauta. Low-ABV, mocktails autorais e bebidas funcionais consolidaram lugar central nos cardápios de 2026.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Story de gancho sazonal: "Carta nova de drink = ficha técnica nova. Quem garante que o mocktail sai igual em toda unidade?"</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🍫</div>
+        <div class="tag">Viral · Sobremesa</div>
+        <h3>Dubai chocolate, crookie & cia.</h3>
+        <p>O chocolate de Dubai segue infiltrando cardápios, agora puxando o "crookie" e o "angel hair chocolate" (+3.900% em menções). Trend de sobremesa que vende por curiosidade.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Post de entretenimento: "Item viral entra no cardápio em 2 dias. O padrão dele leva quanto tempo? Trend sem ficha técnica vira reclamação."</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">🌾</div>
+        <div class="tag">Tendência de consumo</div>
+        <h3>Regional e hiperlocal</h3>
+        <p>Valorização das raízes culturais do Brasil em alta: receitas, ingredientes e boteco autêntico fortalecendo a conexão entre alimento e origem.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Post "Gere Conexão": operação padronizada não apaga a alma do negócio — ela libera o dono pra cuidar do que é única: a receita.</p>
+        </div>
+      </div>
+
+      <div class="mood">
+        <div class="emoji">📈</div>
+        <div class="tag">Economia do setor</div>
+        <h3>QSR voando, prato feito mais caro</h3>
+        <p>Serviço rápido cresceu 22,6% no Brasil. Em paralelo, o "prato feito" subiu 1,67% no trimestre — quem almoça fora gasta ~R$605/mês. Margem virou esporte de precisão.</p>
+        <div class="use">
+          <span class="ut">💡 Koncluí pode usar</span>
+          <p>Reel de CMV/lucro real: com insumo subindo, desperdício invisível custa caro. "Você não tem problema de venda. Tem buraco de operação."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTÍCIAS ===================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Radar · Notícias da semana</div>
+      <h2>O que saiu na imprensa do setor</h2>
+      <p>Os fatos que pautaram o mercado entre 07 e 14 de maio — úteis pra ancorar conteúdo de autoridade.</p>
+    </div>
+
+    <div class="news">
+
+      <div class="news-item">
+        <div class="news-date">12 MAI<span>Mercado &amp; Consumo</span></div>
+        <div class="news-body">
+          <h3>O foodservice entra na era da recorrência</h3>
+          <p>Artigo aponta o FaaS (Food-as-a-Service) como inflexão do setor: assinaturas e serviços recorrentes deixam de ser nicho e viram resposta estratégica à volatilidade de caixa do "fora do lar".</p>
+          <div class="src">mercadoeconsumo.com.br</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">11 MAI<span>Central do Varejo</span></div>
+        <div class="news-body">
+          <h3>Tecnologia e dados redefinem a operação do foodservice</h3>
+          <p>Reportagem reforça que IA, automação de processos e novos modelos de negócio passaram a ser pauta de gestão do dia a dia — não promessa de futuro. Ferramentas a partir de R$500/mês já mexem no desperdício.</p>
+          <div class="src">centraldovarejo.com.br</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">SEMANA<span>Jornal Empresas &amp; Negócios</span></div>
+        <div class="news-body">
+          <h3>Quase 30% dos restaurantes do iFood já são dark kitchens</h3>
+          <p>O dado consolida o modelo sem salão como força do mercado. Com visita presencial em queda e delivery em alta, controle de tempo de produção e padrão de cozinha viram o que separa cliente satisfeito de reclamação.</p>
+          <div class="src">jornalempresasenegocios.com.br</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">13 MAI<span>Dia Mundial do Coquetel</span></div>
+        <div class="news-body">
+          <h3>Moderação alcoólica pauta cardápios e ativações</h3>
+          <p>A data movimentou casas e cartas autorais. Low-ABV, mocktails sofisticados e bebidas funcionais se firmam como movimento permanente — não modismo de verão.</p>
+          <div class="src">Cobertura Giro News / setor</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">SEMANA<span>FCSP / 2A+ Alimentos</span></div>
+        <div class="news-body">
+          <h3>Prato feito sobe 1,67% no trimestre; QSR cresce 22,6%</h3>
+          <p>Levantamento mostra o trabalhador que almoça fora 5x/semana gastando ~R$605/mês. Em paralelo, o serviço rápido segue acelerando — pressão dupla de custo e volume que cobra eficiência operacional.</p>
+          <div class="src">doisamaisalimentos.com.br</div>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-date">SEMANA<span>Marcas e Mercados</span></div>
+        <div class="news-body">
+          <h3>"O sabor fora da foto": a fadiga do gourmet</h3>
+          <p>Ensaio sobre o cansaço do prato cenográfico. A gastronomia redescobre valor na experiência que não precisa ser compartilhada na hora — e o conteúdo de bastidor real cresce junto.</p>
+          <div class="src">marcasemercados.com.br</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      Pano de fundo da semana: <strong>o setor está digitalizando a operação</strong> — FaaS, dark kitchen, IA. E está cansado de fachada. Os dois movimentos apontam pro mesmo lugar: <strong>quem opera com padrão e prova ganha o jogo.</strong> É a tese da Koncluí servida de bandeja.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VIRAIS ===================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Viral · Vídeos e áudios da semana</div>
+      <h2>O que tá rodando — e dá pra surfar</h2>
+      <p>Formatos, áudios e hubs de descoberta que estouraram nos últimos 7 dias. Os links abrem direto na fonte pra equipe puxar o áudio ou o formato.</p>
+    </div>
+
+    <div class="viral-grid">
+
+      <div class="viral">
+        <div class="vtype">🎵 Áudio viral · Reel</div>
+        <h3>O áudio do mês de maio/2026</h3>
+        <p>Reel compilando a música viral do mês — o tipo de som que turbina alcance quando aplicado nos primeiros segundos. Ideal pra encaixar num bastidor de operação ou num "antes x depois".</p>
+        <a class="vlink" href="https://www.instagram.com/reel/DX3IemwNoq4/" target="_blank" rel="noopener">▶ Abrir no Instagram</a>
+      </div>
+
+      <div class="viral">
+        <div class="vtype">🎵 Trend de áudio · Reel</div>
+        <h3>Trend musical de maio que migrou do TikTok</h3>
+        <p>Som que estourou no TikTok e atravessou pro Instagram nesta semana. Bom pra Reels de lista ("3 sinais de que...") e viradas de chave rápidas.</p>
+        <a class="vlink" href="https://www.instagram.com/reel/DX9WC-kPjTu/" target="_blank" rel="noopener">▶ Abrir no Instagram</a>
+      </div>
+
+      <div class="viral">
+        <div class="vtype">🔥 Hub de tendência · TikTok</div>
+        <h3>Vídeos mais virais de maio 2026</h3>
+        <p>Página de descoberta com o que está performando no mês. Use como termômetro de formato antes de gravar — não pra copiar, pra entender o ritmo.</p>
+        <a class="vlink ghost" href="https://www.tiktok.com/discover/v%C3%ADdeos-mais-virais-de-maio-2026" target="_blank" rel="noopener">↗ Ver no TikTok</a>
+      </div>
+
+      <div class="viral">
+        <div class="vtype">🍔 Formato de nicho · TikTok</div>
+        <h3>Vídeos criativos para restaurantes</h3>
+        <p>Coletânea de formatos que viralizam no food service: transições de preparo, montagem de prato, cozinha em movimento. Referência direta de edição pra Reels da Koncluí.</p>
+        <a class="vlink ghost" href="https://www.tiktok.com/discover/videos-criativos-para-restaurantes" target="_blank" rel="noopener">↗ Ver no TikTok</a>
+      </div>
+
+      <div class="viral">
+        <div class="vtype">👨‍🍳 Formato de nicho · TikTok</div>
+        <h3>Cozinha industrial / bastidor de operação</h3>
+        <p>Conteúdo de cozinha em ritmo de turno — exatamente o "menos filtro, mais fogo" da semana. Casa perfeitamente com a série de bastidores da Koncluí.</p>
+        <a class="vlink ghost" href="https://www.tiktok.com/discover/cozinha-industrial-restaurante" target="_blank" rel="noopener">↗ Ver no TikTok</a>
+      </div>
+
+      <div class="viral">
+        <div class="vtype">📅 Pauta do setor · Instagram</div>
+        <h3>Fispal Food Service — contagem regressiva</h3>
+        <p>O perfil do maior evento de food service da América Latina está em ritmo de contagem regressiva (final de maio). Surfar a hashtag do evento amplia alcance pra quem vai estar lá — caso da Koncluí.</p>
+        <a class="vlink ghost" href="https://www.instagram.com/fispalfoodservice/" target="_blank" rel="noopener">↗ Ver perfil</a>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      Nota de curadoria: os <strong>áudios</strong> são a alavanca mais rápida de alcance da semana — aplicar nos Reels já em produção rende mais que esperar o tema perfeito. Os <strong>hubs do TikTok</strong> servem de referência de formato e ritmo, não de cópia. A leitura de viral aqui é honesta: o que importa é o padrão de conteúdo que está performando, não um número de views isolado.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLANO DE AÇÃO ===================== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Plano de ação · Koncluí nas redes</div>
+      <h2>Da tendência pro calendário — 6 movimentos pra semana</h2>
+      <p>Resumo executável: o que postar, em qual formato, surfando qual tendência. Pronto pra entrar no cronograma editorial.</p>
+    </div>
+
+    <div class="plan">
+
+      <div class="plan-row">
+        <div><div class="plan-num">01</div></div>
+        <div>
+          <h3>Reel "Automação não é robô na cozinha"</h3>
+          <p>Surfa a pauta de IA + a fadiga do gourmet. Conteúdo educativo mostrando o painel real respondendo o que o dono perguntaria — sem produção de comercial, no clima "menos filtro, mais fogo".</p>
+          <div class="fmt">Formato: Reels · Pilar: Gestão Inteligente · Áudio viral aplicado</div>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div><div class="plan-num">02</div></div>
+        <div>
+          <h3>Carrossel "Dark kitchen sem checklist é dark de verdade"</h3>
+          <p>Ancora no dado dos ~30% do iFood. Mostra como padrão de cozinha com prova por foto resolve o ponto cego de quem opera 100% delivery.</p>
+          <div class="fmt">Formato: Carrossel · Pilar: Posicionamento + Educativo</div>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div><div class="plan-num">03</div></div>
+        <div>
+          <h3>Post de posicionamento "Recorrência cobra padrão recorrente"</h3>
+          <p>Conecta o FaaS — tendência forte da semana — à tese da Koncluí: cliente que assina espera entrega igual sempre, e isso se audita, não se promete.</p>
+          <div class="fmt">Formato: Post estático ou carrossel curto · Pilar: Posicionamento</div>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div><div class="plan-num">04</div></div>
+        <div>
+          <h3>Sequência de Stories "Vitrine x bastidor"</h3>
+          <p>Usa o dado de Social Food (70%). Enquete: "Sua operação aparece bem na foto. E na auditoria?" — puxa caixinha, dor latente e prova social do painel.</p>
+          <div class="fmt">Formato: Stories (mín. 9) · Estratégias: Enquete, Dor Latente, Prova Social</div>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div><div class="plan-num">05</div></div>
+        <div>
+          <h3>Post de entretenimento "Trend no cardápio em 2 dias"</h3>
+          <p>Surfa o Dubai chocolate / crookie e a moderação alcoólica. Tom leve: item viral entra rápido, mas trend sem ficha técnica vira reclamação. Humor com peso operacional.</p>
+          <div class="fmt">Formato: Reels curto ou post · Pilar: Entretenimento</div>
+        </div>
+      </div>
+
+      <div class="plan-row">
+        <div><div class="plan-num">06</div></div>
+        <div>
+          <h3>Esquenta Fispal — contagem regressiva</h3>
+          <p>A semana é de pré-evento. Manter a sequência de stories de contagem regressiva já mapeada e surfar a hashtag oficial do Fispal pra ampliar alcance entre quem vai estar lá.</p>
+          <div class="fmt">Formato: Stories diários · Estratégia: Antecipação / Contagem Regressiva</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="sources">
+      <h4>Fontes consultadas</h4>
+      <ul>
+        <li><a href="https://mundodomarketing.com.br/food-service-chega-a-2026-com-mercado-de-r-455-bilhoes-e-foco-em-tecnologia-e-eficiencia" target="_blank" rel="noopener">Mundo do Marketing — mercado de R$455 bi</a></li>
+        <li><a href="https://mercadoeconsumo.com.br/12/05/2026/artigos/o-foodservice-na-era-da-recorrencia-faas/" target="_blank" rel="noopener">Mercado &amp; Consumo — FaaS</a></li>
+        <li><a href="https://centraldovarejo.com.br/gestao-de-restaurantes-tecnologia-e-dados-redefinem-a-operacao-do-foodservice-em-2026/" target="_blank" rel="noopener">Central do Varejo — tecnologia e dados</a></li>
+        <li><a href="https://jornalempresasenegocios.com.br/tecnologia/quase-30-dos-restaurantes-do-ifood-sao-dark-kitchens/" target="_blank" rel="noopener">Jornal Empresas &amp; Negócios — dark kitchens</a></li>
+        <li><a href="https://www.doisamaisalimentos.com.br/noticias/brasil-registra-crescimento-de-226-no-setor-de-restaurantes-de-servicos-rapidos-aponta-pesquisa/" target="_blank" rel="noopener">2A+ Alimentos — QSR +22,6%</a></li>
+        <li><a href="https://marcasemercados.com.br/o-sabor-fora-da-foto-a-fadiga-do-gourmet-menos-filtro-a-mais-fogo/" target="_blank" rel="noopener">Marcas e Mercados — fadiga do gourmet</a></li>
+        <li><a href="https://www.uninter.com/noticias/social-food-o-prato-do-dia-vem-com-curtidas-influenciadores-e-dilemas" target="_blank" rel="noopener">UNINTER — Social Food</a></li>
+        <li><a href="https://gironews.com/categorias/food-service-11-05-2026/" target="_blank" rel="noopener">Giro News — Food Service</a></li>
+        <li><a href="https://foodinstitute.com/focus/dubai-chocolate-trend-gains-momentum-despite-ongoing-cocoa-crisis/" target="_blank" rel="noopener">The Food Institute — Dubai chocolate</a></li>
+        <li><a href="https://officialfixdessertchocolatier.com/blogs/news/the-2026-chocolate-trends-report" target="_blank" rel="noopener">2026 Chocolate Trends — Angel Hair</a></li>
+        <li><a href="https://hobart.itwfeg.com.br/hobart/noticia/tendencias-para-o-mercado-de-food-service-em-2026-o-futuro-da-alimentacao-fora-do-lar" target="_blank" rel="noopener">Hobart — tendências food service 2026</a></li>
+        <li><a href="https://www.academiaassai.com.br/noticia/tendencias-2026" target="_blank" rel="noopener">Academia Assaí — tendências 2026</a></li>
+        <li><a href="https://tagme.com.br/6-tendencias-para-restaurantes-em-2026/" target="_blank" rel="noopener">Tagme — 6 tendências para restaurantes</a></li>
+        <li><a href="https://www.instagram.com/fispalfoodservice/" target="_blank" rel="noopener">Instagram — Fispal Food Service</a></li>
+        <li><a href="https://www.tiktok.com/discover/videos-criativos-para-restaurantes" target="_blank" rel="noopener">TikTok — vídeos criativos para restaurantes</a></li>
+      </ul>
+    </div>
+    <div class="foot-note">
+      Relatório gerado automaticamente · Pesquisa de Assuntos em Alta &amp; Vídeos Virais · Período 07–14 Mai 2026 · Koncluí — GPS da sua Operação
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
