@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma Koncluí — Semana 1</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface-2: #232323;
+    --text: #f5f1ea;
+    --muted: #a39d92;
+    --accent: #d4a017;
+    --accent-2: #c0392b;
+    --line: #2d2d2d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 24px;
+  }
+  .container { max-width: 920px; margin: 0 auto; }
+  header.hero {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  .brand {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  h1 span { color: var(--accent); }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--text); font-weight: 600; }
+  h2.section {
+    font-family: 'Georgia', serif;
+    font-size: 32px;
+    margin: 64px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    letter-spacing: -0.01em;
+  }
+  h3.post-title {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    margin: 40px 0 8px;
+    color: var(--accent);
+  }
+  h3.post-title .label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-right: 12px;
+    vertical-align: middle;
+    font-weight: 700;
+  }
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+  .field {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .field:last-child { border-bottom: none; }
+  .field .key {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    padding-top: 2px;
+  }
+  .field .val { color: var(--text); }
+  .field .val strong { color: var(--accent); }
+  .slide {
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  .slide .slide-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .slide .slide-content {
+    white-space: pre-line;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .legend {
+    background: var(--surface-2);
+    padding: 20px;
+    border-radius: 6px;
+    white-space: pre-line;
+    font-size: 15px;
+    line-height: 1.65;
+    border-left: 3px solid var(--muted);
+  }
+  .cta-box {
+    background: linear-gradient(135deg, var(--accent) 0%, #b8861a 100%);
+    color: var(--bg);
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .story-flow {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .story-item {
+    background: var(--surface-2);
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-2);
+  }
+  .story-item .story-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .story-item .story-strategy {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .story-item .story-text {
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .viral-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border-top: 4px solid var(--accent-2);
+  }
+  .viral-card h4 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: var(--accent-2);
+    margin-bottom: 4px;
+  }
+  .viral-card .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .viral-section { margin-top: 16px; }
+  .viral-section .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .viral-section .content {
+    background: var(--surface-2);
+    padding: 14px 18px;
+    border-radius: 6px;
+    white-space: pre-line;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .ops-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 40px;
+  }
+  .ops-box h3 {
+    font-family: 'Georgia', serif;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+  .ops-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .ops-box li {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 14px;
+  }
+  .ops-box li:last-child { border-bottom: none; }
+  .ops-box li strong { color: var(--accent); }
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 640px) {
+    h1 { font-size: 32px; }
+    .field { grid-template-columns: 1fr; gap: 4px; }
+    .post-card { padding: 20px; }
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="hero">
+    <div class="brand">KONCLUÍ — ESTRATÉGIA DE CONTEÚDO</div>
+    <h1>Cronograma Semana 1<br><span>Instagram. Sem achismo.</span></h1>
+    <div class="meta">
+      <div><strong>Tom:</strong> direto, inteligente, pragmático</div>
+      <div><strong>Arquétipos:</strong> 70% Sábio / 30% Mago</div>
+      <div><strong>Inimigo:</strong> gestão baseada em achismo</div>
+      <div><strong>Data:</strong> 12 / 05 / 2026</div>
+    </div>
+  </header>
+
+  <h2 class="section">FEED — 5 POSTS</h2>
+
+  <!-- POST 1 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">POST 1</span>Carrossel — 5 sinais de achismo</h3>
+
+    <div class="field"><div class="key">Objetivo</div><div class="val">Autoridade + identificação. Mostrar que a Koncluí entende a operação real, não a teoria de palestra.</div></div>
+    <div class="field"><div class="key">Tema</div><div class="val">5 sinais de que seu restaurante está sendo gerido no achismo (e você nem percebeu).</div></div>
+    <div class="field"><div class="key">Gancho (capa)</div><div class="val">Se você ainda responde "acho que sim" quando perguntam como está sua operação, esse post é pra você.</div></div>
+
+    <div class="field"><div class="key">Slide a slide</div><div class="val">
+      <div class="slide"><span class="slide-label">Slide 1 — Capa</span><div class="slide-content">5 SINAIS DE QUE SEU RESTAURANTE ESTÁ NO ACHISMO.
+(e você é o último a saber)</div></div>
+      <div class="slide"><span class="slide-label">Slide 2</span><div class="slide-content">Achismo não é falta de esforço. É falta de prova.
+A diferença entre um restaurante que cresce e um que apaga incêndio é uma só: quem dá padrão consegue escalar. Quem dá palpite, não.</div></div>
+      <div class="slide"><span class="slide-label">Slide 3</span><div class="slide-content">SINAL 1 — Você pergunta "tá tudo certo?" e a resposta é "tá".
+Sem foto. Sem dado. Sem nada.
+Tradução: ninguém sabe. Inclusive você.</div></div>
+      <div class="slide"><span class="slide-label">Slide 4</span><div class="slide-content">SINAL 2 — Você descobre o problema pela reclamação do cliente.
+Se o feedback do iFood é seu sistema de qualidade, você não tem sistema. Tem sorte.</div></div>
+      <div class="slide"><span class="slide-label">Slide 5</span><div class="slide-content">SINAL 3 — O padrão muda quando o gerente folga.
+O que muda no domingo não é a equipe. É a ausência de processo escrito.</div></div>
+      <div class="slide"><span class="slide-label">Slide 6</span><div class="slide-content">SINAL 4 — Você refaz o mesmo treinamento de 3 em 3 meses.
+Treinamento sem checklist é palestra. E palestra não vira execução.</div></div>
+      <div class="slide"><span class="slide-label">Slide 7</span><div class="slide-content">SINAL 5 — Sua tomada de decisão começa com "eu acho".
+Dono que decide no achismo paga o preço duas vezes: no caixa e no churn de equipe.</div></div>
+      <div class="slide"><span class="slide-label">Slide 8</span><div class="slide-content">A boa notícia:
+isso não é problema de gestão. É problema de ferramenta.
+A operação só vira padrão quando vira protocolo, prova e dado.</div></div>
+      <div class="slide"><span class="slide-label">Slide 9 — CTA</span><div class="slide-content">Comenta AQUI a palavra PADRÃO que eu te mando como a Koncluí transforma o caos em operação replicável.</div></div>
+    </div></div>
+
+    <div class="field"><div class="key">Legenda</div><div class="val"><div class="legend">A maior dor de quem gere restaurante não é falta de movimento. É falta de previsibilidade.
+
+Você abre a unidade às 11h e não sabe se o pré-preparo foi feito como deveria. Você sai 22h sem saber se o fechamento seguiu o checklist. Você dorme achando que tá tudo bem porque ninguém ligou reclamando.
+
+Isso não é gestão. Isso é fé.
+
+A Koncluí existe pra um motivo específico: acabar com o "eu acho" e instalar o "eu sei".
+
+Checklist com prova fotográfica. Dashboard em tempo real. Notificação no WhatsApp quando algo sai do padrão. Gestão de itens críticos para nada passar batido.
+
+Resultado dos clientes que rodam com a gente: 67% menos falhas operacionais. ROI médio de 350%. Churn abaixo de 3%.
+
+Se algum desses 5 sinais te tocou, salva esse post. E comenta PADRÃO que eu te chamo no direct.</div></div></div>
+
+    <div class="field"><div class="key">CTA</div><div class="val"><span class="cta-box">Comenta PADRÃO que eu te mando o passo a passo.</span></div></div>
+    <div class="field"><div class="key">Referência visual</div><div class="val">Fundo escuro (preto fosco ou grafite), tipografia serifada grande nos números, sans-serif no corpo. Sem ilustração genérica. Estética de manifesto. Cor de destaque: vermelho terroso ou amarelo mostarda no número.</div></div>
+  </div>
+
+  <!-- POST 2 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">POST 2</span>Estático — Padrão como diferencial</h3>
+
+    <div class="field"><div class="key">Objetivo</div><div class="val">Provocação. Plantar a semente do inimigo (achismo) com uma frase salvável.</div></div>
+    <div class="field"><div class="key">Ideia visual</div><div class="val">Card único, fundo claro (off-white ou bege quente), frase grande em serifa preta. Sem foto, sem ilustração. Tipografia faz o trabalho. Logo Koncluí pequeno no rodapé.</div></div>
+    <div class="field"><div class="key">Headline</div><div class="val"><strong>"Restaurante não quebra por falta de cliente. Quebra por falta de padrão."</strong></div></div>
+    <div class="field"><div class="key">Legenda</div><div class="val"><div class="legend">Pode soar duro. Mas é o que a gente vê todo dia.
+
+Restaurante cheio, com fila na porta, fechando as portas em menos de 2 anos. Não foi o público. Foi o caos invisível.
+
+— Estoque que ninguém sabe quanto tem.
+— Prato que sai diferente dependendo de quem está na praça.
+— Atendimento que depende do humor do garçom.
+— Fechamento que muda toda noite.
+
+Movimento bom esconde operação ruim. Até não esconder mais.
+
+A Koncluí não inventa nada novo. Ela só obriga sua operação a fazer o que ela já sabia que precisava: rodar no padrão, todo dia, sem depender de você estar lá.
+
+Salva esse post pra lembrar quando bater dúvida.</div></div></div>
+    <div class="field"><div class="key">CTA</div><div class="val"><span class="cta-box">Salva esse post. E manda pro seu sócio.</span></div></div>
+  </div>
+
+  <!-- POST 3 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">POST 3</span>Carrossel — Custo invisível</h3>
+
+    <div class="field"><div class="key">Objetivo</div><div class="val">Educativo de alto valor. Posicionar a Koncluí como referência técnica em operação.</div></div>
+    <div class="field"><div class="key">Tema</div><div class="val">O custo invisível de uma operação sem checklist (com números reais).</div></div>
+    <div class="field"><div class="key">Gancho (capa)</div><div class="val">Você não está perdendo dinheiro no preço da carne. Está perdendo no que ninguém mediu.</div></div>
+
+    <div class="field"><div class="key">Slide a slide</div><div class="val">
+      <div class="slide"><span class="slide-label">Slide 1 — Capa</span><div class="slide-content">O CUSTO INVISÍVEL DE UMA OPERAÇÃO SEM CHECKLIST.
+(spoiler: é maior que o seu CMV)</div></div>
+      <div class="slide"><span class="slide-label">Slide 2</span><div class="slide-content">A maior parte dos donos olha o CMV e o CMO.
+E ignora o terceiro custo: o CMO invisível.
+Custo de Má Operação. Aquilo que vaza e ninguém anota.</div></div>
+      <div class="slide"><span class="slide-label">Slide 3</span><div class="slide-content">EXEMPLO 1 — Desperdício no pré-preparo.
+Cebola cortada errada, proteína descongelada na hora errada, molho refeito.
+Estimativa real: 4% a 7% do faturamento mensal.</div></div>
+      <div class="slide"><span class="slide-label">Slide 4</span><div class="slide-content">EXEMPLO 2 — Retrabalho de equipe.
+Mesmo treinamento, mesma dúvida, três vezes por mês.
+Custo: 1 hora de gerente por dia. 22 horas no mês. Quase 3 dias úteis perdidos.</div></div>
+      <div class="slide"><span class="slide-label">Slide 5</span><div class="slide-content">EXEMPLO 3 — Cliente que não volta.
+Prato sai diferente em dias diferentes. Atendimento idem.
+Estudo da Toast: 32% dos clientes não retornam por inconsistência.
+Não por preço. Por inconsistência.</div></div>
+      <div class="slide"><span class="slide-label">Slide 6</span><div class="slide-content">EXEMPLO 4 — Falha em item crítico.
+Geladeira que perdeu temperatura. Higienização pulada. Vencimento ignorado.
+Um único episódio: R$ 2.000 a R$ 50.000 (multa, perda de estoque, ANVISA).</div></div>
+      <div class="slide"><span class="slide-label">Slide 7</span><div class="slide-content">EXEMPLO 5 — Tempo do dono apagando incêndio.
+Se você gasta 2h/dia resolvendo o que devia estar resolvido,
+isso é R$ 10 mil/mês do seu tempo que vira bombeiro, não dono.</div></div>
+      <div class="slide"><span class="slide-label">Slide 8</span><div class="slide-content">Soma tudo isso.
+O custo de NÃO ter padrão é maior que o custo de implementar um sistema. Em qualquer cenário.</div></div>
+      <div class="slide"><span class="slide-label">Slide 9</span><div class="slide-content">Por isso a Koncluí existe.
+Checklist com prova fotográfica. Itens críticos monitorados. Dashboard que mostra o invisível. WhatsApp avisando antes do problema explodir.</div></div>
+      <div class="slide"><span class="slide-label">Slide 10 — CTA</span><div class="slide-content">Quer ver o quanto você está perdendo hoje?
+Comenta DIAGNÓSTICO que eu te mando a planilha gratuita.</div></div>
+    </div></div>
+
+    <div class="field"><div class="key">Legenda</div><div class="val"><div class="legend">A conta que ninguém faz no restaurante é a mais cara.
+
+Você sabe quanto custa o quilo da picanha. Você sabe quanto custa o aluguel. Você sabe quanto custa a folha.
+
+Você sabe quanto custa o seu garçom não saber qual é o prato do dia? Quanto custa o cozinheiro não bater o ponto da cocção? Quanto custa o supervisor não conferir a câmara fria às 23h?
+
+Esse é o CMO invisível. E ele come o seu lucro em silêncio.
+
+A Koncluí transforma a operação em dado. O que era "achismo" vira gráfico. O que era "boa vontade" vira protocolo. O que era "depende de quem tá" vira padrão.
+
+Comenta DIAGNÓSTICO que eu te mando uma planilha gratuita pra você medir seu custo invisível hoje.</div></div></div>
+    <div class="field"><div class="key">CTA</div><div class="val"><span class="cta-box">Comenta DIAGNÓSTICO.</span></div></div>
+    <div class="field"><div class="key">Referência visual</div><div class="val">Estética de relatório / dashboard. Fundo branco, números grandes em vermelho ou preto, ícones minimalistas. Cada slide com um número-chave gigante (4%, 32%, R$ 50k) como protagonista. Inspiração: The Economist no Instagram, infográficos da McKinsey.</div></div>
+  </div>
+
+  <!-- POST 4 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">POST 4</span>Estático — Prova social</h3>
+
+    <div class="field"><div class="key">Objetivo</div><div class="val">Prova social + autoridade. Provar com números os resultados reais da base.</div></div>
+    <div class="field"><div class="key">Ideia visual</div><div class="val">Card no estilo "depoimento de capa". Foto real (ou ilustração discreta) de um restaurante ao fundo, blur. Por cima, tipografia grande. Cores: preto + acento amarelo mostarda.</div></div>
+    <div class="field"><div class="key">Headline</div><div class="val"><strong>"67% menos falhas operacionais. Não é promessa. É a média dos restaurantes que rodam com a Koncluí."</strong></div></div>
+    <div class="field"><div class="key">Legenda</div><div class="val"><div class="legend">A gente não vende sonho. A gente vende protocolo.
+
+Quando um restaurante começa a rodar com a Koncluí, três coisas mudam rápido:
+
+1. O dono para de descobrir problema pelo cliente. Descobre pelo dashboard.
+2. A equipe para de discutir "como faz". Tem checklist, tem foto, tem hora.
+3. O gerente vira gestor. Não bombeiro.
+
+Os números que a gente entrega não são marketing. São média real da base: 67% menos falhas operacionais. ROI de 350%. Churn abaixo de 3%. NPS acima de 8.
+
+Se o seu restaurante precisa virar a chave da operação, comenta CHAVE aqui. Eu te chamo no direct.</div></div></div>
+    <div class="field"><div class="key">CTA</div><div class="val"><span class="cta-box">Comenta CHAVE.</span></div></div>
+  </div>
+
+  <!-- POST 5 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">POST 5</span>Carrossel — Checklist em papel já era</h3>
+
+    <div class="field"><div class="key">Objetivo</div><div class="val">Autoridade técnica + diferencial. Mostrar profundidade que concorrente genérico não tem.</div></div>
+    <div class="field"><div class="key">Tema</div><div class="val">Por que checklist em papel já era (e o que substituir por ele).</div></div>
+    <div class="field"><div class="key">Gancho (capa)</div><div class="val">Se o seu checklist ainda é uma folha no clipboard, você não tem checklist. Tem teatro.</div></div>
+
+    <div class="field"><div class="key">Slide a slide</div><div class="val">
+      <div class="slide"><span class="slide-label">Slide 1 — Capa</span><div class="slide-content">SE SEU CHECKLIST AINDA É EM PAPEL, VOCÊ NÃO TEM CHECKLIST.
+Tem teatro de gestão.</div></div>
+      <div class="slide"><span class="slide-label">Slide 2</span><div class="slide-content">Vamos ser sinceros.
+Quem marca o "OK" na folha? O mesmo que precisava executar.
+Sem foto. Sem hora. Sem responsável rastreável.
+Isso não é controle. É autocertificação.</div></div>
+      <div class="slide"><span class="slide-label">Slide 3</span><div class="slide-content">O CHECKLIST DE PAPEL TEM 4 PROBLEMAS GRAVES:</div></div>
+      <div class="slide"><span class="slide-label">Slide 4</span><div class="slide-content">1. Não tem prova.
+Marcar X é fácil. Provar que foi feito, não.
+Sem foto, é palavra contra palavra.</div></div>
+      <div class="slide"><span class="slide-label">Slide 5</span><div class="slide-content">2. Não tem hora real.
+A folha não diz se foi às 8h ou às 11h59 (antes do gerente chegar).
+Tempo é dado. Papel não captura dado.</div></div>
+      <div class="slide"><span class="slide-label">Slide 6</span><div class="slide-content">3. Não escala.
+3 unidades, 3 cadernos. Você não consegue comparar nada.
+Padrão não nasce de papel. Nasce de sistema.</div></div>
+      <div class="slide"><span class="slide-label">Slide 7</span><div class="slide-content">4. Não avisa.
+Se a tarefa crítica falhou, você descobre no dia seguinte. Ou nunca.
+Sistema bom não relata. Avisa em tempo real.</div></div>
+      <div class="slide"><span class="slide-label">Slide 8</span><div class="slide-content">O QUE SUBSTITUI:
+— Checklist digital com prova fotográfica obrigatória.
+— Carimbo de hora e usuário.
+— Alerta automático para o gestor quando algo crítico falha.
+— Dashboard que mostra padrão por unidade, turno e responsável.</div></div>
+      <div class="slide"><span class="slide-label">Slide 9</span><div class="slide-content">Isso é o que a Koncluí faz.
+Não é "app de checklist".
+É padronização operacional auditável.</div></div>
+      <div class="slide"><span class="slide-label">Slide 10 — CTA</span><div class="slide-content">Quer ver na prática como funciona?
+Comenta DEMO aqui embaixo.</div></div>
+    </div></div>
+
+    <div class="field"><div class="key">Legenda</div><div class="val"><div class="legend">O checklist em papel é o "eu acho" da operação.
+
+Ele existe porque alguém precisa sentir que tá no controle. Mas controle real precisa de três coisas: prova, hora e rastreabilidade. Papel não entrega nenhuma das três.
+
+A Koncluí entrega. Cada tarefa do checklist exige foto antes de ser concluída. Cada conclusão registra hora exata e quem fez. Cada falha em item crítico dispara notificação no WhatsApp do gestor. Cada turno gera relatório.
+
+Não é tecnologia por tecnologia. É operação que finalmente vira dado.
+
+Comenta DEMO se quiser ver isso rodando em uma operação parecida com a sua.</div></div></div>
+    <div class="field"><div class="key">CTA</div><div class="val"><span class="cta-box">Comenta DEMO.</span></div></div>
+    <div class="field"><div class="key">Referência visual</div><div class="val">Mockup. Slide 1: foto real de clipboard com folha rasurada, manchada de gordura. Slides 8–9: screenshot estilizado da interface da Koncluí. Contraste claro entre "antes" (analógico, sujo) e "depois" (digital, limpo). Paleta: bege/marrom no analógico, branco/azul-petróleo no digital.</div></div>
+  </div>
+
+  <h2 class="section">STORIES — 3 SEQUÊNCIAS</h2>
+
+  <!-- STORIES 1 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">SEQ. 1</span>Provocação + diagnóstico</h3>
+    <div class="story-flow">
+      <div class="story-item"><div class="story-num">Story 1</div><div class="story-strategy">CTA Call to Action</div><div class="story-text">Pergunta rápida pra você que tem restaurante:
+quando foi a última vez que VOCÊ conferiu se o checklist de abertura foi feito de verdade?
+(não o que te disseram. o que aconteceu.)</div></div>
+      <div class="story-item"><div class="story-num">Story 2</div><div class="story-strategy">Enquete</div><div class="story-text">[Enquete]
+✅ Confiro todo dia
+❌ Confio na equipe e não confiro</div></div>
+      <div class="story-item"><div class="story-num">Story 3</div><div class="story-strategy">Dor Latente</div><div class="story-text">Se você marcou "confio e não confiro", sem julgamento.
+A maioria dos donos faz isso.
+O problema não é a confiança. É a falta de prova.
+Confiança sem prova é fé. E fé não escala restaurante.</div></div>
+      <div class="story-item"><div class="story-num">Story 4</div><div class="story-strategy">Bastidores</div><div class="story-text">Aqui na Koncluí, a gente desenhou uma coisa simples:
+cada item do checklist exige uma foto.
+Sem foto, não fecha.
+Sem fechar, o gestor recebe alerta.
+Sem alerta, o item crítico não passa.</div></div>
+      <div class="story-item"><div class="story-num">Story 5</div><div class="story-strategy">Demonstração</div><div class="story-text">[GIF/vídeo curto da tela do app — checklist com foto sendo tirada]
+Assim: abre o item, tira a foto, registra a hora, fecha.
+3 segundos por item.
+30 dias depois, você tem auditoria completa da sua operação.</div></div>
+      <div class="story-item"><div class="story-num">Story 6</div><div class="story-strategy">Prova Social</div><div class="story-text">Resultado real:
+67% menos falhas operacionais nos clientes que rodam com a gente.
+Não é número de marketing. É média.</div></div>
+      <div class="story-item"><div class="story-num">Story 7</div><div class="story-strategy">Caixinha</div><div class="story-text">Manda aqui a maior dor da sua operação hoje.
+Eu leio TUDO e respondo nos próximos stories.
+[Caixinha de pergunta]</div></div>
+      <div class="story-item"><div class="story-num">Story 8</div><div class="story-strategy">Oportunidade</div><div class="story-text">Se quiser ver como funciona sem compromisso, é só me chamar no direct com a palavra DEMO.
+A gente marca 20 minutos. Sem papo de vendedor. Direto ao ponto.</div></div>
+      <div class="story-item"><div class="story-num">Story 9</div><div class="story-strategy">Expectativa Explosiva</div><div class="story-text">Amanhã eu trago um caso real de um cliente nosso que tava perdendo R$ 18 mil por mês em desperdício invisível.
+Bom dia. E confere o checklist hoje 👀</div></div>
+    </div>
+  </div>
+
+  <!-- STORIES 2 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">SEQ. 2</span>Bastidores + autoridade</h3>
+    <div class="story-flow">
+      <div class="story-item"><div class="story-num">Story 1</div><div class="story-strategy">Afirmação</div><div class="story-text">Hoje quero te mostrar uma coisa que a gente raramente posta.
+Os bastidores de como a gente decide o que entra no produto.
+(spoiler: não é palpite)</div></div>
+      <div class="story-item"><div class="story-num">Story 2</div><div class="story-strategy">Bastidores</div><div class="story-text">Toda semana a gente faz reunião só pra ouvir cliente.
+Dono de restaurante. Gerente. Supervisor.
+A gente não pergunta "o que você acha". A gente pergunta "o que falhou essa semana".</div></div>
+      <div class="story-item"><div class="story-num">Story 3</div><div class="story-strategy">Curiosidade em Fatos</div><div class="story-text">Sabe qual foi a falha mais comum dos últimos 60 dias?
+Não é estoque. Não é equipe.
+É comunicação entre turnos.
+O turno A não conta pro turno B o que aconteceu. E aí o problema vira recorrente.</div></div>
+      <div class="story-item"><div class="story-num">Story 4</div><div class="story-strategy">DNA do Produto</div><div class="story-text">Por causa disso, a gente tá testando uma feature nova:
+"passagem de turno auditável".
+O turno A não fecha sem registrar pendências. O turno B não abre sem ler.
+Simples. E muda tudo.</div></div>
+      <div class="story-item"><div class="story-num">Story 5</div><div class="story-strategy">Posicionamento</div><div class="story-text">Aqui dentro a gente tem uma regra:
+toda decisão de produto começa com uma pergunta:
+"isso elimina achismo ou só decora?"
+Se só decora, não entra.</div></div>
+      <div class="story-item"><div class="story-num">Story 6</div><div class="story-strategy">Enquete</div><div class="story-text">Você já viveu isso no seu restaurante?
+[Enquete]
+✅ Toda semana
+❌ Quase nunca</div></div>
+      <div class="story-item"><div class="story-num">Story 7</div><div class="story-strategy">Captura Valiosa</div><div class="story-text">Se você quer fazer parte da próxima leva de testes dessa feature, me chama no direct com a palavra TURNO.
+Estamos abrindo 8 vagas pra clientes atuais.</div></div>
+      <div class="story-item"><div class="story-num">Story 8</div><div class="story-strategy">Diferenciais</div><div class="story-text">A maior parte das empresas de tecnologia faz produto pra usuário imaginário.
+A gente faz pra dono real, com problema real, em restaurante real.
+É por isso que dá resultado.</div></div>
+      <div class="story-item"><div class="story-num">Story 9</div><div class="story-strategy">Resumo</div><div class="story-text">Amanhã vou postar a planilha do "custo invisível" no feed.
+Salva o perfil pra não perder.
+@koncluí</div></div>
+    </div>
+  </div>
+
+  <!-- STORIES 3 -->
+  <div class="post-card">
+    <h3 class="post-title"><span class="label">SEQ. 3</span>F.A.Q. + objeção</h3>
+    <div class="story-flow">
+      <div class="story-item"><div class="story-num">Story 1</div><div class="story-strategy">F.A.Q.</div><div class="story-text">Toda semana eu recebo as mesmas perguntas no direct.
+Hoje vou responder as 5 mais comuns.
+Se você tá pensando em organizar a operação do seu restaurante, lê até o fim.</div></div>
+      <div class="story-item"><div class="story-num">Story 2</div><div class="story-strategy">Objeção</div><div class="story-text">"A Koncluí é mais um sistema pra equipe ignorar?"
+
+Resposta:
+Sistema que ninguém usa é problema de UX, não de equipe.
+A Koncluí foi desenhada pra ser usada em pé, no salão, com mão suja.
+Tela grande. Botão simples. Foto rápida. Sem 14 cliques.</div></div>
+      <div class="story-item"><div class="story-num">Story 3</div><div class="story-strategy">Objeção</div><div class="story-text">"Minha equipe não vai aceitar."
+
+Resposta:
+A gente já ouviu isso 800 vezes.
+E em 800 vezes a adesão passou de 90% em até 15 dias.
+O segredo: o sistema facilita a vida da equipe, não complica.
+Quem sente o impacto positivo primeiro é o operacional.</div></div>
+      <div class="story-item"><div class="story-num">Story 4</div><div class="story-strategy">Objeção</div><div class="story-text">"Tenho só uma unidade. Vale a pena?"
+
+Resposta:
+Vale, sim. Mas seja sincero:
+se você não tem padrão em 1, não vai ter em 5.
+O sistema serve pra você sair da operação, não pra multiplicar caos.</div></div>
+      <div class="story-item"><div class="story-num">Story 5</div><div class="story-strategy">Quebra de Padrões</div><div class="story-text">"Quanto custa?"
+
+Resposta:
+Menos do que você perde em uma única falha grande.
+O ROI médio é 350%. Em prazo curto.
+O cálculo a gente faz junto, baseado no seu cenário.</div></div>
+      <div class="story-item"><div class="story-num">Story 6</div><div class="story-strategy">Prova Social</div><div class="story-text">"E se eu não gostar?"
+
+Resposta:
+Churn da Koncluí é abaixo de 3%.
+A maior parte fica porque vê resultado nas primeiras 4 semanas.
+Mas se não der match, o contrato é simples e justo.</div></div>
+      <div class="story-item"><div class="story-num">Story 7</div><div class="story-strategy">Caixinha</div><div class="story-text">Tem outra dúvida que travou você até hoje de buscar uma solução?
+Manda aqui.
+[Caixinha de pergunta]</div></div>
+      <div class="story-item"><div class="story-num">Story 8</div><div class="story-strategy">CTA Call to Action</div><div class="story-text">Se quiser ver a Koncluí rodando, com calma, sem compromisso:
+direct com a palavra DEMO.
+20 minutos. Direto ao ponto.</div></div>
+      <div class="story-item"><div class="story-num">Story 9</div><div class="story-strategy">Virada de Chave</div><div class="story-text">A maior parte dos donos demora pra resolver isso porque o problema dói menos que a mudança.
+Até que dói mais.
+Não espere o "dói mais" pra agir.</div></div>
+    </div>
+  </div>
+
+  <h2 class="section">VÍDEOS PARA REPOSTAR OU ADAPTAR</h2>
+
+  <div class="viral-card">
+    <h4>1. Trend "POV: você é dono de restaurante"</h4>
+    <div class="subtitle">Formato POV em primeira pessoa</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">Formato POV está dominando o algoritmo do Reels em 2026. Cria identificação imediata. O dono se vê no vídeo antes mesmo do meio.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Vídeo curto (15–20s) gravado em primeira pessoa, câmera no peito, andando pelo restaurante vazio às 9h da manhã. Texto na tela vai aparecendo conforme você anda:
+
+"POV: você é dono de restaurante."
+[anda até a câmara fria, abre]
+"A câmara passou da temperatura."
+[anda até a praça, vê resto de molho]
+"A higienização não foi feita."
+[anda até a recepção, vê estoque baixo de copos]
+"E ninguém te avisou."
+[silêncio]
+"Pq aqui ninguém anota nada."
+[corte para a tela do app Koncluí com tudo registrado em tempo real]
+"Até instalar a Koncluí."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">Salva esse vídeo se você vive isso. Manda pro seu sócio.</div></div>
+  </div>
+
+  <div class="viral-card">
+    <h4>2. Trend "Things I wish I knew before opening a restaurant"</h4>
+    <div class="subtitle">Lista + arrependimento</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">Formato lista + arrependimento. Funciona muito em comunidades de empreendedorismo e gastronomia. Alto compartilhamento.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Reels falado na câmera, 30–45s. Tom: irônico, leve, mas com peso. Estilo "irmã mais velha que já errou e te alerta".
+
+"5 coisas que eu queria ter sabido antes de abrir restaurante.
+1. Cliente bom não é o que volta. É o que recomenda. E recomendação morre na inconsistência.
+2. Você vai gastar mais tempo brigando com equipe do que cozinhando.
+3. O lucro mora no que ninguém mediu. E você não vai medir se não tiver sistema.
+4. Gerente bom sem ferramenta vira bombeiro. Gerente bom com ferramenta vira gestor.
+5. Achismo é o maior CMV do mercado. Ninguém te conta isso na faculdade de gastronomia."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">Quantas dessas você aprendeu na marra? Comenta o número.</div></div>
+  </div>
+
+  <div class="viral-card">
+    <h4>3. Corte de podcast / entrevista</h4>
+    <div class="subtitle">Autoridade rápida</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">Cortes de podcast com fundo amadeirado, microfone e legenda animada estouram no Reels. Funciona pra construir autoridade rápida.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Gravar um corte de 40s respondendo a pergunta: "Por que tanto restaurante quebra mesmo cheio?"
+
+"Tem uma frase que eu repito muito: restaurante não quebra por falta de cliente, quebra por falta de padrão. E o padrão não nasce do esforço. Nasce do protocolo. A gente trabalha com restaurantes que faturavam alto e estavam no vermelho. Não era preço. Não era equipe. Era falha invisível, todo dia, em 47 pontos da operação. Quando você instala um sistema que mede, prova e alerta, o lucro aparece. Porque ele tava lá. Só não tava sendo visto."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">Se isso fez sentido, segue @koncluí. A gente fala disso todo dia.</div></div>
+  </div>
+
+  <div class="viral-card">
+    <h4>4. Trend "Coisas que só quem trabalha em restaurante entende"</h4>
+    <div class="subtitle">Humor + identificação</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">Identificação alta com equipe operacional. Vídeos com humor sobre rotina de restaurante têm taxa de save altíssima. Funciona pra ampliar alcance fora da bolha de donos.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Carrossel de Reels rápido (3–4 cenas com cortes secos), música em alta no momento (escolher trend que esteja com 100k+ usos):
+
+Cena 1: gerente conferindo câmara fria às 23h, cara de cansado.
+"Quando o fechamento depende só de você porque ninguém anotou nada."
+
+Cena 2: garçom perguntando "como faz o molho da casa?"
+"Quando o garçom novo pergunta o mesmo que o antigo perguntou semana passada."
+
+Cena 3: dono olhando WhatsApp dos grupos da equipe às 22h.
+"Quando o seu sistema de gestão é o grupo do WhatsApp."
+
+Cena 4: tela da Koncluí com tudo organizado.
+"Quando a gente entende que dá pra ser diferente."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">Marca aquele amigo que ainda usa grupo de WhatsApp como ERP 😅</div></div>
+  </div>
+
+  <div class="viral-card">
+    <h4>5. Trend "Red flags do meu setor"</h4>
+    <div class="subtitle">Voz crítica + posicionamento</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">Formato "red flags" tem altíssimo engajamento e compartilhamento. Funciona pra posicionar a Koncluí como voz crítica e inteligente do setor.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Reels falado, 30s, tom seco e direto:
+
+"Red flags do dono de restaurante que vai quebrar nos próximos 12 meses:
+1. Diz 'minha equipe é uma família' mas não tem checklist.
+2. Acha que sistema é luxo.
+3. Mede o sucesso pela fila na porta, não pela margem.
+4. Reclama do gerente mas nunca deu ferramenta pra ele.
+5. Tem 3 unidades e nenhuma roda igual.
+6. Achismo é o KPI principal.
+
+Se você marcou 3 ou mais, a gente precisa conversar."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">Salva esse vídeo. Lê de novo daqui a 30 dias.</div></div>
+  </div>
+
+  <div class="viral-card">
+    <h4>6. Day in the Life — bastidor real</h4>
+    <div class="subtitle">Empatia + identificação</div>
+    <div class="viral-section"><div class="label">Por que funciona</div><div class="content">"Dia na vida" de gerente ou dono está performando muito bem em 2026, especialmente em conta B2B com pegada humana. Cria empatia e identificação.</div></div>
+    <div class="viral-section"><div class="label">Como adaptar</div><div class="content">Vídeo de 60s acompanhando um cliente real (ou simulação) da Koncluí em um dia normal:
+
+6h — chega na unidade, abre o app, vê o que ficou pendente do fechamento.
+9h — recebe alerta de WhatsApp: câmara fria em 4°C, precisa de atenção.
+11h — equipe abre checklist de pré-preparo, tira foto de cada estação.
+14h — almoço cheio, dashboard mostra em tempo real status do salão.
+22h — fechamento. Checklist completo, foto da praça limpa, hora exata. Sai 22h05.
+
+Texto final em tela:
+"Operação sem stress não é sorte. É sistema."</div></div>
+    <div class="viral-section"><div class="label">CTA</div><div class="content">É assim que rodam os restaurantes que escalam. Comenta SISTEMA pra saber como.</div></div>
+  </div>
+
+  <div class="ops-box">
+    <h3>Operacional da semana</h3>
+    <ul>
+      <li><strong>Segunda:</strong> Post 1 (carrossel de autoridade) + Sequência de Stories 1</li>
+      <li><strong>Terça:</strong> Post 2 (estático provocação)</li>
+      <li><strong>Quarta:</strong> Post 3 (carrossel educativo numérico) + Sequência de Stories 2</li>
+      <li><strong>Quinta:</strong> Post 4 (estático prova social)</li>
+      <li><strong>Sexta:</strong> Post 5 (carrossel diferencial técnico) + Sequência de Stories 3</li>
+      <li><strong>Fim de semana:</strong> Reels (escolher 1 ou 2 das ideias virais)</li>
+    </ul>
+    <h3 style="margin-top: 24px;">Métricas pra acompanhar</h3>
+    <ul>
+      <li><strong>Save em carrosséis:</strong> objetivo &gt; 5% do alcance</li>
+      <li><strong>DM com palavras-chave:</strong> PADRÃO, DEMO, CHAVE, DIAGNÓSTICO, TURNO, SISTEMA</li>
+      <li><strong>Profile visits → follows ratio</strong></li>
+      <li><strong>Compartilhamento em stories</strong> pelos seguidores</li>
+    </ul>
+    <h3 style="margin-top: 24px;">Próxima semana — preview</h3>
+    <ul>
+      <li>Tema central: <strong>"O custo de não ter dado"</strong> — foco em dashboard, decisão baseada em número e contraste contra concorrente que vende "controle" sem provar.</li>
+    </ul>
+  </div>
+
+  <footer>
+    KONCLUÍ — SEU RESTAURANTE, NO PADRÃO. SEMPRE. — 12/05/2026
+  </footer>
+</div>
+</body>
+</html>

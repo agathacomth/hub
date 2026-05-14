@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Gravação — Koncluí</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+body{background:radial-gradient(ellipse at top,#f7f9fc 0%,#e8edf4 100%);min-height:100vh;color:#15243c;font-family:'Inter',system-ui,sans-serif}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(150,170,200,0.18) 1px,transparent 1px),linear-gradient(90deg,rgba(150,170,200,0.18) 1px,transparent 1px);background-size:90px 90px;pointer-events:none;z-index:0}
+.container{max-width:1240px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+/* Sticky nav */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(247,249,252,0.92);backdrop-filter:blur(12px);border-bottom:1px solid #dde4ee}
+.topnav-inner{max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.nav-logo{background:#0c1d33;padding:9px 16px;border-radius:10px;display:flex;align-items:center}
+.nav-logo img{height:22px;width:auto;display:block}
+.topnav .nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav .nav-links a{color:#5d6b80;text-decoration:none;font-size:13px;font-weight:700;padding:8px 14px;border-radius:8px;letter-spacing:0.5px;transition:background 0.15s,color 0.15s}
+.topnav .nav-links a:hover{background:rgba(77,212,255,0.15);color:#0e83b0}
+
+/* Hero */
+.hero{text-align:center;padding:80px 0 60px}
+.hero-logo{display:inline-block;background:#0c1d33;padding:30px 46px;border-radius:22px;margin-bottom:36px;box-shadow:0 16px 44px rgba(12,29,51,0.22)}
+.hero-logo img{width:210px;height:auto;display:block}
+.hero-kicker{display:inline-block;font-size:13px;font-weight:800;letter-spacing:4px;color:#0e83b0;text-transform:uppercase;margin-bottom:18px;padding:8px 18px;border:1px solid rgba(14,131,176,0.35);border-radius:30px;background:rgba(77,212,255,0.08)}
+.hero h1{font-size:72px;font-weight:900;letter-spacing:-0.03em;line-height:1;margin-bottom:20px;color:#0c1d33}
+.hero h1 .cyan{color:#0e9fd4}
+.hero p{font-size:21px;color:#5d6b80;line-height:1.5;max-width:680px;margin:0 auto;font-weight:500}
+
+/* Section */
+.section{padding:50px 0;border-top:1px solid #dde4ee}
+.section-num{font-size:14px;font-weight:900;letter-spacing:3px;color:#0e83b0;margin-bottom:10px}
+.section-title{font-size:42px;font-weight:900;letter-spacing:-0.02em;margin-bottom:8px;line-height:1.05;color:#0c1d33}
+.section-desc{font-size:17px;color:#5d6b80;margin-bottom:40px;line-height:1.5;max-width:720px}
+
+/* Formula band */
+.formula{background:linear-gradient(135deg,#eaf7fc,#ffffff);border:1px solid #bfe4f0;border-radius:24px;padding:40px;margin-bottom:50px;box-shadow:0 8px 30px rgba(20,35,60,0.06)}
+.formula-label{font-size:13px;font-weight:900;letter-spacing:3px;color:#0e83b0;text-transform:uppercase;margin-bottom:24px;text-align:center}
+.formula-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fstep{text-align:center;position:relative}
+.fstep:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:34px;color:#0e9fd4;font-size:24px;font-weight:900}
+.fstep .ftime{font-size:34px;font-weight:900;color:#0e9fd4;letter-spacing:-0.02em;margin-bottom:6px}
+.fstep .fname{font-size:18px;font-weight:800;margin-bottom:4px;color:#0c1d33}
+.fstep .fdesc{font-size:13px;color:#5d6b80}
+
+/* Diretrizes cards */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.rule{background:#fff;border:1px solid #dde4ee;border-radius:18px;padding:28px;box-shadow:0 2px 8px rgba(20,35,60,0.05)}
+.rule-n{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;background:#0e9fd4;color:#fff;font-weight:900;font-size:20px;border-radius:11px;margin-bottom:16px}
+.rule-title{font-size:22px;font-weight:800;margin-bottom:14px;line-height:1.2;color:#0c1d33}
+.rule-body{font-size:15px;color:#4a5870;line-height:1.55}
+.compare{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.compare-row{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
+.compare-row .pin{flex-shrink:0;font-weight:900;font-size:11px;letter-spacing:1px;padding:3px 8px;border-radius:5px;margin-top:1px}
+.pin-no{background:rgba(224,57,90,0.12);color:#d3324f}
+.pin-yes{background:rgba(14,131,176,0.13);color:#0e83b0}
+.compare-row .ctext{color:#4a5870}
+.compare-row.no .ctext{color:#8a93a3;text-decoration:line-through;text-decoration-color:rgba(224,57,90,0.5)}
+.taglist{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.taglist .t{font-size:13px;background:rgba(77,212,255,0.14);border:1px solid rgba(14,131,176,0.3);color:#0e83b0;padding:6px 12px;border-radius:8px;font-weight:600}
+
+/* Ganchos grid */
+.ganchos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.gancho{background:#fff;border:1px solid #dde4ee;border-radius:14px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;transition:border-color 0.15s,transform 0.15s,box-shadow 0.15s;box-shadow:0 2px 8px rgba(20,35,60,0.04)}
+.gancho:hover{border-color:#0e9fd4;transform:translateX(4px);box-shadow:0 6px 18px rgba(20,35,60,0.1)}
+.gancho .gn{font-size:28px;font-weight:900;color:rgba(14,131,176,0.3);line-height:1;flex-shrink:0;width:44px}
+.gancho .gbody{flex:1}
+.gancho .gtext{font-size:18px;font-weight:800;line-height:1.25;margin-bottom:8px;color:#0c1d33}
+.gancho .guse{font-size:12px;color:#5d6b80;font-weight:600}
+.gancho .guse strong{color:#0e83b0;font-weight:700}
+
+/* Search */
+.search-wrap{margin-bottom:30px;position:relative}
+.search-wrap input{width:100%;background:#fff;border:1px solid #dde4ee;border-radius:12px;padding:18px 22px 18px 54px;color:#15243c;font-size:16px;font-family:inherit;font-weight:500;box-shadow:0 2px 8px rgba(20,35,60,0.05)}
+.search-wrap input:focus{outline:none;border-color:#0e9fd4}
+.search-wrap input::placeholder{color:#9aa3b2}
+.search-wrap::before{content:'🔍';position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:18px;opacity:0.5}
+
+/* Roteiros */
+.roteiros{display:flex;flex-direction:column;gap:20px}
+.roteiro{background:#fff;border:1px solid #dde4ee;border-radius:20px;overflow:hidden;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 2px 10px rgba(20,35,60,0.05)}
+.roteiro:hover{border-color:#bfe4f0;box-shadow:0 8px 24px rgba(20,35,60,0.09)}
+.roteiro-head{display:flex;align-items:center;gap:18px;padding:24px 28px;background:#f0f9fc;border-bottom:1px solid #dde4ee;flex-wrap:wrap}
+.roteiro-n{font-size:32px;font-weight:900;color:#0e9fd4;line-height:1;letter-spacing:-0.03em;flex-shrink:0}
+.roteiro-gancho{flex:1;min-width:200px}
+.roteiro-gancho .glabel{font-size:11px;font-weight:800;letter-spacing:2px;color:#5d6b80;text-transform:uppercase;margin-bottom:3px}
+.roteiro-gancho .gval{font-size:24px;font-weight:900;line-height:1.15;letter-spacing:-0.01em;color:#0c1d33}
+.roteiro-meta{display:flex;gap:10px;flex-shrink:0}
+.roteiro-meta .chip{font-size:12px;font-weight:800;padding:7px 12px;border-radius:8px;letter-spacing:0.5px}
+.chip-tema{background:rgba(77,212,255,0.18);color:#0e83b0;border:1px solid rgba(14,131,176,0.3)}
+.chip-dur{background:#eef2f7;color:#5d6b80;border:1px solid #dde4ee}
+.roteiro-body{padding:28px;display:grid;grid-template-columns:1.4fr 1fr;gap:32px}
+.rb-block .rb-label{font-size:11px;font-weight:900;letter-spacing:2px;color:#0e83b0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.rb-label::before{content:'';width:18px;height:2px;background:#0e9fd4}
+.script-lines{display:flex;flex-direction:column;gap:7px}
+.script-lines .sl{font-size:18px;font-weight:600;line-height:1.35;padding-left:16px;border-left:2px solid rgba(14,131,176,0.35);color:#1c2c44}
+.rb-side{display:flex;flex-direction:column;gap:22px}
+.rb-side .item .ilabel{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#5d6b80;text-transform:uppercase;margin-bottom:5px}
+.rb-side .item .ival{font-size:15px;color:#3d4a5e;line-height:1.4}
+.cta-pill{background:linear-gradient(135deg,#0e9fd4,#1f6fd6);color:#fff;padding:14px 18px;border-radius:12px;font-size:16px;font-weight:800;line-height:1.3}
+
+/* Footer */
+.footer{padding:60px 0 50px;border-top:1px solid #dde4ee;text-align:center;color:#8a93a3;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:40px}
+.footer strong{color:#0e83b0}
+.no-result{display:none;text-align:center;padding:60px;color:#5d6b80;font-size:18px}
+
+@media (max-width:860px){
+  .container{padding:0 20px}
+  .hero h1{font-size:46px}
+  .section-title{font-size:32px}
+  .rules,.ganchos{grid-template-columns:1fr}
+  .formula-steps{grid-template-columns:1fr 1fr}
+  .fstep:nth-child(2)::after{display:none}
+  .roteiro-body{grid-template-columns:1fr}
+  .topnav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="nav-logo"><img src="png/logo.png" alt="Koncluí"/></div>
+    <div class="nav-links">
+      <a href="#diretrizes">Diretrizes</a>
+      <a href="#formula">Fórmula</a>
+      <a href="#ganchos">Banco de Ganchos</a>
+      <a href="#roteiros">25 Roteiros</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-logo"><img src="png/logo.png" alt="Koncluí"/></div>
+    <div class="hero-kicker">Manual de Gravação</div>
+    <h1>Como gravar vídeos<br>que <span class="cyan">geram conversa</span>.</h1>
+    <p>Transformar conhecimento de operação em vídeos curtos que geram autoridade, desejo e conversas comerciais. Esse é o guia da equipe — leia antes de cada gravação.</p>
+  </div>
+
+  <!-- FÓRMULA -->
+  <div class="section" id="formula">
+    <div class="section-num">— A BASE</div>
+    <div class="section-title">A fórmula fixa Koncluí</div>
+    <div class="section-desc">Todo vídeo segue essa estrutura de tempo. Não importa o tema — o esqueleto é sempre o mesmo. Decore isso.</div>
+    <div class="formula">
+      <div class="formula-label">Estrutura de todo vídeo (até 40s)</div>
+      <div class="formula-steps">
+        <div class="fstep"><div class="ftime">0–3s</div><div class="fname">Gancho</div><div class="fdesc">Começa no conflito</div></div>
+        <div class="fstep"><div class="ftime">4–15s</div><div class="fname">Dor real</div><div class="fdesc">A situação que dói</div></div>
+        <div class="fstep"><div class="ftime">15–30s</div><div class="fname">Insight</div><div class="fdesc">A virada de chave</div></div>
+        <div class="fstep"><div class="ftime">30–40s</div><div class="fname">Prova + CTA</div><div class="fdesc">Evidência e convite</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRETRIZES -->
+  <div class="section" id="diretrizes">
+    <div class="section-num">— 7 REGRAS</div>
+    <div class="section-title">Diretrizes rápidas de gravação</div>
+    <div class="section-desc">Antes de apertar REC, passa o olho aqui. São as 7 regras inegociáveis de todo conteúdo da Koncluí.</div>
+    <div class="rules">
+
+      <div class="rule">
+        <div class="rule-n">1</div>
+        <div class="rule-title">Os primeiros 3 segundos decidem tudo</div>
+        <div class="rule-body">O vídeo começa no conflito — não na saudação.</div>
+        <div class="compare">
+          <div class="compare-row no"><span class="pin pin-no">NUNCA</span><span class="ctext">"Oi pessoal…" · "Hoje eu quero falar…" · "Vou explicar…"</span></div>
+          <div class="compare-row"><span class="pin pin-yes">SEMPRE</span><span class="ctext">"Você acha que…" · "94,9% dos donos…" · "Era 22h…" · "Nunca tirei férias…"</span></div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">2</div>
+        <div class="rule-title">Grave como conversa, não como palestra</div>
+        <div class="rule-body">Fala de gente, pra gente. Dono falando com dono.</div>
+        <div class="compare">
+          <div class="compare-row no"><span class="pin pin-no">ERRADO</span><span class="ctext">"Empresas do setor gastronômico enfrentam desafios operacionais…"</span></div>
+          <div class="compare-row"><span class="pin pin-yes">CERTO</span><span class="ctext">"Você confere porque não confia. E não confia porque não tem prova."</span></div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">3</div>
+        <div class="rule-title">Uma ideia por vídeo</div>
+        <div class="rule-body">Cada vídeo resolve UMA dor. Não misture temas no mesmo roteiro.</div>
+        <div class="compare">
+          <div class="compare-row no"><span class="pin pin-no">NÃO MISTURAR</span><span class="ctext">CMV + estoque + liderança + férias + expansão num vídeo só</span></div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">4</div>
+        <div class="rule-title">Siga a fórmula fixa</div>
+        <div class="rule-body">0–3s gancho · 4–15s dor · 15–30s insight · 30–40s prova + CTA. Exemplo de roteiro inteiro nessa estrutura:</div>
+        <div class="compare">
+          <div class="compare-row"><span class="pin pin-yes">MODELO</span><span class="ctext">"Você acha que fizeram." → "Mas achar não é gestão." → "Texto se inventa. Foto prova." → "É por isso que cliente Koncluí consegue sair da operação."</span></div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">5</div>
+        <div class="rule-title">Grave no contexto</div>
+        <div class="rule-body">O cenário conta parte da história. Fuja de parede branca.</div>
+        <div class="taglist">
+          <span class="t">Cozinha</span><span class="t">Estoque</span><span class="t">Caixa</span><span class="t">Frente de loja</span><span class="t">Recebimento</span><span class="t">Escritório da operação</span>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">6</div>
+        <div class="rule-title">Prova visual vence argumento</div>
+        <div class="rule-body">Sempre que possível, mostre — não só fale.</div>
+        <div class="taglist">
+          <span class="t">Checklist aberto</span><span class="t">Foto operacional</span><span class="t">WhatsApp</span><span class="t">Dashboard</span><span class="t">Unidade rodando</span><span class="t">Antes / depois</span>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-n">7</div>
+        <div class="rule-title">Fale curto</div>
+        <div class="rule-body">Frases de 4 a 10 palavras. Respira. Corta. Continua. Cada frase é um soco — não um parágrafo.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GANCHOS -->
+  <div class="section" id="ganchos">
+    <div class="section-num">— REFERÊNCIA RÁPIDA</div>
+    <div class="section-title">Banco de 25 ganchos</div>
+    <div class="section-desc">Sem ideia de abertura? Pega um daqui. Cada gancho já vem com o contexto certo de uso.</div>
+    <div class="ganchos" id="ganchos-grid"></div>
+  </div>
+
+  <!-- ROTEIROS -->
+  <div class="section" id="roteiros">
+    <div class="section-num">— PRONTO PRA GRAVAR</div>
+    <div class="section-title">25 roteiros completos</div>
+    <div class="section-desc">Cada roteiro tem tudo: gancho, fala palavra por palavra, cena de abertura, b-roll, CTA e duração. É só decorar a fala e gravar. Regra fixa: todo vídeo fecha chamando pra comentar <strong>QUERO</strong> — é assim que o time comercial recebe o lead.</div>
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Buscar por tema, gancho ou palavra-chave… (ex: CMV, férias, freezer)"/>
+    </div>
+    <div class="roteiros" id="roteiros-list"></div>
+    <div class="no-result" id="no-result">Nenhum roteiro encontrado pra essa busca.</div>
+  </div>
+
+  <div class="footer">
+    KONCLUÍ — SEU RESTAURANTE, NO PADRÃO. <strong>SEMPRE.</strong>
+  </div>
+
+</div>
+
+<script>
+// ---- BANCO DE GANCHOS ----
+const ganchos = [
+  ["Microgerenciar não é dedicação. É o sintoma de quem não confia na própria operação.","dono centralizador, liderança"],
+  ["Todo mundo acha que padrão engessa. Padrão é justamente o que liberta o dono da operação.","padronização"],
+  ["Seu checklist de papel funciona uma semana. Na segunda, já virou teatro.","checklists, papel x digital"],
+  ["Você acha que fizeram. Mas achar não é saber. E achar custa caro.","prova operacional"],
+  ["Texto qualquer um inventa em 30 segundos. Foto com hora e nome, ninguém forja.","foto obrigatória, evidência"],
+  ["Qual a temperatura do seu freezer agora? Se você não sabe, já pode estar virando prejuízo.","controle operacional, itens críticos"],
+  ["94,9% dos donos ainda controlam o restaurante na planilha. E quase nenhum controla de verdade.","migração de planilha"],
+  ["73% dos donos ainda anotam tudo num caderninho. E caderninho não avisa quando algo dá errado.","organização, digitalização"],
+  ["Era 22h e o dono ainda estava no restaurante. Não porque quis. Porque sem ele, ninguém fecha.","sobrecarga do dono"],
+  ["“Nunca tirei férias” não é troféu. É um aviso de que o restaurante não anda sem você.","casos reais, dependência"],
+  ["O cliente médio da Koncluí economiza R$3 mil por mês. E nunca tinha visto esse dinheiro vazar.","ROI, prova de resultado"],
+  ["A Koncluí se paga em 90 dias, em média. O resto é lucro que você não enxergava.","objeção de preço"],
+  ["Tem dinheiro saindo pela porta dos fundos do seu restaurante. E não é roubo. É desperdício.","CMV, desperdício"],
+  ["Vender mais não é lucrar mais. Casa cheia com operação ruim é prejuízo em quantidade maior.","financeiro, margem"],
+  ["A culpa nunca é da equipe. Se cinco pessoas erram igual, o problema é o processo.","gestão, processo"],
+  ["Sistema é melhor que memória. Memória pede demissão, falta e tira férias.","padronização, conhecimento"],
+  ["Você confia na sua planilha? Ela mostra o que digitaram, não o que de fato aconteceu.","CMV, controle real"],
+  ["Quando a tarefa é de todo mundo, ela acaba não sendo de ninguém.","liderança, responsabilidade"],
+  ["Restaurante que não alinha no começo do turno passa o dia inteiro apagando incêndio.","ritual diário, alinhamento"],
+  ["Você confere a operação porque não confia. E não confia porque nunca tem prova.","controle, confiança"],
+  ["O grupo de WhatsApp parece organização. Mas é onde o problema importante se esconde.","organização, comunicação"],
+  ["A ANVISA não avisa quando chega. No dia da visita, ou você tem processo, ou tem desculpa.","compliance, fiscalização"],
+  ["Dono que não tem agenda definida pra equipe deixa o restaurante rodar no improviso.","liderança, rotina"],
+  ["Seu restaurante funciona sem você? Some por meio expediente e descubra a verdade.","liberdade do dono"],
+  ["A Koncluí não é ERP. ERP cuida do número. A gente prova que a operação aconteceu.","posicionamento"]
+];
+
+const gg = document.getElementById('ganchos-grid');
+ganchos.forEach((g,i)=>{
+  const el=document.createElement('div');
+  el.className='gancho';
+  el.innerHTML=`<div class="gn">${String(i+1).padStart(2,'0')}</div>
+    <div class="gbody">
+      <div class="gtext">${g[0]}</div>
+      <div class="guse">Usar quando: <strong>${g[1]}</strong></div>
+    </div>`;
+  gg.appendChild(el);
+});
+
+// ---- 25 ROTEIROS COMPLETOS ----
+const roteiros = [
+  {n:1,gancho:"Você acha que fizeram.",tema:"Prova operacional",dur:"45s",cena:"Pessoa olhando celular com expressão de dúvida",
+   copy:["Você abriu hoje achando que a bancada foi higienizada.","Achando que o freezer tava na temperatura certa.","Achando que o estoque chegou completo.","Mas você viu? Ou alguém te disse que viu?","“Tá tudo certo” é a frase mais cara que existe num restaurante.","Texto qualquer um digita correndo, sem ter feito nada.","Foto com hora e nome, ninguém forja.","A diferença entre achar e saber cabe numa foto."],
+   broll:"Checklist + foto da tarefa + dashboard",cta:"Comenta QUERO e o nosso time te mostra como sair do achismo."},
+  {n:2,gancho:"Microgerenciar não é dedicação. É sintoma.",tema:"Gestão / liderança",dur:"45s",cena:"Dono andando pela cozinha conferindo tudo",
+   copy:["Você conhece esse dono. Talvez seja você.","Chega antes de todo mundo, sai depois de todo mundo.","Confere a praça, o caixa, o estoque, o banheiro.","E ainda fala, meio orgulhoso: “aqui ninguém faz nada sem mim”.","Isso não é dedicação. É um alarme tocando.","Equipe sem padrão escrito improvisa. E quem improvisa depende de você pra não errar.","Microgerenciar é o sintoma. A doença é a falta de processo."],
+   broll:"Dono conferindo cozinha → checklist digital",cta:"Comenta QUERO e a gente te mostra como sua operação anda sem você em cima."},
+  {n:3,gancho:"Era 22h.",tema:"Sobrecarga",dur:"40s",cena:"Relógio marcando noite",
+   copy:["Uma terça comum, nada de especial.","A última mesa tinha ido embora fazia tempo.","E o dono ainda tava lá dentro.","Conferindo se a câmara fechou, se o estoque trancou, se o caixa bateu.","Não porque ele quis ficar.","Porque se ele não conferisse, ninguém ia.","Isso não é comprometimento.","É um restaurante que não anda sem o dono dentro."],
+   broll:"Luzes apagando, fechamento da loja",cta:"Comenta QUERO e a gente te mostra como fechar a loja sem você."},
+  {n:4,gancho:"94,9% dos donos ainda usam planilha.",tema:"Migração",dur:"40s",cena:"Mostrar Excel aberto",
+   copy:["E quase todos falam a mesma frase: “eu controlo minha operação”.","Mas controla mesmo?","A planilha mostra o que alguém digitou que fez.","Não o que de fato aconteceu na cozinha.","Ela registra intenção. O sistema registra execução.","Parece detalhe. Não é.","A conta dessa diferença chega todo fim de mês, no caixa."],
+   broll:"Planilha → dashboard Koncluí",cta:"Comenta QUERO e a gente te mostra o tamanho dessa diferença na sua operação."},
+  {n:5,gancho:"Cliente Koncluí economiza R$3 mil por mês.",tema:"ROI",dur:"40s",cena:"Pessoa somando valores numa calculadora",
+   copy:["Mas ninguém perde R$3 mil de uma vez. Se perdesse, você via.","Você perde R$80 numa proteína que estragou no fundo da câmara.","R$200 numa compra feita no susto, pagando caro.","Uma hora de funcionário refazendo o que já tinha sido feito.","Pingado, todo dia, o mês inteiro.","No fim, são R$3 mil que saíram sem aparecer em lugar nenhum."],
+   broll:"Produtos, estoque, desperdício",cta:"Comenta QUERO e a gente faz essa conta junto com você."},
+  {n:6,gancho:"Você confere porque não confia.",tema:"Controle",dur:"40s",cena:"Abrindo WhatsApp e olhando mensagens",
+   copy:["E não é da sua equipe que você desconfia. É da falta de prova.","Sem foto, sem hora, sem registro, sobra a sua palavra contra a deles.","Aí você vira fiscal do próprio restaurante.","Passa o dia caçando tarefa em vez de tocar o negócio.","Quando a operação gera evidência sozinha, isso vira.","Você para de perseguir cada tarefa.","E volta a olhar pra frente."],
+   broll:"Fotos chegando + checklist concluído",cta:"Comenta QUERO e a gente te mostra como parar de fiscalizar."},
+  {n:7,gancho:"Sistema é melhor que memória.",tema:"Padronização",dur:"40s",cena:"Pessoa tentando lembrar algo",
+   copy:["Pensa em como sua operação roda hoje.","Ela roda na cabeça do gerente, que sabe a ordem certa do fechamento.","Na do cozinheiro, que conhece o ponto do molho de cor.","Memória tem um problema: ela vai embora.","A pessoa falta, pede demissão, tira férias.","E o conhecimento sai pela porta junto.","Quem documenta, escala. Quem decora, recomeça do zero."],
+   broll:"Papel → checklist digital",cta:"Comenta QUERO e a gente te mostra como tirar a operação da cabeça das pessoas."},
+  {n:8,gancho:"Seu checklist no papel já morreu.",tema:"Checklists",dur:"40s",cena:"Mostrar papel amassado",
+   copy:["Na primeira semana funciona. A equipe preenche com capricho.","Na segunda, alguém marca tudo de uma vez, às 22h, sem ter olhado.","Na terceira, a folha sumiu. Refizeram em outra.","Na quarta, virou teatro: assina sem fazer, marca sem conferir.","Não é falta de vontade da equipe.","É que o papel aceita mentira e não reclama.","E o que aceita mentira não controla nada."],
+   broll:"Assinatura sem olhar",cta:"Comenta QUERO e a gente te mostra um checklist que não dá pra burlar."},
+  {n:9,gancho:"Padronizar não engessa. Liberta.",tema:"Padronização",dur:"40s",cena:"Cozinha organizada",
+   copy:["Tem dono que ouve a palavra “padrão” e pensa em prisão.","Acha que vai virar linha de montagem, sem alma, sem jogo de cintura.","É o contrário.","Padrão é resolver o básico uma vez, pra não decidir de novo todo santo dia.","Quando a abertura, o preparo e o fechamento já estão definidos,","sobra cabeça pra pensar no que importa: cardápio, cliente, crescer.","Padrão não tira sua liberdade. Ele te devolve seu tempo."],
+   broll:"Equipe seguindo processo",cta:"Comenta QUERO e a gente te mostra como padronizar sem engessar."},
+  {n:10,gancho:"Nunca tirei férias.",tema:"Casos reais",dur:"40s",cena:"Pessoa olhando restaurante vazio",
+   copy:["Tem dono que fala isso quase com orgulho. Como se fosse medalha.","Mas para e pensa: por que você não consegue sair?","Se a resposta é “porque sem mim desanda”,","o problema não é o tamanho da sua dedicação.","É a sua operação, que foi construída em cima de você. Não do processo.","Restaurante que presta funciona melhor quando o dono não tá olhando."],
+   broll:"Malas + restaurante funcionando",cta:"Comenta QUERO e a gente te mostra como tirar férias sem o celular tocar."},
+  {n:11,gancho:"A culpa nunca é da equipe.",tema:"Gestão",dur:"40s",cena:"Equipe trabalhando",
+   copy:["Cinco pessoas diferentes erraram a mesma tarefa, no mesmo ponto.","A gente quer chamar de descuido. De falta de atenção.","Mas cinco pessoas errando igual não é azar.","É o processo te avisando que foi mal desenhado.","Gente boa, dentro de processo ruim, erra.","Gente comum, dentro de processo bom, acerta.","Antes de trocar a equipe, olha pro processo. Quase sempre o problema tava lá."],
+   broll:"Repetição do mesmo erro",cta:"Comenta QUERO e a gente te ajuda a desenhar o processo certo."},
+  {n:12,gancho:"Você sabe a temperatura do freezer agora?",tema:"Controle operacional",dur:"35s",cena:"Mostrar freezer",
+   copy:["Não ontem. Não no último registro do caderno.","Agora, enquanto você assiste isso.","Se a resposta é “não sei”, tudo bem. Quase ninguém sabe.","O problema não é não saber. É o que não saber custa.","Freezer fora da faixa por algumas horas é estoque inteiro no lixo.","Descobrir na hora é um ajuste de dois minutos.","Descobrir no dia seguinte é prejuízo fechado."],
+   broll:"Medidor + alerta",cta:"Comenta QUERO e a gente te mostra como o sistema avisa antes de virar perda."},
+  {n:13,gancho:"Quando todo mundo é responsável…",tema:"Liderança",dur:"35s",cena:"Equipe reunida",
+   copy:["“A equipe toda cuida da limpeza do estoque.”","Parece bonito. Parece time.","Mas quando a tarefa é de todo mundo, ela não é de ninguém.","Cada um acha que o outro fez. E ninguém fez.","Tarefa que funciona de verdade tem três coisas:","um nome, um horário e uma prova.","Sem isso, não é responsabilidade compartilhada. É responsabilidade que evaporou."],
+   broll:"Checklist com responsáveis",cta:"Comenta QUERO e a gente te mostra como dar dono pra cada tarefa."},
+  {n:14,gancho:"ANVISA não avisa quando chega.",tema:"Compliance",dur:"40s",cena:"Porta abrindo",
+   copy:["Não manda mensagem. Não marca horário. Não pergunta se hoje é um bom dia.","Ela chega. E quando chega, você tem duas opções.","Mostrar processo: checklist feito, higienização registrada, prova com data.","Ou mostrar desculpa.","A diferença entre uma multa e um “tudo certo”","não é sorte no dia da visita.","É o que você documentou nos três meses antes dela."],
+   broll:"Higienização + checklist",cta:"Comenta QUERO e a gente te mostra como ter prova no dia da fiscalização."},
+  {n:15,gancho:"Seu restaurante funciona sem você?",tema:"Liberdade do dono",dur:"35s",cena:"Dono saindo da unidade",
+   copy:["Tem um teste simples pra descobrir.","Some por meio expediente. Sem avisar, sem deixar bilhete.","Aí volta e olha o que aconteceu.","Se rodou liso, parabéns: você construiu um negócio.","Se travou, atrasou, bagunçou,","o gargalo não é a equipe que ficou.","É a operação, que só existe quando você tá dentro dela."],
+   broll:"Equipe trabalhando sem o dono",cta:"Comenta QUERO e a gente te mostra como passar nesse teste."},
+  {n:16,gancho:"Grupo de WhatsApp esconde problema.",tema:"Organização",dur:"35s",cena:"Grupo cheio de mensagens",
+   copy:["Parece organização. Mas olha o que acontece lá dentro.","O áudio importante some embaixo de dez mensagens.","A foto do estoque mistura com o meme do almoço.","A tarefa crítica vira mais uma linha que ninguém leu.","O WhatsApp foi feito pra conversa, e faz isso bem.","Mas conversa não é operação.","Operação precisa de ordem, não de rolagem infinita."],
+   broll:"Scroll caótico no WhatsApp",cta:"Comenta QUERO e a gente te mostra como tirar a operação do grupo."},
+  {n:17,gancho:"Não somos ERP.",tema:"Posicionamento",dur:"35s",cena:"Pessoa fechando várias abas",
+   copy:["Vou ser honesto sobre o que a Koncluí não é.","Se você quer relatório fiscal, contábil, financeiro bonito, não somos.","ERP faz isso, e faz bem.","A gente resolve outra coisa.","A gente prova que a operação aconteceu de verdade.","Que o checklist foi feito. Que a foto foi tirada. Que a tarefa fechou no horário.","ERP cuida do número. A Koncluí cuida do que gera o número."],
+   broll:"Dashboard Koncluí",cta:"Comenta QUERO e a gente te mostra exatamente o que resolve."},
+  {n:18,gancho:"Tem dinheiro vazando pela porta dos fundos.",tema:"CMV",dur:"40s",cena:"Produto sendo descartado",
+   copy:["Você olha o caixa da frente todo dia.","Mas o dinheiro não some pela frente. Some pelos fundos, em pedaço pequeno.","A porção que saiu maior que a ficha técnica.","O insumo que venceu esquecido no fundo da câmara.","A compra feita correndo, pagando mais caro.","Cada uma parece pequena demais pra se preocupar.","Somadas, são o seu lucro indo embora sem fazer barulho."],
+   broll:"Desperdício",cta:"Comenta QUERO e a gente te mostra por onde seu dinheiro tá saindo."},
+  {n:19,gancho:"Vender mais não é lucrar mais.",tema:"Financeiro",dur:"35s",cena:"Caixa registrando venda",
+   copy:["Mês cheio. Casa lotada. Faturamento recorde.","E mesmo assim a conta não fecha no fim do mês. Como?","Porque vender mais sem controlar a operação","é só vender o seu prejuízo em quantidade maior.","Faturamento é vaidade. Margem é sobrevivência.","E margem não nasce na mesa do cliente.","Nasce na cozinha, no estoque, no processo."],
+   broll:"Ticket + CMV",cta:"Comenta QUERO e a gente te mostra onde sua margem tá se perdendo."},
+  {n:20,gancho:"Carlos tirou férias depois de 5 anos.",tema:"Caso real",dur:"40s",cena:"Mala sendo fechada",
+   copy:["Cinco anos sem tirar férias. Não por falta de dinheiro. Por medo.","Medo do restaurante desandar sem ele dentro.","Aí o Carlos parou de apagar incêndio e começou a montar processo.","Checklist pra cada turno. Prova em foto. Padrão escrito no lugar do “cada um faz de um jeito”.","Seis meses depois, ele viajou.","E o restaurante rodou igual. Porque agora rodava no sistema, não nele."],
+   broll:"Viagem + restaurante funcionando",cta:"Comenta QUERO e a gente te mostra como construir essa mesma segurança."},
+  {n:21,gancho:"Tayna queria organização.",tema:"Caso real",dur:"40s",cena:"Pessoa organizando papéis",
+   copy:["Ela chegou pedindo uma coisa só: organização.","Achava que o problema era bagunça. Papel solto, equipe perdida, rotina sem ordem.","Mas quando a operação dela virou dado, apareceu o problema real.","Não era desorganização. Era dinheiro.","Compra errada, desperdício, retrabalho. Tudo escondido embaixo da bagunça.","Operação ruim não fica só na cozinha. Ela sempre aparece no caixa."],
+   broll:"Caixa + estoque",cta:"Comenta QUERO e a gente te mostra o que a sua bagunça tá escondendo."},
+  {n:22,gancho:"35 anos de método encontraram software.",tema:"Posicionamento",dur:"40s",cena:"Pessoa falando para câmera",
+   copy:["A Koncluí não nasceu num escritório de tecnologia.","Nasceu de 35 anos dentro de restaurante.","De gente que viveu o caos da operação antes de tentar resolver.","Porque método sem software não escala. Depende de alguém lembrando.","E software sem método é só uma tela bonita que ninguém sabe usar.","A virada acontece quando os dois se encontram.","Experiência de operação de verdade, dentro de uma ferramenta simples."],
+   broll:"Processo + plataforma",cta:"Comenta QUERO e a gente te mostra os dois funcionando juntos."},
+  {n:23,gancho:"Quando sistema é mais fácil que WhatsApp…",tema:"Adoção",dur:"35s",cena:"Equipe usando celular",
+   copy:["O motivo número um de um sistema não pegar na equipe?","Ele é mais difícil que o jeito antigo.","Se pra registrar uma tarefa a pessoa precisa de treinamento, ela não usa.","Volta pro caderno, pro grupo, pro “depois eu marco”.","Por isso a régua da Koncluí é uma só:","tem que ser mais fácil que mandar mensagem no WhatsApp.","Ferramenta boa não é a mais completa. É a que a equipe realmente usa."],
+   broll:"Time executando tarefa",cta:"Comenta QUERO e a gente te mostra na prática como é simples."},
+  {n:24,gancho:"Health Score no celular.",tema:"Produto",dur:"35s",cena:"Tela mostrando dashboard",
+   copy:["Imagina abrir o celular de manhã","e ver, num número só, como sua operação tá hoje.","Não a do mês passado. A de agora.","O que foi feito, o que falhou, o que precisa de você.","Esse é o Health Score da Koncluí.","É a diferença entre descobrir o problema hoje","e descobrir ele semana que vem, já virado prejuízo."],
+   broll:"Dashboard + alerta",cta:"Comenta QUERO e a gente te mostra o Health Score funcionando."},
+  {n:25,gancho:"Quem mais te prende…",tema:"Liberdade do dono",dur:"40s",cena:"Dono parado olhando operação",
+   copy:["Pensa em tudo que te prende ao restaurante.","Você vai pensar na equipe. No fornecedor. Na rotina pesada.","Mas não é nada disso.","O que mais te prende é a falta de um sistema.","Porque o caos depende de você pra não virar incêndio. Todo dia, o dia inteiro.","Sistema é o contrário.","Ele segura a operação pra você poder, enfim, soltar."],
+   broll:"Dono saindo da unidade",cta:"Comenta QUERO e a gente te mostra como soltar sem o negócio cair."}
+];
+
+const list = document.getElementById('roteiros-list');
+function renderRoteiros(filter){
+  list.innerHTML='';
+  const f=(filter||'').toLowerCase().trim();
+  let count=0;
+  roteiros.forEach(r=>{
+    const haystack=(r.gancho+' '+r.tema+' '+r.copy.join(' ')+' '+r.cena+' '+r.broll+' '+r.cta).toLowerCase();
+    if(f && !haystack.includes(f)) return;
+    count++;
+    const el=document.createElement('div');
+    el.className='roteiro';
+    el.innerHTML=`
+      <div class="roteiro-head">
+        <div class="roteiro-n">${String(r.n).padStart(2,'0')}</div>
+        <div class="roteiro-gancho">
+          <div class="glabel">Gancho · 0–3s</div>
+          <div class="gval">${r.gancho}</div>
+        </div>
+        <div class="roteiro-meta">
+          <span class="chip chip-tema">${r.tema}</span>
+          <span class="chip chip-dur">${r.dur}</span>
+        </div>
+      </div>
+      <div class="roteiro-body">
+        <div class="rb-block">
+          <div class="rb-label">Fala (decore e grave)</div>
+          <div class="script-lines">
+            ${r.copy.map(l=>`<div class="sl">${l}</div>`).join('')}
+          </div>
+        </div>
+        <div class="rb-side">
+          <div class="item"><div class="ilabel">Cena de abertura</div><div class="ival">${r.cena}</div></div>
+          <div class="item"><div class="ilabel">B-roll / o que mostrar</div><div class="ival">${r.broll}</div></div>
+          <div class="item"><div class="ilabel">CTA de fechamento</div><div class="cta-pill">${r.cta}</div></div>
+        </div>
+      </div>`;
+    list.appendChild(el);
+  });
+  document.getElementById('no-result').style.display = count===0 ? 'block' : 'none';
+}
+renderRoteiros('');
+document.getElementById('search').addEventListener('input',e=>renderRoteiros(e.target.value));
+</script>
+</body>
+</html>
